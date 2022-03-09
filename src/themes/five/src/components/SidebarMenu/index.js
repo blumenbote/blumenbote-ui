@@ -36,7 +36,7 @@ import {
 
 export const SidebarMenu = (props) => {
   const { auth, isHideSignup, userCustomer, isCustomerMode } = props
-  const [{ login }] = useSession()
+  const [, { login }] = useSession()
   const [events] = useEvent()
   const [{ configs }] = useConfig()
   const [, t] = useLanguage()
