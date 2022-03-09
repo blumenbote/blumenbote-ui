@@ -13,7 +13,7 @@ import BiStoreAlt from '@meronex/icons/bi/BiStoreAlt'
 import AiFillExclamationCircle from '@meronex/icons/ai/AiFillExclamationCircle'
 import BsPhone from '@meronex/icons/bs/BsPhone'
 import BiMessageRounded from '@meronex/icons/bi/BiMessageRounded'
-import AiOutlineExclamationCircle from '@meronex/icons/ai/AiOutlineExclamationCircle'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 
 import { Button } from '../../styles/Buttons'
 import { NotFoundSource } from '../NotFoundSource'
@@ -56,7 +56,9 @@ import {
   SkeletonWrapper,
   ReviewWrapper,
   Exclamation,
-  CommentContainer
+  CommentContainer,
+  NewOrder,
+  OrderActions
 } from './styles'
 import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../../utils'
@@ -75,7 +77,9 @@ const OrderDetailsUI = (props) => {
     messages,
     setMessages,
     readMessages,
-    messagesReadList
+    messagesReadList,
+    reorderState,
+    handleReorder
   } = props
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -226,6 +230,15 @@ const OrderDetailsUI = (props) => {
     }
   }, [messagesReadList])
 
+  useEffect(() => {
+    if (reorderState?.error) {
+      handleBusinessRedirect(businessData?.slug)
+    }
+    if (!reorderState?.error && reorderState?.result?.uuid) {
+      handleGoToPage({ page: 'checkout', params: { cartUuid: reorderState?.result.uuid } })
+    }
+  }, [reorderState])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -250,9 +263,22 @@ const OrderDetailsUI = (props) => {
                       : parseDate(order?.delivery_datetime, { utc: false })
                   }
                 </p>
-                <ReviewOrderLink
-                  className='Review-order'
-                  active={(
+                <OrderActions>
+                  <ReviewOrderLink
+                    className='Review-order'
+                    active={(
+                      parseInt(order?.status) === 1 ||
+                      parseInt(order?.status) === 2 ||
+                      parseInt(order?.status) === 5 ||
+                      parseInt(order?.status) === 6 ||
+                      parseInt(order?.status) === 10 ||
+                      parseInt(order?.status) === 11 ||
+                      parseInt(order?.status) === 12
+                    ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
+                  >
+                    <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
+                  </ReviewOrderLink>
+                  {(
                     parseInt(order?.status) === 1 ||
                     parseInt(order?.status) === 2 ||
                     parseInt(order?.status) === 5 ||
@@ -260,10 +286,19 @@ const OrderDetailsUI = (props) => {
                     parseInt(order?.status) === 10 ||
                     parseInt(order?.status) === 11 ||
                     parseInt(order?.status) === 12
-                  ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed)}
-                >
-                  <span onClick={handleOpenReview}>{t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}</span>
-                </ReviewOrderLink>
+                  ) && (
+                    <NewOrder>
+                      <Button
+                        color='primary'
+                        outline
+                        onClick={() => handleReorder(order.id)}
+                        disabled={reorderState?.loading}
+                      >
+                        {reorderState?.loading ? t('LOADING', 'Loading...') : t('START_NEW_ORDER', 'Start new order')}
+                      </Button>
+                    </NewOrder>
+                  )}
+                </OrderActions>
                 <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
                 <p className='order-status'>{getOrderStatus(order?.status)?.value}</p>
               </OrderInfo>
@@ -419,7 +454,7 @@ const OrderDetailsUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>
@@ -475,7 +510,7 @@ const OrderDetailsUI = (props) => {
                             {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
@@ -489,7 +524,7 @@ const OrderDetailsUI = (props) => {
                             {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
@@ -505,7 +540,7 @@ const OrderDetailsUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>
@@ -529,7 +564,7 @@ const OrderDetailsUI = (props) => {
                               <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                             )}
                             <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
+                              <BsInfoCircle size='20' color={theme.colors.primary} />
                             </Exclamation>
                           </td>
                           <td>
