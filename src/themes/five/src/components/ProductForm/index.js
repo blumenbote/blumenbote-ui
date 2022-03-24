@@ -239,6 +239,33 @@ const ProductOptionsUI = (props) => {
     }
   }, [product])
 
+  const scrollDown = () => {
+    const isErrors = Object.values(errors).length > 0
+    if (!isErrors) {
+      return
+    }
+    const productContainer = document.getElementsByClassName('popup-dialog')[0]
+    const errorCount = document.getElementsByClassName('error')?.length
+    let unselectedFirstSubOption = document.getElementsByClassName('error')?.[0]
+    if (errorCount > 1) {
+      unselectedFirstSubOption = document.getElementsByClassName('error')?.[1]
+    }
+    unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
+    productContainer.scrollTop -= 100
+  }
+
+  const handleSlideChange = () => {
+    var videos = document.querySelectorAll('iframe, video')
+    Array.prototype.forEach.call(videos, function (video) {
+      if (video.tagName.toLowerCase() === 'video') {
+        video.pause()
+      } else {
+        var src = video.src
+        video.src = src
+      }
+    })
+  }
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -285,6 +312,7 @@ const ProductOptionsUI = (props) => {
                   navigation
                   watchOverflow
                   thumbs={{ swiper: thumbsSwiper }} className='mySwiper2'
+                  onSlideChange={() => handleSlideChange()}
                 >
                   {gallery.map((img, i) => (
                     <SwiperSlide key={i}>
@@ -479,6 +507,7 @@ const ProductOptionsUI = (props) => {
                                           suboption={suboption}
                                           state={currentState}
                                           isSoldOut={isSoldOut}
+                                          scrollDown={scrollDown}
                                         />
                                       )
                                     })
@@ -516,49 +545,57 @@ const ProductOptionsUI = (props) => {
                 }
               </ProductEdition>
               <ProductActions>
-                <div className='price'>{productCart.total && parsePrice(productCart.total)}</div>
-                {
-                  productCart && !isSoldOut && maxProductQuantity > 0 && (
-                    <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
-                      <FiMinusCircle
-                        onClick={decrement}
-                        className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {
-                        qtyBy?.pieces && (
-                          <Input
-                            className='qty'
-                            value={productCart?.quantity || ''}
-                            onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
-                            onKeyPress={(e) => {
-                              if (!/^[0-9.]$/.test(e.key)) {
-                                e.preventDefault()
-                              }
-                            }}
-                          />
-                        )
-                      }
-                      {qtyBy?.weight_unit && (<span className='qty'>{productCart.quantity * product?.weight}</span>)}
-                      <FiPlusCircle
-                        onClick={increment}
-                        className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
-                      />
-                      {isHaveWeight && (
-                        <WeightUnitSwitch>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
-                          <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
-                        </WeightUnitSwitch>
-                      )}
-                    </div>
-                  )
-                }
+                <div className='price-amount-block'>
+                  <div className='price'>
+                    <h4>{productCart.total && parsePrice(productCart.total)}</h4>
+                    {product?.minimum_per_order && productCart?.quantity < product?.minimum_per_order && <span>{t('MINIMUM_TO_ORDER', 'Minimum _number_ to order').replace('_number_', product?.minimum_per_order)}</span>}
+                    {product?.maximum_per_order && productCart?.quantity > product?.maximum_per_order && <span>{t('MAXIMUM_TO_ORDER', 'Max. _number_ to order'.replace('_number_', product?.maximum_per_order))}</span>}
+                  </div>
+                  {
+                    productCart && !isSoldOut && maxProductQuantity > 0 && (
+                      <div className={isHaveWeight ? 'incdec-control show-weight-unit' : 'incdec-control'}>
+                        <FiMinusCircle
+                          onClick={decrement}
+                          className={`${productCart.quantity === 1 || !productCart.quantity || isSoldOut ? 'disabled' : ''}`}
+                        />
+                        {
+                          qtyBy?.pieces && (
+                            <Input
+                              className='qty'
+                              value={productCart?.quantity || ''}
+                              onChange={e => onChangeProductCartQuantity(parseInt(e.target.value))}
+                              onKeyPress={(e) => {
+                                if (!/^[0-9.]$/.test(e.key)) {
+                                  e.preventDefault()
+                                }
+                              }}
+                            />
+                          )
+                        }
+                        {qtyBy?.weight_unit && (
+                          <Input className='qty' value={productCart.quantity * product?.weight} />
+                        )}
+                        <FiPlusCircle
+                          onClick={increment}
+                          className={`${maxProductQuantity <= 0 || productCart.quantity >= maxProductQuantity || isSoldOut ? 'disabled' : ''}`}
+                        />
+                        {isHaveWeight && (
+                          <WeightUnitSwitch>
+                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('pieces')} active={qtyBy?.pieces}>{t('PIECES', 'pcs')}</WeightUnitItem>
+                            <WeightUnitItem onClick={() => handleSwitchQtyUnit('weight_unit')} active={qtyBy?.weight_unit}>{product?.weight_unit}</WeightUnitItem>
+                          </WeightUnitSwitch>
+                        )}
+                      </div>
+                    )
+                  }
+                </div>
 
                 {productCart && !isSoldOut && maxProductQuantity > 0 && auth && orderState.options?.address_id && (
                   <Button
                     className={`add ${(maxProductQuantity === 0 || Object.keys(errors).length > 0) ? 'disabled' : ''}`}
                     color='primary'
                     onClick={() => handleSaveProduct()}
-                    disabled={orderState.loading || productCart?.quantity === 0}
+                    disabled={orderState.loading || productCart?.quantity === 0 || (product?.minimum_per_order && (productCart?.quantity < product?.minimum_per_order)) || (product?.maximum_per_order && (productCart?.quantity > product?.maximum_per_order))}
                   >
                     {orderState.loading ? (
                       <span>{t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading')}</span>
