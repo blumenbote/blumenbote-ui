@@ -140,7 +140,7 @@ const ProductOptionsUI = (props) => {
     let topPos = myElement.offsetTop - productContainer.offsetTop
     if (windowSize.width <= 768) {
       const productImage = document.getElementById('product_image')
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0)
+      topPos = topPos + (myElement.offsetTop < productImage?.clientHeight ? productImage?.clientHeight : 0)
     }
     scrollTo(productContainer, topPos, 1250)
   }
@@ -254,6 +254,7 @@ const ProductOptionsUI = (props) => {
     unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
     productContainer.scrollTop -= 100
   }
+
   const handleSlideChange = () => {
     var videos = document.querySelectorAll('iframe, video')
     Array.prototype.forEach.call(videos, function (video) {
@@ -488,7 +489,7 @@ const ProductOptionsUI = (props) => {
                 </div>
                 <div id='extra'>
                   {
-                    product?.extras.map(extra => extra.options.map(option => {
+                    product?.extras.map(extra => extra.options.sort((a, b) => a.rank - b.rank).map(option => {
                       const currentState = productCart.options[`id:${option?.id}`] || {}
                       return (
                         <div key={option?.id}>
@@ -501,7 +502,7 @@ const ProductOptionsUI = (props) => {
                               >
                                 <WrapperSubOption className={isError(option?.id)}>
                                   {
-                                    option.suboptions.filter(suboptions => suboptions.enabled).map(suboption => {
+                                    option.suboptions.filter(suboptions => suboptions.enabled).sort((a, b) => a.rank - b.rank).map(suboption => {
                                       const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                       const balance = productCart.options[`id:${option?.id}`]?.balance || 0
                                       return (
