@@ -49,7 +49,7 @@ export const ContentWrapper = styled.div`
     `}
 
     button {
-      width: 180px;
+      width: calc(50% - 20px);
     }
 
     input {
@@ -78,7 +78,7 @@ export const Title = styled.h1`
   font: normal normal normal 80px ${props => props.theme.fonts.special?.name || 'Georgia'};
   letter-spacing: 0px;
   color: ${props => props.theme.colors.titleHomeColor ?? '#FFFFFF'};
-  text-shadow: 0px 3px 6px #00000029;
+  text-shadow: 1px 1px black;
   opacity: 1;
   font-size: 35px;
 
@@ -95,6 +95,7 @@ export const Slogan = styled.p`
   color: ${props => props.theme.colors.subtitleHomeColor ?? '#FFFFFF'};
   opacity: 1;
   margin-bottom: 15px;
+  text-shadow: 1px 1px black;
 
   ${props => props.theme?.rtl && css`
       text-align: right;
@@ -137,6 +138,8 @@ export const WrapInput = styled.label`
     position: relative;
     bottom: 25px;
     left: 15px;
+    text-shadow: 1px 1px black;
+    
     ${props => props.theme?.rtl && css`
       left: initial;
       right: 15px;
