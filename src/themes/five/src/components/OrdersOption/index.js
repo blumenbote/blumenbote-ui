@@ -35,7 +35,12 @@ const OrdersOptionUI = (props) => {
     orderStatus,
     isCustomLayout,
     isBusinessesLoading,
-    pastOrders
+    pastOrders,
+    preOrders,
+    selectItem,
+    setIsEmptyPast,
+    setIsEmptyActive,
+    setIsEmptyPreorder
   } = props
 
   const [, t] = useLanguage()
@@ -115,6 +120,16 @@ const OrdersOptionUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (loading) return
+
+    if (orders.length === 0) {
+      activeOrders && setIsEmptyActive && setIsEmptyActive(true)
+      pastOrders && setIsEmptyPast && setIsEmptyPast(true)
+      preOrders && setIsEmptyPreorder && setIsEmptyPreorder(true)
+    }
+  }, [orders, activeOrders, pastOrders, preOrders])
+
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -125,14 +140,16 @@ const OrdersOptionUI = (props) => {
         <BeforeComponent key={i} {...props} />))}
       {(isCustomLayout ? ((isShowTitles || !isBusinessesPage) && !loadingOrders && !loading && !isBusinessesLoading) : (isShowTitles || !isBusinessesPage)) && (
         <>
-          <OptionTitle isBusinessesPage={isBusinessesPage}>
-            <h1>
-              {titleContent || (activeOrders
-                ? t('ACTIVE', 'Active')
-                : (pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))}
-            </h1>
-          </OptionTitle>
-          {!loading && orders.length === 0 && (
+          {orders.length > 0 && (
+            <OptionTitle isBusinessesPage={isBusinessesPage}>
+              <h1>
+                {titleContent || (activeOrders
+                  ? t('ACTIVE', 'Active')
+                  : (pastOrders ? t('PAST', 'Past') : t('UPCOMING', 'Upcoming')))}
+              </h1>
+            </OptionTitle>
+          )}
+          {!loading && orders.length === 0 && selectItem !== 'all' && (
             <NotFoundSource
               image={imageFails}
               content={t('NO_RESULTS_FOUND', 'Sorry, no results found')}
