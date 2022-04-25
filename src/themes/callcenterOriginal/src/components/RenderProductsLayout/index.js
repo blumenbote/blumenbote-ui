@@ -125,7 +125,6 @@ export const RenderProductsLayout = (props) => {
                       featured={featuredProducts}
                       openBusinessInformation={openBusinessInformation}
                       business={business}
-                      currentCart={currentCart}
                     />
                   )}
                   {windowSize.width < 500 && (
@@ -154,12 +153,11 @@ export const RenderProductsLayout = (props) => {
                       handleClearSearch={handleChangeSearch}
                       errorQuantityProducts={errorQuantityProducts}
                       business={business}
-                      currentCart={currentCart}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
                 <BusinessCartContainer>
-                  <BusinessCartContent>
+                  <BusinessCartContent maxHeight={window.innerHeight - 200}>
                     {currentCart?.products?.length > 0 ? (
                       <>
                         <Title>{t('YOUR_CART', 'Your cart')}</Title>
@@ -208,7 +206,6 @@ export const RenderProductsLayout = (props) => {
                       openBusinessInformation={openBusinessInformation}
                       openCategories={openCategories}
                       business={business}
-                      currentCart={currentCart}
                     />
                   )}
                 </BusinessCategoriesContainer>
@@ -235,7 +232,6 @@ export const RenderProductsLayout = (props) => {
                       handleClearSearch={handleChangeSearch}
                       errorQuantityProducts={errorQuantityProducts}
                       business={business}
-                      currentCart={currentCart}
                     />
                   </WrapContent>
                 </BusinessCategoryProductWrapper>
