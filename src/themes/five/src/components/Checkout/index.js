@@ -11,7 +11,8 @@ import {
   useUtils,
   useValidationFields,
   useConfig,
-  useCustomer
+  useCustomer,
+  useEvent
 } from 'ordering-components'
 import { UpsellingPage } from '../UpsellingPage'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -34,7 +35,8 @@ import {
   CheckOutDivider,
   DriverTipDivider,
   DeliveryOptionsContainer,
-  WalletPaymentOptionContainer
+  WalletPaymentOptionContainer,
+  CartHeader
 } from './styles'
 
 import { Button } from '../../styles/Buttons'
@@ -87,6 +89,7 @@ const CheckoutUI = (props) => {
   const [{ user }] = useSession()
   const [{ configs }] = useConfig()
   const [customerState] = useCustomer()
+  const [events] = useEvent()
 
   const [errorCash, setErrorCash] = useState(false)
   const [userErrors, setUserErrors] = useState([])
@@ -163,6 +166,10 @@ const CheckoutUI = (props) => {
     }
 
     setUserErrors(errors)
+  }
+
+  const handleGoToStore = (slug) => {
+    events.emit('go_to_page', { page: 'business', params: { store: slug } })
   }
 
   useEffect(() => {
@@ -425,7 +432,10 @@ const CheckoutUI = (props) => {
 
           {!props.isHideSectionSix && !cartState.loading && cart && (
             <CartContainer>
-              <h1>{t('YOUR_ORDER', 'Your Order')}</h1>
+              <CartHeader>
+                <h1>{t('MOBILE_FRONT_YOUR_ORDER', 'Your order')}</h1>
+                <span onClick={() => cart?.business?.slug && handleGoToStore(cart?.business?.slug)}>{('ADD_PRODUCTS', 'Add products')}</span>
+              </CartHeader>
               <Cart
                 isCartPending={cart?.status === 2}
                 cart={cart}
