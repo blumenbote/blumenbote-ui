@@ -46,9 +46,9 @@ const BusinessProductsListUI = (props) => {
         {category?.id && (
           <ProductsListing>
             {
-              categoryState.products?.map(product => (
+              categoryState.products?.map((product, i) => (
                 <SingleProductCard
-                  key={product?.id}
+                  key={i}
                   isSoldOut={(product.inventoried && !product.quantity)}
                   product={product}
                   businessId={businessId}
@@ -69,9 +69,9 @@ const BusinessProductsListUI = (props) => {
                   <WrapAllCategories id='categoryfeatured'>
                     <h3>{t('FEATURED', 'Featured')}</h3>
                     <ProductsListing>
-                      {categoryState.products?.map(product => product.featured && (
+                      {categoryState.products?.map((product, i) => product.featured && (
                         <SingleProductCard
-                          key={product?.id}
+                          key={i}
                           isSoldOut={(product.inventoried && !product.quantity)}
                           product={product}
                           businessId={businessId}
@@ -94,7 +94,7 @@ const BusinessProductsListUI = (props) => {
               ? categoryState?.products?.filter(product => product?.category_id === category?.id) ?? []
               : categoryState?.products?.filter(product => category?.children?.some(cat => cat.category_id === product?.category_id)) ?? []
             return (
-              <React.Fragment key={category?.id}>
+              <React.Fragment key={i}>
                 {
                   products.length > 0 && (
                     <WrapAllCategories id={`category${category?.id}`}>
@@ -108,9 +108,9 @@ const BusinessProductsListUI = (props) => {
                       </div>
                       <ProductsListing>
                         {
-                          products.map(product => (
+                          products.map((product, i) => (
                             <SingleProductCard
-                              key={product?.id}
+                              key={i}
                               isSoldOut={product.inventoried && !product.quantity}
                               businessId={businessId}
                               product={product}
