@@ -253,19 +253,6 @@ const ProductOptionsUI = (props) => {
     unselectedFirstSubOption && unselectedFirstSubOption.scrollIntoView(true)
     productContainer.scrollTop -= 100
   }
-
-  const handleSlideChange = () => {
-    var videos = document.querySelectorAll('iframe, video')
-    Array.prototype.forEach.call(videos, function (video) {
-      if (video.tagName.toLowerCase() === 'video') {
-        video.pause()
-      } else {
-        var src = video.src
-        video.src = src
-      }
-    })
-  }
-
   const handleSlideChange = () => {
     var videos = document.querySelectorAll('iframe, video')
     Array.prototype.forEach.call(videos, function (video) {
