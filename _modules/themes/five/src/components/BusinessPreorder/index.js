@@ -162,11 +162,9 @@ var BusinessPreorderUI = function BusinessPreorderUI(props) {
 
       for (var i = open.hour; i <= close.hour; i++) {
         if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
-          var _configs$format_time;
-
           var hour = '';
           var meridian = '';
-          if ((configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '24') hour = i < 10 ? '0' + i : i;else {
+          if (!is12Hours) hour = i < 10 ? '0' + i : i;else {
             if (i === 0) {
               hour = '12';
               meridian = ' ' + t('AM', 'AM');
