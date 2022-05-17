@@ -1534,14 +1534,14 @@
     any-observable "^0.3.0"
 
 "@segment/analytics-next@^1.35.1":
-  version "1.36.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.36.0.tgz#61de2e82f697686e460b482f285ee710a785d75e"
-  integrity sha512-4sBn8D/abcUZrocgTVdmy7kbxvRR9VhbCE95uLe55uD5NXysByPQO4T4RMyTiCSRYJKB2wZdikDh6SkItSKNsw==
+  version "1.37.0"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.37.0.tgz#28a774da26917418219f50985babfe0b765211d9"
+  integrity sha512-gFrHAVHgRGO7CA/byXOwiATck0C+dzvRrBot70PU8gTqHXOtJmmV10d2mrM84yp0jH3qq9Z+qUOh5CYDeAXqPQ==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics.js-video-plugins" "^0.2.1"
     "@segment/facade" "^3.4.9"
-    "@segment/tsub" "^0.1.10"
+    "@segment/tsub" "^0.1.12"
     dset "^3.0.0"
     js-cookie "^2.2.1"
     node-fetch "^2.6.7"
@@ -1578,7 +1578,7 @@
   resolved "https://registry.yarnpkg.com/@segment/isodate/-/isodate-1.0.3.tgz#f44e8202d5edd277ce822785239474b2c9411d4a"
   integrity sha512-BtanDuvJqnACFkeeYje7pWULVv8RgZaqKHWwGFnL/g/TH/CcZjkIVTfGDp/MAxmilYHUkrX70SqwnYSTNEaN7A==
 
-"@segment/tsub@^0.1.10":
+"@segment/tsub@^0.1.12":
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/@segment/tsub/-/tsub-0.1.12.tgz#1c301a8b81e5dbda54eb0435ae808fbe65553f23"
   integrity sha512-35JB0+HuMZrn7mus/s4yOHAcuid+MzaOYxV8YAogTR4Z7AsHwn/Zn/y9XdoHp2kKdn54s6jO4IaO826v0j7qmw==
@@ -8205,7 +8205,7 @@ optionator@^0.8.3:
 
 "ordering-components@github:Ordering-Inc/ordering-components#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/887987b9c6f5e9fce5137f8fb660cf14ceece74c"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/37e8f9c0ffa41985d0da18e2fad4cb7910ebfaa7"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
