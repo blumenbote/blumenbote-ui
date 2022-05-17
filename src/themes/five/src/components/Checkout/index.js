@@ -393,10 +393,11 @@ const CheckoutUI = (props) => {
                 />
               </PaymentMethodContainer>
             )}
-            {isWalletEnabled && (
+            {isWalletEnabled && !businessDetails?.loading && (
               <WalletPaymentOptionContainer>
                 <PaymentOptionWallet
                   cart={cart}
+                  businessConfigs={businessDetails?.business?.configs}
                 />
               </WalletPaymentOptionContainer>
             )}
