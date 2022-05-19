@@ -468,3 +468,51 @@ export const OrderActions = styled.div`
   align-items: flex-end;
   justify-content: space-between;
 `
+
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  button {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    justify-content: space-around;
+    min-width: 200px;
+    max-height: 53px;
+  }
+`
+
+export const ReOrder = styled.div`
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  button {
+    padding: 5px 16px;
+    min-width: unset;
+  }
+`
+
+export const BusinessTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const OrderPreferences = styled(OrderCustomer)``
+
+export const HeaderTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+`
+
+export const PlaceSpotSection = styled.div`
+
+`

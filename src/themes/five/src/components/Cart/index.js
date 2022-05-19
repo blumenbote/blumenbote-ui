@@ -20,7 +20,6 @@ import {
   CouponContainer,
   CartSticky,
   Divider,
-  Exclamation,
   Spinner,
   CommentContainer,
   IconContainer
@@ -28,7 +27,6 @@ import {
 import { verifyDecimals } from '../../../../../utils'
 import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
-import { PlaceSpot } from '../PlaceSpot'
 
 const CartUI = (props) => {
   const {
@@ -50,7 +48,8 @@ const CartUI = (props) => {
     isStore,
     handleChangeComment,
     commentState,
-    handleRemoveOfferClick
+    handleRemoveOfferClick,
+    setPreorderBusiness
   } = props
 
   const theme = useTheme()
@@ -68,14 +67,11 @@ const CartUI = (props) => {
   const [openUpselling, setOpenUpselling] = useState(false)
   const [canOpenUpselling, setCanOpenUpselling] = useState(false)
   const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
-  const [openPlaceModal, setOpenPlaceModal] = useState(false)
   const [isUpselling, setIsUpselling] = useState(false)
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const cart = orderState?.carts?.[`businessId:${props.cart.business_id}`]
-
-  const placeSpotTypes = [3, 4]
 
   const walletName = {
     cash: {
@@ -213,6 +209,7 @@ const CartUI = (props) => {
             total={cart?.total}
             handleClickCheckout={handleClickCheckout}
             checkoutButtonDisabled={(openUpselling && !canOpenUpselling) || !cart?.valid_maximum || (!cart?.valid_minimum && !(cart?.discount_type === 1 && cart?.discount_rate === 100)) || !cart?.valid_address}
+            setPreorderBusiness={setPreorderBusiness}
           >
             {cart?.products?.length > 0 && cart?.products.map(product => (
               <ProductItemAccordion
@@ -298,9 +295,9 @@ const CartUI = (props) => {
                           <td className='icon'>
                             {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
                           </td>
                           <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
                         </tr>
@@ -312,9 +309,9 @@ const CartUI = (props) => {
                           <td className='icon'>
                             {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                             ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                            <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
                               <BsInfoCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
+                            </IconContainer>
                           </td>
                           <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
                         </tr>
@@ -396,16 +393,6 @@ const CartUI = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {placeSpotTypes.includes(orderState?.options?.type) && (
-                  <table className='spot'>
-                    <tbody>
-                      <tr>
-                        <td>{t('SPOT', 'Spot')}: {cart?.place?.name || t('NO_SELECTED', 'No selected')}</td>
-                        <td onClick={() => setOpenPlaceModal(true)}>{t('EDIT', 'Edit')}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                )}
                 {cart?.status !== 2 && (
                   <table className='comments'>
                     <tbody>
@@ -541,17 +528,6 @@ const CartUI = (props) => {
               type={openTaxModal.type}
               data={openTaxModal.data}
               products={cart.products}
-            />
-          </Modal>
-          <Modal
-            width='40%'
-            padding='20px'
-            open={openPlaceModal}
-            title={t('CHOOSE_YOUR_SPOT', 'Choose your spot')}
-            onClose={() => setOpenPlaceModal(false)}
-          >
-            <PlaceSpot
-              cart={cart}
             />
           </Modal>
           {(openUpselling || isUpselling) && (
