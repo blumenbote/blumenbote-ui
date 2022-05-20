@@ -579,7 +579,7 @@ const ProductOptionsUI = (props) => {
                           )
                         }
                         {qtyBy?.weight_unit && (
-                          <Input className='qty' value={productCart.quantity * product?.weight} />
+                          <Input className='qty' value={(productCart.quantity * product?.weight).toFixed(2)} />
                         )}
                         <FiPlusCircle
                           onClick={increment}
