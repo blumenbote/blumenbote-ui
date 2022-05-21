@@ -231,7 +231,7 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
 
     if (windowSize.width <= 768) {
       var productImage = document.getElementById('product_image');
-      topPos = topPos + (myElement.offsetTop < productImage.clientHeight ? productImage.clientHeight : 0);
+      topPos = topPos + (myElement.offsetTop < (productImage === null || productImage === void 0 ? void 0 : productImage.clientHeight) ? productImage === null || productImage === void 0 ? void 0 : productImage.clientHeight : 0);
     }
 
     (0, _utils.scrollTo)(productContainer, topPos, 1250);
@@ -561,7 +561,9 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement("div", {
     id: "extra"
   }, product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
-    return extra.options.map(function (option) {
+    return extra.options.sort(function (a, b) {
+      return a.rank - b.rank;
+    }).map(function (option) {
       var currentState = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)] || {};
       return /*#__PURE__*/_react.default.createElement("div", {
         key: option === null || option === void 0 ? void 0 : option.id
@@ -573,6 +575,8 @@ var ProductOptionsUI = function ProductOptionsUI(props) {
         className: isError(option === null || option === void 0 ? void 0 : option.id)
       }, option.suboptions.filter(function (suboptions) {
         return suboptions.enabled;
+      }).sort(function (a, b) {
+        return a.rank - b.rank;
       }).map(function (suboption) {
         var _productCart$options$, _productCart$options$2;
 
