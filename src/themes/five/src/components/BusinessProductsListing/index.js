@@ -323,6 +323,7 @@ const BusinessProductsListingUI = (props) => {
         onClose={() => closeModalProductForm()}
         padding='0'
         isProductForm
+        disableOverflowX
       >
 
         {productModal.loading && !productModal.error && (
