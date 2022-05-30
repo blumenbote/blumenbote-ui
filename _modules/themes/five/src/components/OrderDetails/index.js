@@ -51,7 +51,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -401,16 +401,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     var outsideModal = !window.document.getElementById('app-modals') || !window.document.getElementById('app-modals').contains(e.target);
 
     if (outsideModal) {
-      var _carts$_businessId;
-
       var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
 
-      var _uuid = (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.uuid;
-
-      if (_uuid) {
-        localStorage.setItem('remove-cartId', JSON.stringify(_uuid));
-        handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
-      }
+      localStorage.setItem('adjust-businessId', JSON.stringify(_businessId));
+      handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
     }
   };
 
@@ -449,8 +443,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   }, [messagesReadList]);
   (0, _react.useEffect)(function () {
-    var _reorderState$result;
-
     if (reorderState !== null && reorderState !== void 0 && reorderState.error) {
       window.addEventListener('click', closeOrderModal);
       return function () {
@@ -458,13 +450,27 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       };
     }
 
-    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState !== null && reorderState !== void 0 && (_reorderState$result = reorderState.result) !== null && _reorderState$result !== void 0 && _reorderState$result.uuid) {
-      handleGoToPage({
-        page: 'checkout',
-        params: {
-          cartUuid: reorderState === null || reorderState === void 0 ? void 0 : reorderState.result.uuid
-        }
+    if (!(reorderState !== null && reorderState !== void 0 && reorderState.error) && reorderState.loading === false && businessData !== null && businessData !== void 0 && businessData.id) {
+      var _carts$_businessId, _reorderState$result;
+
+      var _businessId = 'businessId:' + (businessData === null || businessData === void 0 ? void 0 : businessData.id);
+
+      var products = carts === null || carts === void 0 ? void 0 : (_carts$_businessId = carts[_businessId]) === null || _carts$_businessId === void 0 ? void 0 : _carts$_businessId.products;
+      var available = products.every(function (product) {
+        return product.valid === true;
       });
+
+      if (available && reorderState !== null && reorderState !== void 0 && (_reorderState$result = reorderState.result) !== null && _reorderState$result !== void 0 && _reorderState$result.uuid) {
+        handleGoToPage({
+          page: 'checkout',
+          params: {
+            cartUuid: reorderState === null || reorderState === void 0 ? void 0 : reorderState.result.uuid
+          }
+        });
+      } else {
+        localStorage.setItem('adjust-businessId', JSON.stringify(_businessId));
+        handleBusinessRedirect(businessData === null || businessData === void 0 ? void 0 : businessData.slug);
+      }
     }
   }, [reorderState]);
 
