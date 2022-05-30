@@ -79,9 +79,11 @@ import { UserVerification } from './src/components/UserVerification'
 import { Wallets } from './src/components/Wallets'
 import { WalletTransactionItem } from './src/components/WalletTransactionItem'
 import { BusinessListingSearch } from './src/components/BusinessListingSearch'
+
 import { Button } from './src/styles/Buttons'
 import { Input, TextArea } from './src/styles/Inputs'
 import { Select } from './src/styles/Select'
+import { Checkbox } from '../../styles/Checkbox'
 
 export {
   AccordionDropdown,
@@ -170,5 +172,6 @@ export {
   Button,
   Input,
   TextArea,
-  Select
+  Select,
+  Checkbox
 }
