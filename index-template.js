@@ -66,9 +66,9 @@ import leftArrow from './template/assets/left-arrow.svg'
 import rightArrow from './template/assets/right-arrow.svg'
 
 Sentry.init({
-  environment: window?.location?.hostname === 'localhost' ? 'development' : process.env.NODE_ENV,
+  environment: process.env.NODE_ENV,
   dsn: "https://d609ec2a193c4ef18d8d77b5575444dc@o460529.ingest.sentry.io/6302950",
-  release: process.env.npm_package_version ? 'ordering-ui@' + process.env.npm_package_version : 'ordering-ui@' + '0.0.3',
+  release: 'ordering-ui@' + process.env.npm_package_version,
   integrations: [
     new Integrations.BrowserTracing()
   ],
@@ -79,9 +79,11 @@ Sentry.init({
     'objects are not valid',
     'element type is invalid'
   ],
+  // Release health
+  autoSessionTracking: true,
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
-  tracesSampleRate: window?.location?.hostname === 'localhost' ? 0 : 0.5
+  tracesSampleRate: 0.2
 })
 
 const logos = {
