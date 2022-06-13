@@ -48,8 +48,12 @@ export const ContentWrapper = styled.div`
       padding: 0px 20px 0px;
     `}
 
-    button {
-      width: calc(50% - 20px);
+    button {  
+      width: calc(100% - 20px);
+      
+       @media (min-width: 1024px) {
+        width: calc(50% - 20px);
+      }
     }
 
     input {
