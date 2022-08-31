@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _reactRouterDom = require("react-router-dom");
-
 var _orderingComponents = require("ordering-components");
 
 require("react-datepicker/dist/react-datepicker.css");
@@ -49,7 +47,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -66,7 +64,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation]);
 
 var MomentControlUI = function MomentControlUI(props) {
-  var _configs$dates_moment, _configs$dates_moment2, _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
+  var _props$beforeElements, _props$beforeComponen, _configs$max_days_pre, _configs$max_days_pre2, _configs$max_days_pre3, _props$afterComponent, _props$afterElements;
 
   var isAsap = props.isAsap,
       datesList = props.datesList,
@@ -82,14 +80,9 @@ var MomentControlUI = function MomentControlUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
-  var is12hours = configs === null || configs === void 0 ? void 0 : (_configs$dates_moment = configs.dates_moment_format) === null || _configs$dates_moment === void 0 ? void 0 : (_configs$dates_moment2 = _configs$dates_moment.value) === null || _configs$dates_moment2 === void 0 ? void 0 : _configs$dates_moment2.includes('hh:mm');
-
   var _useUtils = (0, _orderingComponents.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parseTime = _useUtils2[0].parseTime;
-
-  var _useLocation = (0, _reactRouterDom.useLocation)(),
-      pathname = _useLocation.pathname;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -109,16 +102,6 @@ var MomentControlUI = function MomentControlUI(props) {
       timeList = _useState4[0],
       setTimeList = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      scheduleList = _useState6[0],
-      setScheduleList = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(true),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isEnabled = _useState8[0],
-      setIsEnabled = _useState8[1];
-
   var handleCheckBoxChange = function handleCheckBoxChange(index) {
     if (index) {
       !orderState.loading && handleAsap();
@@ -126,96 +109,25 @@ var MomentControlUI = function MomentControlUI(props) {
     } else setIsASP(false);
   };
 
-  var validateSelectedDate = function validateSelectedDate(curdate, schedule) {
-    var day = (0, _moment.default)(curdate).format('d');
-    setIsEnabled(schedule[day].enabled);
-  };
-
-  var getTimes = function getTimes(curdate, schedule) {
-    validateSelectedDate(curdate, schedule);
-    var date = new Date();
-    var dateParts = curdate.split('-');
-    var dateSeleted = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    var times = [];
-
-    for (var k = 0; k < schedule[dateSeleted.getDay()].lapses.length; k++) {
-      var open = {
-        hour: schedule[dateSeleted.getDay()].lapses[k].open.hour,
-        minute: schedule[dateSeleted.getDay()].lapses[k].open.minute
-      };
-      var close = {
-        hour: schedule[dateSeleted.getDay()].lapses[k].close.hour,
-        minute: schedule[dateSeleted.getDay()].lapses[k].close.minute
-      };
-
-      for (var i = open.hour; i <= close.hour; i++) {
-        if (date.getDate() !== dateSeleted.getDate() || i >= date.getHours()) {
-          var hour = '';
-          var meridian = '';
-          if (!is12hours) hour = i < 10 ? '0' + i : i;else {
-            if (i === 0) {
-              hour = '12';
-              meridian = ' ' + t('AM', 'AM');
-            } else if (i > 0 && i < 12) {
-              hour = i < 10 ? '0' + i : i;
-              meridian = ' ' + t('AM', 'AM');
-            } else if (i === 12) {
-              hour = '12';
-              meridian = ' ' + t('PM', 'PM');
-            } else {
-              hour = i - 12 < 10 ? '0' + (i - 12) : i - 12;
-              meridian = ' ' + t('PM', 'PM');
-            }
-          }
-
-          for (var j = i === open.hour ? open.minute : 0; j <= (i === close.hour ? close.minute : 59); j += 15) {
-            if (i !== date.getHours() || j >= date.getMinutes() || date.getDate() !== dateSeleted.getDate()) {
-              times.push({
-                text: hour + ':' + (j < 10 ? '0' + j : j) + meridian,
-                value: (i < 10 ? '0' + i : i) + ':' + (j < 10 ? '0' + j : j)
-              });
-            }
-          }
-        }
-      }
-    }
-
-    return times;
-  };
-
   (0, _react.useEffect)(function () {
-    var _timeLists = [];
+    var _timeLists = hoursList.map(function (hour) {
+      var _configs$format_time;
 
-    if (!scheduleList) {
-      _timeLists = hoursList.map(function (hour) {
-        return {
-          value: hour.startTime,
-          text: is12hours ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-            outputFormat: 'hh:mma'
-          }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
-            outputFormat: 'HH:mm'
-          })
-        };
-      });
-      setIsEnabled(true);
-    } else {
-      _timeLists = getTimes(dateSelected, scheduleList);
-    }
+      return {
+        value: hour.startTime,
+        text: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? hour.startTime.includes('12') ? "".concat(hour.startTime, "PM") : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+          outputFormat: 'hh:mma'
+        }) : parseTime((0, _moment.default)(hour.startTime, 'HH:mm'), {
+          outputFormat: 'HH:mm'
+        })
+      };
+    });
 
     setTimeList(_timeLists);
-  }, [dateSelected, hoursList, scheduleList]);
+  }, [dateSelected, hoursList]);
   (0, _react.useEffect)(function () {
     handleCheckBoxChange(isAsap);
   }, [isAsap]);
-  (0, _react.useEffect)(function () {
-    if (!pathname.includes('store')) {
-      setScheduleList(null);
-      return;
-    }
-
-    var schedules = JSON.parse(window.localStorage.getItem('business_schedule'));
-    setScheduleList(schedules);
-  }, [pathname]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "moment_control"
   }, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
@@ -262,8 +174,7 @@ var MomentControlUI = function MomentControlUI(props) {
     },
     freeMode: true,
     watchSlidesProgress: true,
-    className: "swiper-datelist",
-    preventClicksPropagation: false
+    className: "swiper-datelist"
   }, datesList.slice(0, Number((configs === null || configs === void 0 ? void 0 : (_configs$max_days_pre3 = configs.max_days_preorder) === null || _configs$max_days_pre3 === void 0 ? void 0 : _configs$max_days_pre3.value) || 6, 10)).map(function (date) {
     var dateParts = date.split('-');
 
@@ -281,7 +192,7 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeDate(date);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.DayName, null, dayName), /*#__PURE__*/_react.default.createElement(_styles.DayNumber, null, dayNumber)));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, isEnabled && (timeList === null || timeList === void 0 ? void 0 : timeList.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, timeList.map(function (time, i) {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.TimeListWrapper, null, timeList.map(function (time, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TimeItem, {
       key: i,
       active: timeSelected === time.value,
@@ -289,7 +200,7 @@ var MomentControlUI = function MomentControlUI(props) {
         return handleChangeTime(time.value);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, time.text));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.ClosedBusinessMsg, null, t('ERROR_ADD_PRODUCT_BUSINESS_CLOSED', 'The business is closed at the moment')))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return onClose();

@@ -41,7 +41,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -67,7 +67,9 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var deleteCard = props.deleteCard,
       cardsList = props.cardsList,
       _handleCardClick = props.handleCardClick,
-      handleNewCard = props.handleNewCard;
+      handleNewCard = props.handleNewCard,
+      onSelectCard = props.onSelectCard,
+      onPaymentChange = props.onPaymentChange;
 
   var _useSession = (0, _orderingComponents.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -94,6 +96,14 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
   var _handleNewCard = function _handleNewCard(card) {
     setAddCardOpen(false);
     handleNewCard(card);
+    onSelectCard({
+      id: card.id,
+      type: 'card',
+      card: {
+        brand: card.brand,
+        last4: card.last4
+      }
+    });
   };
 
   var _handleDeleteCard = function handleDeleteCard(card) {
@@ -105,6 +115,8 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
+        onSelectCard({});
+        onPaymentChange(null);
       }
     });
   };
@@ -188,8 +200,10 @@ var PaymentOptionStripeUI = function PaymentOptionStripeUI(props) {
 var PaymentCard = function PaymentCard(props) {
   var handleDeleteCard = props.handleDeleteCard,
       card = props.card,
+      cardSelected = props.cardSelected,
       handleCardClick = props.handleCardClick,
-      onSelectCard = props.onSelectCard;
+      onSelectCard = props.onSelectCard,
+      defaultSelected = props.defaultSelected;
 
   var _useLanguage3 = (0, _orderingComponents.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
@@ -255,13 +269,26 @@ var PaymentCard = function PaymentCard(props) {
       return window.removeEventListener('click', handleClickOutside);
     };
   }, [isShowActions]);
+  (0, _react.useEffect)(function () {
+    if (defaultSelected && card) {
+      handleCardClick(card);
+      onSelectCard({
+        id: card.id,
+        type: 'card',
+        card: {
+          brand: card.brand,
+          last4: card.last4
+        }
+      });
+    }
+  }, [defaultSelected]);
   return /*#__PURE__*/_react.default.createElement(_styles.CardItem, {
     onClick: handleChangeDefaultCard,
     isCursor: true
   }, /*#__PURE__*/_react.default.createElement(_styles.CardItemContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: getIconCard(card === null || card === void 0 ? void 0 : card.brand),
     alt: card === null || card === void 0 ? void 0 : card.brand
-  })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, {
+  })), /*#__PURE__*/_react.default.createElement("span", null, card === null || card === void 0 ? void 0 : card.brand, " ", card === null || card === void 0 ? void 0 : card.last4)), /*#__PURE__*/_react.default.createElement(_styles.CardItemActions, null, (card === null || card === void 0 ? void 0 : card.id) === (cardSelected === null || cardSelected === void 0 ? void 0 : cardSelected.id) && /*#__PURE__*/_react.default.createElement("span", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement(_styles.CardItemActionsWrapper, {
     ref: actionWrapperRef
   }, /*#__PURE__*/_react.default.createElement("span", {
     ref: cardActionsRef

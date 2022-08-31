@@ -17,6 +17,8 @@ var _styles = require("./styles");
 
 var _CardForm = require("../CardForm");
 
+var _StripeMethodForm = require("../../../../../components/StripeMethodForm");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -25,7 +27,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -48,7 +50,11 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
       requirements = props.requirements,
       onNewCard = props.onNewCard,
       toSave = props.toSave,
-      onCancel = props.onCancel;
+      onCancel = props.onCancel,
+      paymethod = props.paymethod,
+      cart = props.cart,
+      handlePlaceOrder = props.handlePlaceOrder,
+      methodsPay = props.methodsPay;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -64,7 +70,17 @@ var StripeElementsFormUI = function StripeElementsFormUI(props) {
     }, props));
   }), publicKey ? /*#__PURE__*/_react.default.createElement(_reactStripeJs.Elements, {
     stripe: (0, _pure.loadStripe)(publicKey)
-  }, /*#__PURE__*/_react.default.createElement(_CardForm.CardForm, {
+  }, methodsPay !== null && methodsPay !== void 0 && methodsPay.includes(paymethod) ? /*#__PURE__*/_react.default.createElement(_StripeMethodForm.StripeMethodForm, {
+    cart: cart,
+    handleSource: handleSource,
+    onNewCard: onNewCard,
+    toSave: toSave,
+    requirements: requirements,
+    businessId: businessId,
+    handleCancel: onCancel,
+    paymethod: paymethod,
+    handlePlaceOrder: handlePlaceOrder
+  }) : /*#__PURE__*/_react.default.createElement(_CardForm.CardForm, {
     handleSource: handleSource,
     onNewCard: onNewCard,
     toSave: toSave,

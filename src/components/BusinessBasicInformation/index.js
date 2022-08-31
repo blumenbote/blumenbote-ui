@@ -7,9 +7,6 @@ import FaStar from '@meronex/icons/fa/FaStar'
 import BsExclamationCircle from '@meronex/icons/bs/BsExclamationCircle'
 import { useTheme } from 'styled-components'
 
-import { Modal } from '../Modal'
-import { BusinessInformation } from '../BusinessInformation'
-
 import { useUtils, useOrder, useLanguage } from 'ordering-components'
 
 import { convertHoursToMinutes } from '../../utils'
@@ -28,9 +25,7 @@ const types = ['food', 'laundry', 'alcohol', 'groceries']
 export const BusinessBasicInformation = (props) => {
   const {
     isSkeleton,
-    businessState,
-    setOpenBusinessInformation,
-    openBusinessInformation
+    businessState
   } = props
   const { business, loading } = businessState
 
@@ -129,35 +124,10 @@ export const BusinessBasicInformation = (props) => {
                     )}
                   </>
                 )}
-
-                {!loading && (
-                  <h5>
-                    <BsExclamationCircle
-                      className='popup'
-                      onClick={() => setOpenBusinessInformation(true)}
-                    />
-                  </h5>
-                )}
               </div>
             </BusinessInfoItem>
           </BusinessInfo>
         </BusinessContent>
-
-        <Modal
-          width='70%'
-          open={openBusinessInformation}
-          onClose={setOpenBusinessInformation}
-          padding='0'
-          hideCloseDefault
-          isTransparent
-        >
-          <BusinessInformation
-            business={business}
-            getBusinessType={getBusinessType}
-            optimizeImage={optimizeImage}
-            onClose={setOpenBusinessInformation}
-          />
-        </Modal>
       </BusinessContainer>
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}

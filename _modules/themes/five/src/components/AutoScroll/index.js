@@ -35,13 +35,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var AutoScroll = function AutoScroll(props) {
-  var children = props.children,
-      modal = props.modal,
-      special = props.special,
-      scrollId = props.scrollId,
-      onHandleRightEnd = props.onHandleRightEnd,
-      isColumnMode = props.isColumnMode;
+var AutoScroll = function AutoScroll(_ref) {
+  var children = _ref.children,
+      modal = _ref.modal,
+      special = _ref.special,
+      scrollId = _ref.scrollId;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -58,7 +56,6 @@ var AutoScroll = function AutoScroll(props) {
       theme = _useTheme2[0];
 
   var autoScrollId = scrollId || 'autoscroll';
-  var handleEndFired = false;
   (0, _react.useLayoutEffect)(function () {
     var _document, _document$getElementB;
 
@@ -87,11 +84,6 @@ var AutoScroll = function AutoScroll(props) {
     if (botonLeft || botonRight) {
       if (theme !== null && theme !== void 0 && theme.rtl) {
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) * -1 < 40) {
-          if (!botonRight.classList.contains('hidden') && onHandleRightEnd && !handleEndFired) {
-            handleEndFired = true;
-            onHandleRightEnd();
-          }
-
           botonRight && botonRight.classList.add('hidden');
         } else {
           botonRight && botonRight.classList.remove('hidden');
@@ -110,14 +102,8 @@ var AutoScroll = function AutoScroll(props) {
         }
 
         if ((containerElement === null || containerElement === void 0 ? void 0 : containerElement.scrollLeft) > (parentElement === null || parentElement === void 0 ? void 0 : parentElement.scrollWidth) - (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) - 40) {
-          if (!botonRight.classList.contains('hidden') && onHandleRightEnd && !handleEndFired) {
-            handleEndFired = true;
-            onHandleRightEnd();
-          }
-
           botonRight && botonRight.classList.add('hidden');
         } else {
-          handleEndFired = false;
           botonRight && botonRight.classList.remove('hidden');
         }
       }
@@ -142,14 +128,13 @@ var AutoScroll = function AutoScroll(props) {
 
   return /*#__PURE__*/_react.default.createElement(_styles.AutoscrollContainer, {
     modal: modal,
-    id: "".concat(autoScrollId),
-    isColumnMode: isColumnMode
-  }, (!special ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) && !isColumnMode ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
+    id: "".concat(autoScrollId)
+  }, (!special ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowLeft.default, {
     className: "left-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling(true);
     }
-  }) : '', children, (!special ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) && !isColumnMode ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
+  }) : '', children, (!special ? (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth) + 50 : (containerElement === null || containerElement === void 0 ? void 0 : containerElement.offsetWidth) < (parentElement === null || parentElement === void 0 ? void 0 : parentElement.offsetWidth)) ? /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, {
     className: "right-autoscroll",
     onMouseDown: function onMouseDown() {
       return scrolling();

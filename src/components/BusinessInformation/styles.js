@@ -179,135 +179,6 @@ export const BusinessContent = styled.div`
   }
 `
 
-export const FlexTabs = styled.div`
-  display: flex;
-  justify-content: space-around;
-  height: 10%;
-  padding-top: 30px;
-`
-
-export const SectionTitle = styled.h3`
-  font-weight: bold;
-`
-
-export const Map = styled.div`
-  width: 100%;
-  height: 50vh;
-  > div {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 15px;
-  }
-`
-
-export const ScheduleSection = styled.div`
-  width: 100%;
-  margin-bottom: 25px;
-`
-
-export const ScheduleContainer = styled.div`
-  width: 100%;
-  display: flex;
-  overflow-x: auto;
-  > div {
-    width: 100%;
-  }
-
-`
-
-export const ScheduleBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 0px 15px;
-  border-right: 1px solid #CCC;
-  width: 10%;
-  min-width: 80px;
-  ${props => props.theme?.rtl && css`
-    border-left: 1px solid #CCC;
-    border-right: none;
-  `}
-  h4 {
-    margin: 0px 0px 3px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: ${props => props.theme?.colors?.primary};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  p {
-    margin: 0px;
-    font-size: 14px;
-  }
-
-  &:last-child {
-    border: 0;
-  }
-  @media(min-width: 768px){
-    min-width: initial;
-  }
-`
-
-export const DeliveryInfo = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: 10px;
-  border-top: 1px solid #CCC;
-  border-bottom: 1px solid #CCC;
-
-  div {
-    width: 100%;
-    &:last-child {
-      h5:not(:last-child) {
-        margin-top: 0px;
-      }
-    }
-  }
-
-  @media (min-width: 769px) {
-    flex-wrap: nowrap;
-    div {
-      width: 50%;
-      &:last-child {
-        h5:not(:last-child) {
-          margin-top: 22.1776px;
-        }
-      }
-    }
-  }
-`
-export const BusinessMediaContent = styled.div`
-  > div {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-
-    > img,
-    > iframe {
-      object-fit: cover;
-      border-radius: 10px;
-      margin: 10px 10px;
-      width: calc(100% - 12px);
-      cursor: pointer;
-
-      @media (min-width: 481px) {
-        width: calc(50% - 20px);
-      }
-
-      @media (min-width: 681px) {
-        width: calc(33% - 20px);
-      }
-
-      @media (min-width: 993px) {
-        width: calc(25% - 20px);
-      }
-    }
-  }
-`
-
 export const ModalIcon = styled.span`
   display: flex;
   position: absolute;
@@ -341,9 +212,6 @@ export const ModalIcon = styled.span`
   }
 `
 
-export const Description = styled.p`
-  margin: 0 10px;
-`
 
 export const ImageContainer = styled.div` 
   max-height: 500px;
@@ -354,26 +222,6 @@ export const ImageContainer = styled.div`
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-`
-export const OffersSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 0 20px;
-`
-
-export const OfferText = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-export const OfferTextP = styled.div`
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
 `
 
 export const OfferTable = styled.div`

@@ -39,7 +39,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -60,8 +60,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
       handleBusinessClick = props.handleBusinessClick,
       isCustomLayout = props.isCustomLayout,
       handleClickAddress = props.handleClickAddress,
-      setHasHighRatedBusiness = props.setHasHighRatedBusiness,
-      isCustomerMode = props.isCustomerMode;
+      setHasHighRatedBusiness = props.setHasHighRatedBusiness;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -110,7 +109,7 @@ var HighestRatedUI = function HighestRatedUI(props) {
       handleCustomClick: handleBusinessClick,
       orderType: orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type,
       isCustomLayout: isCustomLayout,
-      isCustomerMode: isCustomerMode
+      isShowCallcenterInformation: isCustomLayout
     });
   }))), businessesList.loading && _toConsumableArray(Array(8).keys()).map(function (i) {
     var _orderState$options2;

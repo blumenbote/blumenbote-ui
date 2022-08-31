@@ -127,18 +127,10 @@ export const App = () => {
                 <HelmetTags />
                 <Switch>
                   <Route exact path='/home'>
-                    {
-                      orderStatus.options?.address?.location
-                        ? <Redirect to='/search' />
-                        : <HomePage />
-                    }
+                    <HomePage />
                   </Route>
                   <Route exact path='/'>
-                    {
-                      orderStatus.options?.address?.location
-                        ? <Redirect to='/search' />
-                        : <HomePage />
-                    }
+                    <HomePage />
                   </Route>
                   <Route exact path='/signup'>
                     {
@@ -167,13 +159,11 @@ export const App = () => {
                           />
                         )
                         : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
+                          orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                            <Redirect to='/' />
+                          ) : (
+                            <SpinnerLoader />
+                          )
                         )
                     }
                   </Route>
@@ -189,13 +179,11 @@ export const App = () => {
                           />
                         )
                         : (
-                        orderStatus?.options?.user_id && !orderStatus?.loading ? (
-                          orderStatus.options?.address?.location
-                            ? <Redirect to='/search' />
-                            : <Redirect to='/' />
-                        ) : (
-                          <SpinnerLoader />
-                        )
+                          orderStatus?.options?.user_id && !orderStatus?.loading ? (
+                            <Redirect to='/' />
+                          ) : (
+                            <SpinnerLoader />
+                          )
                         )
                     }
                   </Route>
@@ -224,9 +212,7 @@ export const App = () => {
                     {orderStatus.loading && !orderStatus.options?.address?.location ? (
                       <SpinnerLoader />
                     ) : (
-                      orderStatus.options?.address?.location
-                        ? <BusinessesList />
-                        : <Redirect to='/' />
+                      <BusinessesList />
                     )}
                   </Route>
                   <Route exact path='/store/:store'>

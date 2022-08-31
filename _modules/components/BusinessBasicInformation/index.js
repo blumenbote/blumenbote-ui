@@ -21,10 +21,6 @@ var _BsExclamationCircle = _interopRequireDefault(require("@meronex/icons/bs/BsE
 
 var _styledComponents = require("styled-components");
 
-var _Modal = require("../Modal");
-
-var _BusinessInformation = require("../BusinessInformation");
-
 var _orderingComponents = require("ordering-components");
 
 var _utils = require("../../utils");
@@ -33,7 +29,7 @@ var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -53,9 +49,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
   var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _business$reviews, _orderState$options, _props$afterComponent, _props$afterElements;
 
   var isSkeleton = props.isSkeleton,
-      businessState = props.businessState,
-      setOpenBusinessInformation = props.setOpenBusinessInformation,
-      openBusinessInformation = props.openBusinessInformation;
+      businessState = props.businessState;
   var business = businessState.business,
       loading = businessState.loading;
   var theme = (0, _styledComponents.useTheme)();
@@ -124,24 +118,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     width: 70
   }), (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  })), !loading && /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_BsExclamationCircle.default, {
-    className: "popup",
-    onClick: function onClick() {
-      return setOpenBusinessInformation(true);
-    }
-  })))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
-    width: "70%",
-    open: openBusinessInformation,
-    onClose: setOpenBusinessInformation,
-    padding: "0",
-    hideCloseDefault: true,
-    isTransparent: true
-  }, /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
-    business: business,
-    getBusinessType: getBusinessType,
-    optimizeImage: optimizeImage,
-    onClose: setOpenBusinessInformation
-  }))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

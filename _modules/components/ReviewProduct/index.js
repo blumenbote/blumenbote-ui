@@ -37,7 +37,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -96,12 +96,7 @@ var SingleProductReview = function SingleProductReview(props) {
       extraComment = _useState8[0],
       setExtraComment = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(5),
-      _useState10 = _slicedToArray(_useState9, 2),
-      currentValue = _useState10[0],
-      setCurrentValue = _useState10[1];
-
-  var commentsList = (0, _utils.reviewCommentList)('product');
+  var commentsList = (0, _utils.reviewCommentList)(2);
 
   var handleChangeComment = function handleChangeComment(commentItem) {
     var found = comments.find(function (comment) {
@@ -129,9 +124,6 @@ var SingleProductReview = function SingleProductReview(props) {
   (0, _react.useEffect)(function () {
     var _formState$changes;
 
-    var value = isLike ? 5 : 1;
-    setCurrentValue(value);
-    if (value !== currentValue) setComments([]);
     if ((comments === null || comments === void 0 ? void 0 : comments.length) === 0 && !extraComment && ((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.length) === 0 && isLike) return;
     var _comments = '';
 
@@ -220,14 +212,14 @@ var ReviewProductUI = function ReviewProductUI(props) {
       handleSubmit = _useForm.handleSubmit,
       errors = _useForm.errors;
 
-  var _useState11 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     open: false,
     content: [],
     success: false
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      alertState = _useState12[0],
-      setAlertState = _useState12[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      alertState = _useState10[0],
+      setAlertState = _useState10[1];
 
   var onSubmit = function onSubmit(values) {
     setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {

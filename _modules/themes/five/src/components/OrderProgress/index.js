@@ -48,10 +48,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderProgressUI = function OrderProgressUI(props) {
-  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _getOrderStatus2, _lastOrder$business2, _lastOrder$business3;
+  var _orderList$orders, _lastOrder$business, _theme$images, _theme$images$dummies, _getOrderStatus, _lastOrder$business2, _lastOrder$business3;
 
-  var orderList = props.orderList,
-      isCustomerMode = props.isCustomerMode;
+  var orderList = props.orderList;
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -207,6 +206,7 @@ var OrderProgressUI = function OrderProgressUI(props) {
   };
 
   var convertDiffToHours = function convertDiffToHours(time) {
+    if (!time) return;
     var deliveryTime = lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
       outputFormat: 'YYYY-MM-DD hh:mm A'
     }) : parseDate(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
@@ -216,16 +216,13 @@ var OrderProgressUI = function OrderProgressUI(props) {
     var hour = time === null || time === void 0 ? void 0 : time.split(':')[0];
     var minute = time === null || time === void 0 ? void 0 : time.split(':')[1];
     var result = time ? parseInt(hour, 10) * 60 + parseInt(minute, 10) : 0;
-    var returnedDate = (0, _moment.default)(new Date(deliveryTime.replace(/-/g, '/'))).add(result, 'minutes').format('hh:mm A');
+    var returnedDate = (0, _moment.default)(new Date(deliveryTime)).add(result, 'minutes').format('hh:mm A');
     return returnedDate;
   };
 
   var handleGoToPage = function handleGoToPage(index) {
     events.emit('go_to_page', {
-      page: index,
-      params: {
-        orderId: lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.uuid
-      }
+      page: index
     });
   };
 
@@ -245,13 +242,13 @@ var OrderProgressUI = function OrderProgressUI(props) {
     color: "primaryContrast",
     naked: true,
     onClick: function onClick() {
-      return handleGoToPage(isCustomerMode ? 'order_detail' : 'orders');
+      return handleGoToPage('orders');
     }
-  }, isCustomerMode ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('GO_TO_THE_ORDER', 'Go to the order')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('GO_TO_MY_ORDERS', 'Go to my orders')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
+  }, t('GO_TO_MY_ORDERS', 'Go to my orders'), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ProgressBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ProgressBar, {
     style: {
       width: (_getOrderStatus = getOrderStatus(lastOrder.status)) !== null && _getOrderStatus !== void 0 && _getOrderStatus.percentage ? "".concat(getOrderStatus(lastOrder.status).percentage, "%") : '0%'
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, (_getOrderStatus2 = getOrderStatus(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.status)) === null || _getOrderStatus2 === void 0 ? void 0 : _getOrderStatus2.value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.ProgressTextWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.StatusWrapper, null, getOrderStatus(lastOrder.status).value), /*#__PURE__*/_react.default.createElement(_styles.TimeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ESTIMATED_DELIVERY', 'Estimated delivery'), ":\xA0"), /*#__PURE__*/_react.default.createElement("span", null, lastOrder !== null && lastOrder !== void 0 && lastOrder.delivery_datetime_utc ? parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime_utc, {
     outputFormat: 'hh:mm A'
   }) : parseTime(lastOrder === null || lastOrder === void 0 ? void 0 : lastOrder.delivery_datetime, {
     utc: false

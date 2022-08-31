@@ -9,6 +9,8 @@ exports.MyOrders = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _styles = require("./styles");
+
 var _orderingComponents = require("ordering-components");
 
 var _ProfileOptions = require("../../../../../components/UserProfileForm/ProfileOptions");
@@ -19,17 +21,13 @@ var _Buttons = require("../../styles/Buttons");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _styles = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -50,8 +48,6 @@ var MyOrders = function MyOrders(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var history = (0, _reactRouterDom.useHistory)();
-
   var _useState = (0, _react.useState)('all'),
       _useState2 = _slicedToArray(_useState, 2),
       selectItem = _useState2[0],
@@ -66,11 +62,6 @@ var MyOrders = function MyOrders(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       isEmptyPast = _useState6[0],
       setIsEmptyPast = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isEmptyPreorder = _useState8[0],
-      setIsEmptyPreorder = _useState8[1];
 
   var filterList = [{
     key: 'all',
@@ -100,7 +91,7 @@ var MyOrders = function MyOrders(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_ProfileOptions.ProfileOptions, {
     value: "orders"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, ('MY_ORDERS', 'My orders')), !(isEmptyActive && isEmptyPast && isEmptyPreorder) && /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, ('MY_ORDERS', 'My orders')), /*#__PURE__*/_react.default.createElement(_styles.OrderGroupFilterWrapper, null, filterList === null || filterList === void 0 ? void 0 : filterList.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       key: i,
       color: selectItem === order.key ? 'primary' : 'secundary',
@@ -108,27 +99,20 @@ var MyOrders = function MyOrders(props) {
         return handleChangeFilter(order.key);
       }
     }, order.value, selectItem === order.key && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
-  })), isEmptyActive && isEmptyPast && isEmptyPreorder ? /*#__PURE__*/_react.default.createElement(_styles.NoOrdersWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('YOU_DONT_HAVE_ORDERS', 'You don\'t have any orders')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    color: "primary",
-    onClick: function onClick() {
-      return history.push('/');
-    }
-  }, t('ORDER_NOW', 'Order now'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (selectItem === 'all' || selectItem === 'preorder') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
+  })), (selectItem === 'all' || selectItem === 'preorder') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     preOrders: true,
-    horizontal: true,
-    setIsEmptyPreorder: setIsEmptyPreorder,
-    selectItem: selectItem
+    horizontal: true
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'active') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     activeOrders: true,
     horizontal: true,
     setIsEmptyActive: setIsEmptyActive,
-    selectItem: selectItem
+    isEmptyActive: isEmptyActive,
+    isEmptyPast: isEmptyPast
   })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)), (selectItem === 'all' || selectItem === 'past') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrdersOption.OrdersOption, _extends({}, props, {
     pastOrders: true,
     horizontal: true,
-    setIsEmptyPast: setIsEmptyPast,
-    selectItem: selectItem
-  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null)))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    setIsEmptyPast: setIsEmptyPast
+  })), /*#__PURE__*/_react.default.createElement(_styles.Divider, null))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));
