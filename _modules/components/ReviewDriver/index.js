@@ -106,7 +106,7 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
       alertState = _useState6[0],
       setAlertState = _useState6[1];
 
-  var commentsList = (0, _utils.reviewCommentList)(1);
+  var commentsList = (0, _utils.reviewCommentList)('driver');
   var qualificationList = [{
     key: 1,
     text: t('TERRIBLE', 'Terrible'),
@@ -141,8 +141,10 @@ var ReviewDriverUI = function ReviewDriverUI(props) {
 
   var handleChangeReviews = function handleChangeReviews(index) {
     if (index) setDriverReviews(_objectSpread(_objectSpread({}, dirverReviews), {}, {
-      qualification: index
+      qualification: index,
+      comment: ''
     }));
+    setComments([]);
   };
 
   var onSubmit = function onSubmit(values) {

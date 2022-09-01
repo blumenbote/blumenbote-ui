@@ -107,7 +107,7 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       extraComment = _useState6[0],
       setExtraComment = _useState6[1];
 
-  var commentsList = (0, _utils.reviewCommentList)(1);
+  var commentsList = (0, _utils.reviewCommentList)('order');
   var qualificationList = [{
     key: 1,
     text: t('TERRIBLE', 'Terrible'),
@@ -145,8 +145,10 @@ var ReviewOrderUI = function ReviewOrderUI(props) {
       quality: index,
       punctiality: index,
       service: index,
-      packaging: index
+      packaging: index,
+      comments: ''
     }));
+    setComments([]);
   };
 
   var handleChangeComment = function handleChangeComment(commentItem) {

@@ -101,13 +101,13 @@ var UserPopover = function UserPopover(props) {
     pathname: '/wallets',
     displayName: 'wallets',
     key: 'wallets',
-    isActive: isWalletEnabled
+    isActive: isWalletEnabled && !isCustomerMode
   }, {
     name: 'messages',
     pathname: '/messages',
     displayName: 'messages',
     key: 'messages',
-    isActive: true
+    isActive: !isCustomerMode
   }, {
     name: 'help',
     pathname: '/help',
@@ -135,8 +135,7 @@ var UserPopover = function UserPopover(props) {
   var styles = popper.styles,
       attributes = popper.attributes,
       forceUpdate = popper.forceUpdate;
-  (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
+  (0, _react.useEffect)(function () {// forceUpdate && forceUpdate()
   }, [open, sessionState]);
 
   var handleClickOutside = function handleClickOutside(e) {

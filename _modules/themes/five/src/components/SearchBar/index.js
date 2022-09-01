@@ -62,10 +62,12 @@ var SearchBar = function SearchBar(props) {
     if (previousSearch !== e.target.value) {
       if (!lazyLoad) {
         onSearch(e.target.value);
+        el.current.value = e.target.value;
       } else {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
           onSearch(e.target.value);
+          el.current.value = e.target.value;
         }, 750);
       }
     }
@@ -75,13 +77,14 @@ var SearchBar = function SearchBar(props) {
 
   var handleClear = function handleClear() {
     onSearch('');
+    el.current.value = '';
   };
 
   (0, _react.useEffect)(function () {
     el.current.onkeyup = onChangeSearch;
   }, []);
   (0, _react.useEffect)(function () {
-    if (!search) {
+    if (!search || search === '') {
       el.current.value = '';
     }
   }, [search]);
