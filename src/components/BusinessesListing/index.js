@@ -45,7 +45,8 @@ const BusinessesListingUI = (props) => {
     handleChangeSearch,
     handleChangeBusinessType,
     handleBusinessClick,
-    currentPageParam
+    currentPageParam,
+    getCities
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -63,6 +64,8 @@ const BusinessesListingUI = (props) => {
   const businessesIds = isCustomLayout &&
     businessesList.businesses &&
     businessesList.businesses?.map(business => business.id)
+
+  const cityBusinesses = location.search.includes('region') ? businessesList.businesses.filter(b => location.search.split('?').filter(p => p.includes('region'))[0].replace('region=', '').replace('%20', ' ') === b.city.name) : businessesList.businesses
 
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + PIXELS_TO_SCROLL
@@ -94,8 +97,8 @@ const BusinessesListingUI = (props) => {
 
   useEffect(() => {
     if (orderState.loading && businessesList.loading) {
-    //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
-    //  window.history.pushState({ path: newurl }, '', newurl)
+      //  const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname
+      //  window.history.pushState({ path: newurl }, '', newurl)
       const params = new URLSearchParams()
       history.replace({ pathname: location.pathname, search: params.toString() })
       setPrevPage({ loading: true, page: 1 })
@@ -142,7 +145,8 @@ const BusinessesListingUI = (props) => {
 
   const handleClickNextItems = () => {
     getBusinesses(false, nextPage.page + 1, false)
-    const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + `?page=${nextPage.page + 1}`
+    let newSearch = location.search.split('?').slice(1).filter(i => !i.includes('page')).map(w => `?${w}`) + `?page=${nextPage.page + 1}`
+    const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + newSearch
     window.history.pushState({ path: newurl }, '', newurl)
     setNextPage({ loading: true, page: nextPage.page + 1 })
   }
@@ -252,7 +256,7 @@ const BusinessesListingUI = (props) => {
             ))
           )}
           {
-            !businessesList.loading && businessesList.businesses.length === 0 && (
+            !businessesList.loading && cityBusinesses.length === 0 && (
               <NotFoundSource
                 content={t('NOT_FOUND_BUSINESSES', 'No businesses to delivery / pick up at this address, please change filters or change address.')}
               >
@@ -267,7 +271,7 @@ const BusinessesListingUI = (props) => {
             )
           }
           {
-            businessesList.businesses?.map((business) => (
+            cityBusinesses?.map((business) => (
               <BusinessController
                 key={business.id}
                 className='card'
@@ -291,7 +295,7 @@ const BusinessesListingUI = (props) => {
               />
             ))
           )}
-          {businessesList.error && businessesList.error.length > 0 && businessesList.businesses.length === 0 && (
+          {businessesList.error && businessesList.error.length > 0 && cityBusinesses.length === 0 && (
             businessesList.error.map((e, i) => (
               <ErrorMessage key={i}>{t('ERROR', 'ERROR')}: [{e?.message || e}]</ErrorMessage>
             ))
@@ -350,6 +354,30 @@ const BusinessesListingUI = (props) => {
 export const BusinessesListing = (props) => {
   const businessListingProps = {
     ...props,
+    propsToFetch: [
+      "id",
+      "name",
+      "header",
+      "logo",
+      "location",
+      "schedule",
+      "open",
+      "ribbon",
+      "delivery_price",
+      "distance",
+      "delivery_time",
+      "pickup_time",
+      "reviews",
+      "featured",
+      "offers",
+      "food",
+      "laundry",
+      "alcohol",
+      "groceries",
+      "slug",
+      "city",
+      "city_id"
+  ],
     UIComponent: BusinessesListingUI
   }
 

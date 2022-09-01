@@ -249,6 +249,12 @@ export const DeliveryInfo = styled.div`
   }
 `
 
+export const DeliveryContent = styled.div`
+  h5:first-child {
+    margin-top: 0;
+  }
+`
+
 export const Description = styled.p`
   margin: 0 10px;
 `

@@ -36,7 +36,8 @@ import {
   ScheduleBlock,
   ScheduleContainer,
   ScheduleSection,
-  SectionTitle
+  SectionTitle,
+  DeliveryContent
 } from './styles'
 import { Tab, Tabs } from '../../styles/Tabs'
 import { AutoScroll } from '../AutoScroll'
@@ -310,10 +311,10 @@ export const RenderProductsLayoutUI = (props) => {
               </ScheduleSection>
               <DeliveryInfo>
                 <SectionTitle>{t('PRODUCT_DELIVERY_AND_PICKUP', 'Delivery and pickup time')}</SectionTitle>
-                <div>
+                <DeliveryContent>
                   <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
                   <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
-                </div>
+                </DeliveryContent>
               </DeliveryInfo>
             </>
           )}

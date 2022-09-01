@@ -113,7 +113,7 @@ const AddressListUI = (props) => {
       userCustomerSetup?.id === user?.id &&
       !isFromCheckout
     ) {
-      events.emit('go_to_page', { page: 'search' })
+      // events.emit('go_to_page', { page: 'search' })
       handleSetDefault(address, userCustomerSetup, true)
       setCustomerModalOpen && setCustomerModalOpen(false)
       return

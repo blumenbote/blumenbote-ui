@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSearch = exports.WrappLayout = exports.WrapContent = exports.Title = exports.SectionTitle = exports.ScheduleSection = exports.ScheduleContainer = exports.ScheduleBlock = exports.OffersSection = exports.OfferTextP = exports.OfferText = exports.Map = exports.FlexTabs = exports.EmptyCart = exports.EmptyBtnWrapper = exports.Description = exports.DeliveryInfo = exports.BusinessMediaContent = exports.BusinessContent = exports.BusinessCategoryProductWrapper = exports.BusinessCategoriesContainer = exports.BusinessCartContent = exports.BusinessCartContainer = void 0;
+exports.WrapperSearch = exports.WrappLayout = exports.WrapContent = exports.Title = exports.SectionTitle = exports.ScheduleSection = exports.ScheduleContainer = exports.ScheduleBlock = exports.OffersSection = exports.OfferTextP = exports.OfferText = exports.Map = exports.FlexTabs = exports.EmptyCart = exports.EmptyBtnWrapper = exports.Description = exports.DeliveryInfo = exports.DeliveryContent = exports.BusinessMediaContent = exports.BusinessContent = exports.BusinessCategoryProductWrapper = exports.BusinessCategoriesContainer = exports.BusinessCartContent = exports.BusinessCartContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -91,34 +91,38 @@ var DeliveryInfo = _styledComponents.default.div(_templateObject18 || (_template
 
 exports.DeliveryInfo = DeliveryInfo;
 
-var Description = _styledComponents.default.p(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin: 0 10px;\n"])));
+var DeliveryContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  h5:first-child {\n    margin-top: 0;\n  }\n"])));
+
+exports.DeliveryContent = DeliveryContent;
+
+var Description = _styledComponents.default.p(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin: 0 10px;\n"])));
 
 exports.Description = Description;
 
-var FlexTabs = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  height: 10%;\n  padding-top: 30px;\n  overflow-x: auto;\n  white-space: nowrap;\n"])));
+var FlexTabs = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  height: 10%;\n  padding-top: 30px;\n  overflow-x: auto;\n  white-space: nowrap;\n"])));
 
 exports.FlexTabs = FlexTabs;
 
-var Map = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 50vh;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])));
+var Map = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 50vh;\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 15px;\n  }\n"])));
 
 exports.Map = Map;
 
-var OffersSection = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 10px 0 20px;\n"])));
+var OffersSection = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 10px 0 20px;\n"])));
 
 exports.OffersSection = OffersSection;
 
-var OfferText = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n"])));
+var OfferText = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n"])));
 
 exports.OfferText = OfferText;
 
-var OfferTextP = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n"])));
+var OfferTextP = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n"])));
 
 exports.OfferTextP = OfferTextP;
 
-var ScheduleBlock = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  padding: 0px 15px;\n  border-right: 1px solid #CCC;\n  width: 10%;\n  min-width: 80px;\n  ", "\n  h4 {\n    margin: 0px 0px 3px;\n    font-weight: bold;\n    text-transform: uppercase;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n  p {\n    margin: 0px;\n    font-size: 14px;\n  }\n\n  &:last-child {\n    border: 0;\n  }\n  @media(min-width: 768px){\n    min-width: initial;\n  }\n"])), function (props) {
+var ScheduleBlock = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  text-align: center;\n  padding: 0px 15px;\n  border-right: 1px solid #CCC;\n  width: 10%;\n  min-width: 80px;\n  ", "\n  h4 {\n    margin: 0px 0px 3px;\n    font-weight: bold;\n    text-transform: uppercase;\n    color: ", ";\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n  p {\n    margin: 0px;\n    font-size: 14px;\n  }\n\n  &:last-child {\n    border: 0;\n  }\n  @media(min-width: 768px){\n    min-width: initial;\n  }\n"])), function (props) {
   var _props$theme4;
 
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    border-left: 1px solid #CCC;\n    border-right: none;\n  "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    border-left: 1px solid #CCC;\n    border-right: none;\n  "])));
 }, function (props) {
   var _props$theme5, _props$theme5$colors;
 
@@ -127,14 +131,14 @@ var ScheduleBlock = _styledComponents.default.div(_templateObject25 || (_templat
 
 exports.ScheduleBlock = ScheduleBlock;
 
-var SectionTitle = _styledComponents.default.h3(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  font-weight: bold;\n"])));
+var SectionTitle = _styledComponents.default.h3(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  font-weight: bold;\n"])));
 
 exports.SectionTitle = SectionTitle;
 
-var ScheduleSection = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 25px;\n"])));
+var ScheduleSection = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 25px;\n"])));
 
 exports.ScheduleSection = ScheduleSection;
 
-var ScheduleContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  > div {\n    width: 100%;\n  }\n\n"])));
+var ScheduleContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  > div {\n    width: 100%;\n  }\n\n"])));
 
 exports.ScheduleContainer = ScheduleContainer;

@@ -172,9 +172,7 @@ var AddressListUI = function AddressListUI(props) {
 
   var handleSetAddress = function handleSetAddress(address) {
     if (checkAddress(address) && isCustomerMode && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id) && !isFromCheckout) {
-      events.emit('go_to_page', {
-        page: 'search'
-      });
+      // events.emit('go_to_page', { page: 'search' })
       handleSetDefault(address, userCustomerSetup, true);
       setCustomerModalOpen && setCustomerModalOpen(false);
       return;
