@@ -13,6 +13,7 @@ export const FooterUI = (props) => {
   const [businessCities, setBusinessCities] = useState([])
 
   useEffect(() => {
+    console.log(businessesList.businesses)
     let newCities = businessesList.businesses.filter((value, index, self) => index === self.findIndex(t => t.city_id === value.city_id)).map(i => i.city.name)
     setBusinessCities(newCities)
   }, [businessesList])

@@ -54,6 +54,7 @@ var FooterUI = function FooterUI(props) {
       setBusinessCities = _useState2[1];
 
   (0, _react.useEffect)(function () {
+    console.log(businessesList.businesses);
     var newCities = businessesList.businesses.filter(function (value, index, self) {
       return index === self.findIndex(function (t) {
         return t.city_id === value.city_id;
