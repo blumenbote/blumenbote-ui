@@ -84,6 +84,7 @@ export const HomePage = (props) => {
             </SkeletonContainer>
           )
         }
+        <h1>Test</h1>
         {
           homeState.body && (
             <div dangerouslySetInnerHTML={{
