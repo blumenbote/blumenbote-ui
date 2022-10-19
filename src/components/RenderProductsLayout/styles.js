@@ -1,79 +1,117 @@
 import styled, { css } from 'styled-components'
 
+import { BusinessSearch } from '../SearchBar/styles'
+
 export const Title = styled.h1`
   font-weight: 600;
   font-size: 20px;
-  color: ${props => props.theme.colors.darkTextColor};
+  color: ${(props) => props.theme.colors.darkTextColor};
   margin-bottom: 18px;
 `
 
 export const WrappLayout = styled.div`
-  ${({ isCartOnProductsList }) => isCartOnProductsList && css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    .bp-list,
-    .cart {
+  ${({ isCartOnProductsList }) =>
+    isCartOnProductsList &&
+    css`
+      display: flex;
+      flex-direction: column;
       width: 100%;
-    }
 
-    @media (min-width: 870px) {
-      flex-direction: row;
-      .bp-list {
-        width: 55%;
-      }
+      .bp-list,
       .cart {
-        width: calc(45% - 20px);
-        margin-left: 20px;
+        width: 100%;
       }
-    }
 
-    @media (min-width: 1024px) {
-      .bp-list {
-        width: 60%;
+      @media (min-width: 870px) {
+        flex-direction: row;
+        .bp-list {
+          width: 55%;
+        }
+        .cart {
+          width: calc(45% - 20px);
+          margin-left: 20px;
+        }
       }
-      .cart {
-        width: calc(40% - 20px);
-      }
-    }  
 
-    @media (min-width: 1200px) {
-      .bp-list {
-        width: 70%;
+      @media (min-width: 1024px) {
+        .bp-list {
+          width: 60%;
+        }
+        .cart {
+          width: calc(40% - 20px);
+        }
       }
-      .cart {
-        width: calc(30% - 20px);
+
+      @media (min-width: 1200px) {
+        .bp-list {
+          width: 70%;
+        }
+        .cart {
+          width: calc(30% - 20px);
+        }
       }
-    }  
-  `}
+    `}
 `
 
 export const WrapperSearch = styled.div`
-  margin: 15px 0px 0px;
+  /* margin: 15px 0px 0px; */
   display: flex;
+  flex: 3 0 50%;
   align-items: center;
   justify-content: flex-end;
+  margin-bottom: 5px;
 
   .search-bar {
     margin-right: 10px;
-    ${props => props.theme?.rtl && css`
-      margin-left: 10px;
-      margin-right: 0;
-    `}
+    ${(props) =>
+      props.theme?.rtl &&
+      css`
+        margin-left: 10px;
+        margin-right: 0;
+      `}
   }
 
   div:last-child {
     text-align: right;
 
-    ${props => props.theme?.rtl && css`
-      text-align: left;
-    `}
+    ${(props) =>
+      props.theme?.rtl &&
+      css`
+        text-align: left;
+      `}
+  }
+  span {
+    transform: translate(-70%, 0%);
+  }
+
+  ${BusinessSearch} {
+    margin-right: 8px;
+    width: 200px;
+    &:focus {
+      width: 50%;
+    }
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    @media (max-width: 960px) {
+      width: 100%;
+    }
+  }
+`
+
+export const WrapperSearchAndBusinessCategories = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+
+  @media (max-width: 960px) {
+    align-items: unset;
+    flex-direction: column-reverse;
   }
 `
 
 export const WrapContent = styled.div`
-  background: ${props => props.theme.colors.backgroundPage};
+  background: ${(props) => props.theme.colors.backgroundPage};
 `
 
 export const BusinessContent = styled.div`
@@ -111,10 +149,12 @@ export const BusinessCategoriesContainer = styled.div`
   @media (min-width: 701px) {
     width: 30%;
 
-    ${props => props.theme?.rtl && css`
-      margin-right: 25px;
-      margin-left: 0;
-    `}
+    ${(props) =>
+      props.theme?.rtl &&
+      css`
+        margin-right: 25px;
+        margin-left: 0;
+      `}
   }
 `
 
@@ -139,11 +179,13 @@ export const BusinessCartContent = styled.div`
     padding: 10px 0;
   }
 
-  ${({ isModal }) => !isModal && css`
-    border: 1px solid #E9ECEF;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    border-radius: 7.6px;
-  `}
+  ${({ isModal }) =>
+    !isModal &&
+    css`
+      border: 1px solid #e9ecef;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+      border-radius: 7.6px;
+    `}
 
   @media (min-width: 1200px) {
     position: sticky;
@@ -163,13 +205,13 @@ export const EmptyCart = styled.div`
 
     svg {
       font-size: 45px;
-      color: #B1BCCC;
+      color: #b1bccc;
       margin-top: 10px;
     }
 
     p {
       font-size: 14px;
-      color: #B1BCCC;
+      color: #b1bccc;
       margin: 23px 0 0 0;
     }
   }
@@ -184,13 +226,13 @@ export const EmptyBtnWrapper = styled.div`
   span {
     font-weight: 600;
     font-size: 16px;
-    color: ${props => props.theme.colors.darkTextColor};
+    color: ${(props) => props.theme.colors.darkTextColor};
   }
 
   button {
     color: #748194;
-    background: #F8F9FA;
-    border: 1px solid #F8F9FA;
+    background: #f8f9fa;
+    border: 1px solid #f8f9fa;
     border-radius: 7.6px;
     height: 44px;
     font-size: 14px;
@@ -234,8 +276,8 @@ export const DeliveryInfo = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: 10px;
-  border-top: 1px solid #CCC;
-  border-bottom: 1px solid #CCC;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 
   div {
     width: 100%;
@@ -305,18 +347,20 @@ export const ScheduleBlock = styled.div`
   flex-direction: column;
   text-align: center;
   padding: 0px 15px;
-  border-right: 1px solid #CCC;
+  border-right: 1px solid #ccc;
   width: 10%;
   min-width: 80px;
-  ${props => props.theme?.rtl && css`
-    border-left: 1px solid #CCC;
-    border-right: none;
-  `}
+  ${(props) =>
+    props.theme?.rtl &&
+    css`
+      border-left: 1px solid #ccc;
+      border-right: none;
+    `}
   h4 {
     margin: 0px 0px 3px;
     font-weight: bold;
     text-transform: uppercase;
-    color: ${props => props.theme?.colors?.primary};
+    color: ${(props) => props.theme?.colors?.primary};
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -329,7 +373,7 @@ export const ScheduleBlock = styled.div`
   &:last-child {
     border: 0;
   }
-  @media(min-width: 768px){
+  @media (min-width: 768px) {
     min-width: initial;
   }
 `
@@ -350,5 +394,6 @@ export const ScheduleContainer = styled.div`
   > div {
     width: 100%;
   }
-
 `
+
+export const OfferTable = styled.div
