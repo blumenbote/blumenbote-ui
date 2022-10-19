@@ -16,25 +16,25 @@ import {
   BusinessHeader,
   BusinessContent,
   BusinessBasicContent,
-  FlexTabs,
-  SectionTitle,
-  Map,
-  ScheduleBlock,
-  ScheduleSection,
-  ScheduleContainer,
-  DeliveryInfo,
-  BusinessMediaContent,
+  // FlexTabs,
+  // SectionTitle,
+  // Map,
+  // ScheduleBlock,
+  // ScheduleSection,
+  // ScheduleContainer,
+  // DeliveryInfo,
+  // BusinessMediaContent,
   BusinessInfo,
   BusinessInfoItem,
   WrapperBusinessLogo,
   BusinessLogo,
   ModalIcon,
-  Description,
-  ImageContainer,
-  OffersSection,
-  OfferText,
-  OfferTextP,
-  OfferTable
+  // Description,
+  ImageContainer
+  // OffersSection,
+  // OfferText,
+  // OfferTextP,
+  // OfferTable
 } from './styles'
 import { Tabs, Tab } from '../../styles/Tabs'
 import GrDeliver from '@meronex/icons/gr/GrDeliver'
@@ -77,6 +77,7 @@ export const BusinessInformationUI = (props) => {
 
   const scheduleFormatted = ({ hour, minute }) => {
     const checkTime = (val) => val < 10 ? `0${val}` : val
+    const checkTime = (val) => (val < 10 ? `0${val}` : val)
     return `${checkTime(hour)}:${checkTime(minute)}`
   }
 
@@ -85,264 +86,315 @@ export const BusinessInformationUI = (props) => {
     setModalImage(true)
   }
 
-  return <></>
-  // return (
-  //   <>
-  //     {props.beforeElements?.map((BeforeElement, i) => (
-  //       <React.Fragment key={i}>
-  //         {BeforeElement}
-  //       </React.Fragment>))
-  //     }
-  //     {props.beforeComponents?.map((BeforeComponent, i) => (
-  //       <BeforeComponent key={i} {...props} />))
-  //     }
-  //     <BusinessInformationContainer>
-  //       <ModalIcon>
-  //         <MdClose onClick={() => onClose(false)} />
-  //       </ModalIcon>
-  //       <BusinessHeader>
-  //         <img src={business.header} alt='business-image' width='444px' height='250px' loading='lazy' />
-  //         <BusinessBasicContent>
-  //           {(business?.logo || theme.images?.dummies?.businessLogo) && (
-  //             <WrapperBusinessLogo>
-  //               <BusinessLogo
-  //                 bgimage={
-  //                   optimizeImage
-  //                     ? optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')
-  //                     : business?.logo || theme.images?.dummies?.businessLogo
-  //                 }
-  //               />
-  //             </WrapperBusinessLogo>
-  //           )}
-  //           <BusinessInfo className='info'>
-  //             <BusinessInfoItem>
-  //               <div>
-  //                 <p className='bold'>{business?.name}</p>
-  //                 <p>
-  //                   <FaStar className='start' />
-  //                   {business?.reviews?.total}
-  //                 </p>
-  //               </div>
-  //               {getBusinessType && (
-  //                 <div>
-  //                   <p>{getBusinessType()}</p>
-  //                 </div>
-  //               )}
-  //               <div>
-  //                 <>
-  //                   {orderState?.options?.type === 1 ? (
-  //                     <h5>
-  //                       <FiClock />
-  //                       {convertHoursToMinutes(business?.delivery_time)}
-  //                     </h5>
-  //                   ) : (
-  //                     <h5>
-  //                       <FiClock />
-  //                       {convertHoursToMinutes(business?.pickup_time)}
-  //                     </h5>
-  //                   )}
-  //                 </>
-  //                 <h5>
-  //                   <GrLocation />
-  //                   {parseDistance(business?.distance || 0)}
-  //                 </h5>
-  //                 <h5>
-  //                   <GrDeliver />
-  //                   {business && parsePrice(business?.delivery_price || 0)}
-  //                 </h5>
-  //               </div>
-  //             </BusinessInfoItem>
-  //           </BusinessInfo>
-  //         </BusinessBasicContent>
-  //       </BusinessHeader>
-  //       <BusinessContent>
-  //         {business.reviews && (
-  //           <FlexTabs>
-  //             <Tabs variant='primary'>
-  //               <Tab onClick={() => setTabValue('General Info')} active={tabValue === 'General Info'}>
-  //                 {t('GENERAL_INFO', 'General Info')}
-  //               </Tab>
-  //               {business.reviews?.reviews && (
-  //                 <Tab onClick={() => setTabValue('Reviews')} active={tabValue === 'Reviews'}>
-  //                   {t('REVIEWS', 'Reviews')}
-  //                 </Tab>
-  //               )}
-  //               {business?.offers?.length > 0 && (
-  //                 <Tab onClick={() => setTabValue('Offers')} active={tabValue === 'Offers'}>
-  //                   {t('OFFERS', 'Offers')}
-  //                 </Tab>
-  //               )}
-  //             </Tabs>
-  //           </FlexTabs>
-  //         )}
+  return (
+    <>
+      {props.beforeElements?.map((BeforeElement, i) => (
+        <React.Fragment key={i}>{BeforeElement}</React.Fragment>
+      ))}
+      {props.beforeComponents?.map((BeforeComponent, i) => (
+        <BeforeComponent key={i} {...props} />
+      ))}
+      <BusinessInformationContainer>
+        <ModalIcon>
+          <MdClose onClick={() => onClose(false)} />
+        </ModalIcon>
+        <BusinessHeader>
+          <img
+            src={business.header}
+            alt='business-image'
+            width='444px'
+            height='250px'
+            loading='lazy'
+          />
+          <BusinessBasicContent>
+            {(business?.logo || theme.images?.dummies?.businessLogo) && (
+              <WrapperBusinessLogo>
+                <BusinessLogo
+                  bgimage={
+                    optimizeImage
+                      ? optimizeImage(
+                          business?.logo || theme.images?.dummies?.businessLogo,
+                          'h_200,c_limit'
+                        )
+                      : business?.logo || theme.images?.dummies?.businessLogo
+                  }
+                />
+              </WrapperBusinessLogo>
+            )}
+            <BusinessInfo className='info'>
+              <BusinessInfoItem>
+                <div>
+                  <p className='bold'>{business?.name}</p>
+                  <p>
+                    <FaStar className='start' />
+                    {business?.reviews?.total}
+                  </p>
+                </div>
+                {getBusinessType && (
+                  <div>
+                    <p>{getBusinessType()}</p>
+                  </div>
+                )}
+                <div>
+                  <>
+                    {orderState?.options?.type === 1 ? (
+                      <h5>
+                        <FiClock />
+                        {convertHoursToMinutes(business?.delivery_time)}
+                      </h5>
+                    ) : (
+                      <h5>
+                        <FiClock />
+                        {convertHoursToMinutes(business?.pickup_time)}
+                      </h5>
+                    )}
+                  </>
+                  <h5>
+                    <GrLocation />
+                    {parseDistance(business?.distance || 0)}
+                  </h5>
+                  <h5>
+                    <GrDeliver />
+                    {business && parsePrice(business?.delivery_price || 0)}
+                  </h5>
+                </div>
+              </BusinessInfoItem>
+            </BusinessInfo>
+          </BusinessBasicContent>
+        </BusinessHeader>
+        <BusinessContent>
+          {business.reviews && (
+            <div>
+              <Tabs variant='primary'>
+                <Tab
+                  onClick={() => setTabValue('General Info')}
+                  active={tabValue === 'General Info'}
+                >
+                  {t('GENERAL_INFO', 'General Info')}
+                </Tab>
+                {business.reviews?.reviews && (
+                  <Tab
+                    onClick={() => setTabValue('Reviews')}
+                    active={tabValue === 'Reviews'}
+                  >
+                    {t('REVIEWS', 'Reviews')}
+                  </Tab>
+                )}
+                {business?.offers?.length > 0 && (
+                  <Tab
+                    onClick={() => setTabValue('Offers')}
+                    active={tabValue === 'Offers'}
+                  >
+                    {t('OFFERS', 'Offers')}
+                  </Tab>
+                )}
+              </Tabs>
+            </div>
+          )}
 
-  //         {tabValue === 'General Info' && (
-  //           <>
-  //             {business.about && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_ABOUT', 'Business short description')}</SectionTitle>
-  //                 <Description>{business.about}</Description>
-  //               </>
-  //             )}
-  //             {business.description && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
-  //                 <Description>{business.description}</Description>
-  //               </>
-  //             )}
-  //             {businessLocation.location && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_LOCATION', 'Business location')}</SectionTitle>
-  //                 {businessLocation.location && (
-  //                   <Map>
-  //                     <GoogleMapsMap
-  //                       apiKey={configs?.google_maps_api_key?.value}
-  //                       location={businessLocation.location}
-  //                       mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
-  //                     />
-  //                   </Map>
-  //                 )}
-  //               </>
-  //             )}
-  //             {businessSchedule?.length > 0 && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
-  //                 <ScheduleSection>
-  //                   <ScheduleContainer>
-  //                     <Tabs>
-  //                       <AutoScroll modal>
-  //                         {businessSchedule.map((schedule, i) => (
-  //                           <ScheduleBlock key={i}>
-  //                             <h4>{daysOfWeek[i]}</h4>
-  //                             {schedule.enabled ? (
-  //                               schedule.lapses.map( (time, k) => (
-  //                                 <React.Fragment key={k}>
-  //                                   <p>{scheduleFormatted(time.open)}</p>
-  //                                   <p style={{
-  //                                     borderBottom: '2px solid',
-  //                                     borderBottomColor: theme.colors.primary,
-  //                                     marginBottom: 10
-  //                                   }} >{scheduleFormatted(time.close)}</p>
-  //                                 </React.Fragment>
-  //                               ))
-  //                             ) : (
-  //                               <p style={{ fontWeight: 500 }}>{t('CLOSED_TODAY', 'Closed Today')}</p>
-  //                             )}
-  //                           </ScheduleBlock>
-  //                         ))}
-  //                       </AutoScroll>
-  //                     </Tabs>
-  //                   </ScheduleContainer>
-  //                 </ScheduleSection>
-  //                 <DeliveryInfo>
-  //                   <div>
-  //                     <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
-  //                     <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
-  //                   </div>
-  //                 </DeliveryInfo>
-  //               </>
-  //             )}
-  //             {businessPhotos?.length > 0 && (
-  //               <BusinessMediaContent>
-  //                 <SectionTitle>{t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')}</SectionTitle>
-  //                 <div>
-  //                   {
-  //                     businessPhotos.map((photo, i) => (
-  //                       <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} loading='lazy' />
-  //                     ))
-  //                   }
-  //                 </div>
-  //               </BusinessMediaContent>
-  //             )}
-  //             {businessVideos?.length > 0 && (
-  //               <BusinessMediaContent>
-  //                 <SectionTitle>{t('BUSINESS_VIDEOS', 'Business Videos')}</SectionTitle>
-  //                 <div>
-  //                   {businessVideos.map((video, i) => (
-  //                     <iframe key={i} src={formatUrlVideo(video.video)} width='191' height='128' frameBorder='0' allow='autoplay; encrypted-media' allowFullScreen />
-  //                   ))}
-  //                 </div>
-  //               </BusinessMediaContent>
-  //             )}
-  //           </>
-  //         )}
+          {tabValue === 'General Info' && (
+            <>
+              {business.about && (
+                <>
+                  <div>{t('BUSINESS_ABOUT', 'Business short description')}</div>
+                  <div>{business.about}</div>
+                </>
+              )}
+              {business.description && (
+                <>
+                  <div>{t('BUSINESS_DESCRIPTION', 'Business description')}</div>
+                  <div>{business.description}</div>
+                </>
+              )}
+              {businessLocation.location && (
+                <>
+                  <div>{t('BUSINESS_LOCATION', 'Business location')}</div>
+                  {businessLocation.location && (
+                    <div>
+                      <GoogleMapsMap
+                        apiKey={configs?.google_maps_api_key?.value}
+                        location={businessLocation.location}
+                        mapControls={
+                          businessLocation.googleMapsControls ||
+                          business.googleMapsControls
+                        }
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+              {businessSchedule?.length > 0 && (
+                <>
+                  <div>
+                    {t('BUSINESS_OPENING_TIME', 'Business Opening Time')}
+                  </div>
+                  <div>
+                    <div>
+                      <Tabs>
+                        <AutoScroll modal>
+                          {businessSchedule.map((schedule, i) => (
+                            <div key={i}>
+                              <h4>{daysOfWeek[i]}</h4>
+                              {schedule.enabled ? (
+                                schedule.lapses.map((time, k) => (
+                                  <React.Fragment key={k}>
+                                    <p>{scheduleFormatted(time.open)}</p>
+                                    <p
+                                      style={{
+                                        borderBottom: '2px solid',
+                                        borderBottomColor: theme.colors.primary,
+                                        marginBottom: 10
+                                      }}
+                                    >
+                                      {scheduleFormatted(time.close)}
+                                    </p>
+                                  </React.Fragment>
+                                ))
+                              ) : (
+                                <p style={{ fontWeight: 500 }}>
+                                  {t('CLOSED_TODAY', 'Closed Today')}
+                                </p>
+                              )}
+                            </div>
+                          ))}
+                        </AutoScroll>
+                      </Tabs>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <h5>
+                        {t('DELIVERY_TIME', 'Delivery Time')}:{' '}
+                        {convertHoursToMinutes(business?.delivery_time)}
+                      </h5>
+                      <h5>
+                        {t('PICKUP_TIME', 'Pickup Time')}:{' '}
+                        {convertHoursToMinutes(business?.pickup_time)}
+                      </h5>
+                    </div>
+                  </div>
+                </>
+              )}
+              {businessPhotos?.length > 0 && (
+                <div>
+                  <div>
+                    {t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')}
+                  </div>
+                  <div>
+                    {businessPhotos.map((photo, i) => (
+                      <img
+                        key={i}
+                        src={photo.file}
+                        alt={`photo-${i}`}
+                        width='191'
+                        height='128'
+                        onClick={() => handleModalImage(photo.file)}
+                        loading='lazy'
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {businessVideos?.length > 0 && (
+                <div>
+                  <div>{t('BUSINESS_VIDEOS', 'Business Videos')}</div>
+                  <div>
+                    {businessVideos.map((video, i) => (
+                      <iframe
+                        key={i}
+                        src={formatUrlVideo(video.video)}
+                        width='191'
+                        height='128'
+                        frameBorder='0'
+                        allow='autoplay; encrypted-media'
+                        allowFullScreen
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
 
-  //         {tabValue === 'Reviews' && (
-  //           <>
-  //             {business.reviews?.reviews && (
-  //               <BusinessReviews
-  //                 businessId={business.id}
-  //                 reviews={business.reviews?.reviews}
-  //                 businessName={business.name}
-  //                 stars={business.reviews?.total}
-  //               />
-  //             )}
-  //           </>
-  //         )}
+          {tabValue === 'Reviews' && (
+            <>
+              {business.reviews?.reviews && (
+                <BusinessReviews
+                  businessId={business.id}
+                  reviews={business.reviews?.reviews}
+                  businessName={business.name}
+                  stars={business.reviews?.total}
+                />
+              )}
+            </>
+          )}
 
-  //         {tabValue === 'Offers' && (
-  //           <OffersSection>
-  //             <OfferText>
-  //               <OfferTextP>{t('DISCOUNTS_OF', 'Discounts of')} {business?.name}</OfferTextP>
-  //               <OfferTextP>{business?.address}</OfferTextP>
-  //             </OfferText>
-  //             <OfferTable>
-  //               <table>
-  //                 <thead>
-  //                   <tr>
-  //                     <th>{t('OFFERT_NAME', 'Offer Name')}</th>
-  //                     <th>{t('OFFERT_PRICE', 'Offer Price')}</th>
-  //                     <th>{t('OFFERT_START_DATE', 'Start Date')}</th>
-  //                     <th>{t('OFFERT_END_DATE', 'End Date')}</th>
-  //                   </tr>
-  //                 </thead>
-  //                 <tbody>
-  //                   {business?.offers?.map(offer => (
-  //                     <tr key={offer.id}>
-  //                       <td>{offer.name}</td>
-  //                       <td>
-  //                         {offer.rate_type === 1 ? (
-  //                           `${offer.rate} % ${t('MIN', 'Min')}: ${parsePrice(offer.minimum)}`
-  //                         ) : (
-  //                           `${parsePrice(offer.rate)} ${t('MIN', 'Min')}: ${parsePrice(offer.minimum)}`
-  //                         )}
-  //                       </td>
-  //                       <td>{offer.start}</td>
-  //                       <td>{offer.end}</td>
-  //                     </tr>
-  //                   ))}
-  //                 </tbody>
-  //               </table>
-  //             </OfferTable>
-  //           </OffersSection>
-  //         )}
-  //       </BusinessContent>
-  //       <Modal
-  //         onClose={() => setModalImage(false)}
-  //         open={modalImage}
-  //         padding='0'
-  //         hideCloseDefault
-  //         isTransparent
-  //         height='auto'
-  //       >
-  //         <ImageContainer>
-  //           <ModalIcon>
-  //             <MdClose onClick={() => setModalImage(false)} />
-  //           </ModalIcon>
-  //           <img src={image} width='320px' height='180px' loading='lazy' />
-  //         </ImageContainer>
-  //       </Modal>
-  //     </BusinessInformationContainer>
-  //     {props.afterComponents?.map((AfterComponent, i) => (
-  //       <AfterComponent key={i} {...props} />))
-  //     }
-  //     {props.afterElements?.map((AfterElement, i) => (
-  //       <React.Fragment key={i}>
-  //         {AfterElement}
-  //       </React.Fragment>))
-  //     }
-  //   </>
-  // )
+          {tabValue === 'Offers' && (
+            <div>
+              <div>
+                <div>
+                  {t('DISCOUNTS_OF', 'Discounts of')} {business?.name}
+                </div>
+                <div>{business?.address}</div>
+              </div>
+              <div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>{t('OFFERT_NAME', 'Offer Name')}</th>
+                      <th>{t('OFFERT_PRICE', 'Offer Price')}</th>
+                      <th>{t('OFFERT_START_DATE', 'Start Date')}</th>
+                      <th>{t('OFFERT_END_DATE', 'End Date')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {business?.offers?.map((offer) => (
+                      <tr key={offer.id}>
+                        <td>{offer.name}</td>
+                        <td>
+                          {offer.rate_type === 1
+                            ? `${offer.rate} % ${t('MIN', 'Min')}: ${parsePrice(
+                                offer.minimum
+                              )}`
+                            : `${parsePrice(offer.rate)} ${t(
+                                'MIN',
+                                'Min'
+                              )}: ${parsePrice(offer.minimum)}`}
+                        </td>
+                        <td>{offer.start}</td>
+                        <td>{offer.end}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </BusinessContent>
+        <Modal
+          onClose={() => setModalImage(false)}
+          open={modalImage}
+          padding='0'
+          hideCloseDefault
+          isTransparent
+          height='auto'
+        >
+          <ImageContainer>
+            <ModalIcon>
+              <MdClose onClick={() => setModalImage(false)} />
+            </ModalIcon>
+            <img src={image} width='320px' height='180px' loading='lazy' />
+          </ImageContainer>
+        </Modal>
+      </BusinessInformationContainer>
+      {props.afterComponents?.map((AfterComponent, i) => (
+        <AfterComponent key={i} {...props} />
+      ))}
+      {props.afterElements?.map((AfterElement, i) => (
+        <React.Fragment key={i}>{AfterElement}</React.Fragment>
+      ))}
+    </>
+  )
 }
 
 export const BusinessInformation = (props) => {
