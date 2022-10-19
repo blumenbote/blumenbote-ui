@@ -47,6 +47,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -60,6 +62,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessInformationUI = function BusinessInformationUI(props) {
+  var _props$beforeElements, _props$beforeComponen, _theme$images, _theme$images$dummies, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _business$reviews, _orderState$options, _business$reviews2, _business$offers, _configs$google_maps_, _business$reviews3, _business$reviews4, _business$reviews5, _business$offers2, _props$afterComponent, _props$afterElements;
+
   var business = props.business,
       getBusinessType = props.getBusinessType,
       optimizeImage = props.optimizeImage,
@@ -121,260 +125,131 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     setModalImage(true);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null); // return (
-  //   <>
-  //     {props.beforeElements?.map((BeforeElement, i) => (
-  //       <React.Fragment key={i}>
-  //         {BeforeElement}
-  //       </React.Fragment>))
-  //     }
-  //     {props.beforeComponents?.map((BeforeComponent, i) => (
-  //       <BeforeComponent key={i} {...props} />))
-  //     }
-  //     <BusinessInformationContainer>
-  //       <ModalIcon>
-  //         <MdClose onClick={() => onClose(false)} />
-  //       </ModalIcon>
-  //       <BusinessHeader>
-  //         <img src={business.header} alt='business-image' width='444px' height='250px' loading='lazy' />
-  //         <BusinessBasicContent>
-  //           {(business?.logo || theme.images?.dummies?.businessLogo) && (
-  //             <WrapperBusinessLogo>
-  //               <BusinessLogo
-  //                 bgimage={
-  //                   optimizeImage
-  //                     ? optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_200,c_limit')
-  //                     : business?.logo || theme.images?.dummies?.businessLogo
-  //                 }
-  //               />
-  //             </WrapperBusinessLogo>
-  //           )}
-  //           <BusinessInfo className='info'>
-  //             <BusinessInfoItem>
-  //               <div>
-  //                 <p className='bold'>{business?.name}</p>
-  //                 <p>
-  //                   <FaStar className='start' />
-  //                   {business?.reviews?.total}
-  //                 </p>
-  //               </div>
-  //               {getBusinessType && (
-  //                 <div>
-  //                   <p>{getBusinessType()}</p>
-  //                 </div>
-  //               )}
-  //               <div>
-  //                 <>
-  //                   {orderState?.options?.type === 1 ? (
-  //                     <h5>
-  //                       <FiClock />
-  //                       {convertHoursToMinutes(business?.delivery_time)}
-  //                     </h5>
-  //                   ) : (
-  //                     <h5>
-  //                       <FiClock />
-  //                       {convertHoursToMinutes(business?.pickup_time)}
-  //                     </h5>
-  //                   )}
-  //                 </>
-  //                 <h5>
-  //                   <GrLocation />
-  //                   {parseDistance(business?.distance || 0)}
-  //                 </h5>
-  //                 <h5>
-  //                   <GrDeliver />
-  //                   {business && parsePrice(business?.delivery_price || 0)}
-  //                 </h5>
-  //               </div>
-  //             </BusinessInfoItem>
-  //           </BusinessInfo>
-  //         </BusinessBasicContent>
-  //       </BusinessHeader>
-  //       <BusinessContent>
-  //         {business.reviews && (
-  //           <FlexTabs>
-  //             <Tabs variant='primary'>
-  //               <Tab onClick={() => setTabValue('General Info')} active={tabValue === 'General Info'}>
-  //                 {t('GENERAL_INFO', 'General Info')}
-  //               </Tab>
-  //               {business.reviews?.reviews && (
-  //                 <Tab onClick={() => setTabValue('Reviews')} active={tabValue === 'Reviews'}>
-  //                   {t('REVIEWS', 'Reviews')}
-  //                 </Tab>
-  //               )}
-  //               {business?.offers?.length > 0 && (
-  //                 <Tab onClick={() => setTabValue('Offers')} active={tabValue === 'Offers'}>
-  //                   {t('OFFERS', 'Offers')}
-  //                 </Tab>
-  //               )}
-  //             </Tabs>
-  //           </FlexTabs>
-  //         )}
-  //         {tabValue === 'General Info' && (
-  //           <>
-  //             {business.about && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_ABOUT', 'Business short description')}</SectionTitle>
-  //                 <Description>{business.about}</Description>
-  //               </>
-  //             )}
-  //             {business.description && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_DESCRIPTION', 'Business description')}</SectionTitle>
-  //                 <Description>{business.description}</Description>
-  //               </>
-  //             )}
-  //             {businessLocation.location && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_LOCATION', 'Business location')}</SectionTitle>
-  //                 {businessLocation.location && (
-  //                   <Map>
-  //                     <GoogleMapsMap
-  //                       apiKey={configs?.google_maps_api_key?.value}
-  //                       location={businessLocation.location}
-  //                       mapControls={businessLocation.googleMapsControls || business.googleMapsControls}
-  //                     />
-  //                   </Map>
-  //                 )}
-  //               </>
-  //             )}
-  //             {businessSchedule?.length > 0 && (
-  //               <>
-  //                 <SectionTitle>{t('BUSINESS_OPENING_TIME', 'Business Opening Time')}</SectionTitle>
-  //                 <ScheduleSection>
-  //                   <ScheduleContainer>
-  //                     <Tabs>
-  //                       <AutoScroll modal>
-  //                         {businessSchedule.map((schedule, i) => (
-  //                           <ScheduleBlock key={i}>
-  //                             <h4>{daysOfWeek[i]}</h4>
-  //                             {schedule.enabled ? (
-  //                               schedule.lapses.map( (time, k) => (
-  //                                 <React.Fragment key={k}>
-  //                                   <p>{scheduleFormatted(time.open)}</p>
-  //                                   <p style={{
-  //                                     borderBottom: '2px solid',
-  //                                     borderBottomColor: theme.colors.primary,
-  //                                     marginBottom: 10
-  //                                   }} >{scheduleFormatted(time.close)}</p>
-  //                                 </React.Fragment>
-  //                               ))
-  //                             ) : (
-  //                               <p style={{ fontWeight: 500 }}>{t('CLOSED_TODAY', 'Closed Today')}</p>
-  //                             )}
-  //                           </ScheduleBlock>
-  //                         ))}
-  //                       </AutoScroll>
-  //                     </Tabs>
-  //                   </ScheduleContainer>
-  //                 </ScheduleSection>
-  //                 <DeliveryInfo>
-  //                   <div>
-  //                     <h5>{t('DELIVERY_TIME', 'Delivery Time')}: {convertHoursToMinutes(business?.delivery_time)}</h5>
-  //                     <h5>{t('PICKUP_TIME', 'Pickup Time')}: {convertHoursToMinutes(business?.pickup_time)}</h5>
-  //                   </div>
-  //                 </DeliveryInfo>
-  //               </>
-  //             )}
-  //             {businessPhotos?.length > 0 && (
-  //               <BusinessMediaContent>
-  //                 <SectionTitle>{t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')}</SectionTitle>
-  //                 <div>
-  //                   {
-  //                     businessPhotos.map((photo, i) => (
-  //                       <img key={i} src={photo.file} alt={`photo-${i}`} width='191' height='128' onClick={() => handleModalImage(photo.file)} loading='lazy' />
-  //                     ))
-  //                   }
-  //                 </div>
-  //               </BusinessMediaContent>
-  //             )}
-  //             {businessVideos?.length > 0 && (
-  //               <BusinessMediaContent>
-  //                 <SectionTitle>{t('BUSINESS_VIDEOS', 'Business Videos')}</SectionTitle>
-  //                 <div>
-  //                   {businessVideos.map((video, i) => (
-  //                     <iframe key={i} src={formatUrlVideo(video.video)} width='191' height='128' frameBorder='0' allow='autoplay; encrypted-media' allowFullScreen />
-  //                   ))}
-  //                 </div>
-  //               </BusinessMediaContent>
-  //             )}
-  //           </>
-  //         )}
-  //         {tabValue === 'Reviews' && (
-  //           <>
-  //             {business.reviews?.reviews && (
-  //               <BusinessReviews
-  //                 businessId={business.id}
-  //                 reviews={business.reviews?.reviews}
-  //                 businessName={business.name}
-  //                 stars={business.reviews?.total}
-  //               />
-  //             )}
-  //           </>
-  //         )}
-  //         {tabValue === 'Offers' && (
-  //           <OffersSection>
-  //             <OfferText>
-  //               <OfferTextP>{t('DISCOUNTS_OF', 'Discounts of')} {business?.name}</OfferTextP>
-  //               <OfferTextP>{business?.address}</OfferTextP>
-  //             </OfferText>
-  //             <OfferTable>
-  //               <table>
-  //                 <thead>
-  //                   <tr>
-  //                     <th>{t('OFFERT_NAME', 'Offer Name')}</th>
-  //                     <th>{t('OFFERT_PRICE', 'Offer Price')}</th>
-  //                     <th>{t('OFFERT_START_DATE', 'Start Date')}</th>
-  //                     <th>{t('OFFERT_END_DATE', 'End Date')}</th>
-  //                   </tr>
-  //                 </thead>
-  //                 <tbody>
-  //                   {business?.offers?.map(offer => (
-  //                     <tr key={offer.id}>
-  //                       <td>{offer.name}</td>
-  //                       <td>
-  //                         {offer.rate_type === 1 ? (
-  //                           `${offer.rate} % ${t('MIN', 'Min')}: ${parsePrice(offer.minimum)}`
-  //                         ) : (
-  //                           `${parsePrice(offer.rate)} ${t('MIN', 'Min')}: ${parsePrice(offer.minimum)}`
-  //                         )}
-  //                       </td>
-  //                       <td>{offer.start}</td>
-  //                       <td>{offer.end}</td>
-  //                     </tr>
-  //                   ))}
-  //                 </tbody>
-  //               </table>
-  //             </OfferTable>
-  //           </OffersSection>
-  //         )}
-  //       </BusinessContent>
-  //       <Modal
-  //         onClose={() => setModalImage(false)}
-  //         open={modalImage}
-  //         padding='0'
-  //         hideCloseDefault
-  //         isTransparent
-  //         height='auto'
-  //       >
-  //         <ImageContainer>
-  //           <ModalIcon>
-  //             <MdClose onClick={() => setModalImage(false)} />
-  //           </ModalIcon>
-  //           <img src={image} width='320px' height='180px' loading='lazy' />
-  //         </ImageContainer>
-  //       </Modal>
-  //     </BusinessInformationContainer>
-  //     {props.afterComponents?.map((AfterComponent, i) => (
-  //       <AfterComponent key={i} {...props} />))
-  //     }
-  //     {props.afterElements?.map((AfterElement, i) => (
-  //       <React.Fragment key={i}>
-  //         {AfterElement}
-  //       </React.Fragment>))
-  //     }
-  //   </>
-  // )
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, BeforeElement);
+  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
+      key: i
+    }, props));
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessInformationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return onClose(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessHeader, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: business.header,
+    alt: "business-image",
+    width: "444px",
+    height: "250px",
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessBasicContent, null, ((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)) && /*#__PURE__*/_react.default.createElement(_styles.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessLogo, {
+    bgimage: optimizeImage ? optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit') : (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo)
+  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, {
+    className: "info"
+  }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "bold"
+  }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_FaStar.default, {
+    className: "start"
+  }), business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total)), getBusinessType && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, getBusinessType())), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)) : /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_FiClock.default, null), (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))), /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrLocation.default, null), parseDistance((business === null || business === void 0 ? void 0 : business.distance) || 0)), /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0))))))), /*#__PURE__*/_react.default.createElement(_styles.BusinessContent, null, business.reviews && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, {
+    variant: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setTabValue('General Info');
+    },
+    active: tabValue === 'General Info'
+  }, t('GENERAL_INFO', 'General Info')), ((_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.reviews) && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setTabValue('Reviews');
+    },
+    active: tabValue === 'Reviews'
+  }, t('REVIEWS', 'Reviews')), (business === null || business === void 0 ? void 0 : (_business$offers = business.offers) === null || _business$offers === void 0 ? void 0 : _business$offers.length) > 0 && /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
+    onClick: function onClick() {
+      return setTabValue('Offers');
+    },
+    active: tabValue === 'Offers'
+  }, t('OFFERS', 'Offers')))), tabValue === 'General Info' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, business.about && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, t('BUSINESS_ABOUT', 'Business short description')), /*#__PURE__*/_react.default.createElement("div", null, business.about)), business.description && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement("div", null, business.description)), businessLocation.location && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, t('BUSINESS_LOCATION', 'Business location')), businessLocation.location && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_orderingComponents.GoogleMapsMap, {
+    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value,
+    location: businessLocation.location,
+    mapControls: businessLocation.googleMapsControls || business.googleMapsControls
+  }))), (businessSchedule === null || businessSchedule === void 0 ? void 0 : businessSchedule.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, t('BUSINESS_OPENING_TIME', 'Business Opening Time')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Tabs.Tabs, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
+    modal: true
+  }, businessSchedule.map(function (schedule, i) {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("h4", null, daysOfWeek[i]), schedule.enabled ? schedule.lapses.map(function (time, k) {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: k
+      }, /*#__PURE__*/_react.default.createElement("p", null, scheduleFormatted(time.open)), /*#__PURE__*/_react.default.createElement("p", {
+        style: {
+          borderBottom: '2px solid',
+          borderBottomColor: theme.colors.primary,
+          marginBottom: 10
+        }
+      }, scheduleFormatted(time.close)));
+    }) : /*#__PURE__*/_react.default.createElement("p", {
+      style: {
+        fontWeight: 500
+      }
+    }, t('CLOSED_TODAY', 'Closed Today')));
+  }))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h5", null, t('DELIVERY_TIME', 'Delivery Time'), ":", ' ', (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("h5", null, t('PICKUP_TIME', 'Pickup Time'), ":", ' ', (0, _utils.convertHoursToMinutes)(business === null || business === void 0 ? void 0 : business.pickup_time))))), (businessPhotos === null || businessPhotos === void 0 ? void 0 : businessPhotos.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, t('BUSINESS_PHOTO_GALLERY', 'Business Photo Gallery')), /*#__PURE__*/_react.default.createElement("div", null, businessPhotos.map(function (photo, i) {
+    return /*#__PURE__*/_react.default.createElement("img", {
+      key: i,
+      src: photo.file,
+      alt: "photo-".concat(i),
+      width: "191",
+      height: "128",
+      onClick: function onClick() {
+        return handleModalImage(photo.file);
+      },
+      loading: "lazy"
+    });
+  }))), (businessVideos === null || businessVideos === void 0 ? void 0 : businessVideos.length) > 0 && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, t('BUSINESS_VIDEOS', 'Business Videos')), /*#__PURE__*/_react.default.createElement("div", null, businessVideos.map(function (video, i) {
+    return /*#__PURE__*/_react.default.createElement("iframe", {
+      key: i,
+      src: (0, _utils.formatUrlVideo)(video.video),
+      width: "191",
+      height: "128",
+      frameBorder: "0",
+      allow: "autoplay; encrypted-media",
+      allowFullScreen: true
+    });
+  })))), tabValue === 'Reviews' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.reviews) && /*#__PURE__*/_react.default.createElement(_BusinessReviews.BusinessReviews, {
+    businessId: business.id,
+    reviews: (_business$reviews4 = business.reviews) === null || _business$reviews4 === void 0 ? void 0 : _business$reviews4.reviews,
+    businessName: business.name,
+    stars: (_business$reviews5 = business.reviews) === null || _business$reviews5 === void 0 ? void 0 : _business$reviews5.total
+  })), tabValue === 'Offers' && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, t('DISCOUNTS_OF', 'Discounts of'), " ", business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("div", null, business === null || business === void 0 ? void 0 : business.address)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_NAME', 'Offer Name')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_PRICE', 'Offer Price')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_START_DATE', 'Start Date')), /*#__PURE__*/_react.default.createElement("th", null, t('OFFERT_END_DATE', 'End Date')))), /*#__PURE__*/_react.default.createElement("tbody", null, business === null || business === void 0 ? void 0 : (_business$offers2 = business.offers) === null || _business$offers2 === void 0 ? void 0 : _business$offers2.map(function (offer) {
+    return /*#__PURE__*/_react.default.createElement("tr", {
+      key: offer.id
+    }, /*#__PURE__*/_react.default.createElement("td", null, offer.name), /*#__PURE__*/_react.default.createElement("td", null, offer.rate_type === 1 ? "".concat(offer.rate, " % ").concat(t('MIN', 'Min'), ": ").concat(parsePrice(offer.minimum)) : "".concat(parsePrice(offer.rate), " ").concat(t('MIN', 'Min'), ": ").concat(parsePrice(offer.minimum))), /*#__PURE__*/_react.default.createElement("td", null, offer.start), /*#__PURE__*/_react.default.createElement("td", null, offer.end));
+  })))))), /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
+    onClose: function onClose() {
+      return setModalImage(false);
+    },
+    open: modalImage,
+    padding: "0",
+    hideCloseDefault: true,
+    isTransparent: true,
+    height: "auto"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ModalIcon, null, /*#__PURE__*/_react.default.createElement(_MdClose.default, {
+    onClick: function onClick() {
+      return setModalImage(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement("img", {
+    src: image,
+    width: "320px",
+    height: "180px",
+    loading: "lazy"
+  })))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
+      key: i
+    }, props));
+  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, AfterElement);
+  }));
 };
 
 exports.BusinessInformationUI = BusinessInformationUI;
