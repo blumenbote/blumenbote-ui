@@ -1,6 +1,7 @@
 import React from 'react'
 import { GoogleGpsButton as GpsButton } from 'ordering-components'
 import { GpsButtonStyle } from './styles'
+import { useAgreement } from '../../contexts/AgreementContext'
 
 const GoogleGpsButtonUI = (props) => {
   const {
@@ -20,20 +21,25 @@ const GoogleGpsButtonUI = (props) => {
       onClick={handleGPS}
     >
       {isLoading ? (
-        IconLoadingButton ? <IconLoadingButton /> : '...'
+        IconLoadingButton ? (
+          <IconLoadingButton />
+        ) : (
+          '...'
+        )
+      ) : IconButton ? (
+        <IconButton />
       ) : (
-        IconButton ? <IconButton /> : 'GPS'
+        'GPS'
       )}
     </GpsButtonStyle>
   )
 }
 
 export const GoogleGpsButton = (props) => {
+  const [isAgreement] = useAgreement()
   const gpsButtonProps = {
     ...props,
     UIComponent: GoogleGpsButtonUI
   }
-  return (
-    <GpsButton {...gpsButtonProps} />
-  )
+  return isAgreement && <GpsButton {...gpsButtonProps} />
 }
