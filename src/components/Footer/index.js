@@ -13,8 +13,7 @@ export const FooterUI = (props) => {
   const [businessCities, setBusinessCities] = useState([])
 
   useEffect(() => {
-    console.log(businessesList.businesses)
-    let newCities = businessesList.businesses.filter((value, index, self) => index === self.findIndex(t => t.city_id === value.city_id)).map(i => i.city.name)
+    let newCities = businessesList.businesses.filter((value, index, self) => index === self.findIndex(t => t.city_id === value.city_id)).map(i => i.city?.name)
     setBusinessCities(newCities)
   }, [businessesList])
 
@@ -95,7 +94,6 @@ svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0
         </div>
       </Content>
       <Copy>COPYRIGHT 2022 BLUMENBOTE.ONLINE</Copy>
-      <div>TEST</div>
     </FooterContainer>
   )
 }
