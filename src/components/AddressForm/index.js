@@ -90,6 +90,7 @@ const AddressFormUI = (props) => {
       'true'
 
   const mapErrors = {
+    ERROR_NOT_FOUND_ADDRESS: "Sorry, we couldn't find an address",
     ERROR_MAX_LIMIT_LOCATION: `Sorry, You can only set the position to ${maxLimitLocation}m`
   }
 
