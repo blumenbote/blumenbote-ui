@@ -5,7 +5,6 @@ import {
   useEvent,
   useUtils,
   useConfig,
-  GoogleMapsMap
 } from 'ordering-components'
 import FiPhone from '@meronex/icons/fi/FiPhone'
 import FaUserCircle from '@meronex/icons/fa/FaUserCircle'
@@ -28,6 +27,7 @@ import { ReviewOrder } from '../ReviewOrder'
 import { ReviewProduct } from '../ReviewProduct'
 import { ReviewDriver } from '../ReviewDriver'
 import { OrderSuccessModal } from '../OrderSuccessModal'
+import { GoogleMaps } from '../GoogleMaps'
 
 import {
   Container,
@@ -246,11 +246,11 @@ const OrderDetailsUI = (props) => {
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
+        <React.Fragment key={i}>{BeforeElement}</React.Fragment>
+      ))}
       {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
+        <BeforeComponent key={i} {...props} />
+      ))}
       <Container>
         {!loading && order && Object.keys(order).length > 0 && (
           <WrapperContainer>
@@ -263,19 +263,42 @@ const OrderDetailsUI = (props) => {
                   </Button>
                 )}
                 <HeaderImg>
-                  <img src={businessData?.header} alt='business-header' height='200px' width='355px' loading='lazy' />
+                  <img
+                    src={businessData?.header}
+                    alt='business-header'
+                    height='200px'
+                    width='355px'
+                    loading='lazy'
+                  />
                 </HeaderImg>
                 <HeaderInfo className='order-header'>
                   <HeaderText column>
-                    <h1>{t('ORDER_MESSAGE_RECEIVED', theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED || 'Your order has been received')}</h1>
-                    <p>{t('ORDER_MESSAGE_HEADER_TEXT', theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT || 'Once business accepts your order, we will send you an email, thank you!')}</p>
+                    <h1>
+                      {t(
+                        'ORDER_MESSAGE_RECEIVED',
+                        theme?.defaultLanguages?.ORDER_MESSAGE_RECEIVED ||
+                          'Your order has been received'
+                      )}
+                    </h1>
+                    <p>
+                      {t(
+                        'ORDER_MESSAGE_HEADER_TEXT',
+                        theme?.defaultLanguages?.ORDER_MESSAGE_HEADER_TEXT ||
+                          'Once business accepts your order, we will send you an email, thank you!'
+                      )}
+                    </p>
                   </HeaderText>
                 </HeaderInfo>
               </Header>
               <OrderBusiness>
                 <BusinessWrapper>
                   <LogoWrapper>
-                    <BusinessLogo bgimage={order?.business?.logo || theme.images?.dummies?.businessLogo} />
+                    <BusinessLogo
+                      bgimage={
+                        order?.business?.logo ||
+                        theme.images?.dummies?.businessLogo
+                      }
+                    />
                   </LogoWrapper>
                   <BusinessInfo>
                     <h1>{order?.business?.name}</h1>
@@ -285,14 +308,23 @@ const OrderDetailsUI = (props) => {
                   </BusinessInfo>
                 </BusinessWrapper>
                 <ActionsBlock>
-                  {order?.driver && order?.driver.phone &&
-                    <span onClick={() => window.open(`tel:${order?.driver.phone}`)}>
+                  {order?.driver && order?.driver.phone && (
+                    <span
+                      onClick={() => window.open(`tel:${order?.driver.phone}`)}
+                    >
                       <FiPhone />
-                    </span>}
+                    </span>
+                  )}
                   <span>
-                    <BiStoreAlt onClick={() => handleBusinessRedirect(businessData?.slug)} />
+                    <BiStoreAlt
+                      onClick={() => handleBusinessRedirect(businessData?.slug)}
+                    />
                   </span>
-                  <MessagesIcon onClick={() => handleOpenMessages({ driver: false, business: true })}>
+                  <MessagesIcon
+                    onClick={() =>
+                      handleOpenMessages({ driver: false, business: true })
+                    }
+                  >
                     {order?.unread_count > 0 && unreadAlert.business && (
                       <ExclamationWrapper>
                         <AiFillExclamationCircle />
@@ -305,24 +337,41 @@ const OrderDetailsUI = (props) => {
 
               <OrderInfo>
                 <OrderData>
-                  <h1>{t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #{order?.id}</h1>
+                  <h1>
+                    {t('ORDER', theme?.defaultLanguages?.ORDER || 'Order')} #
+                    {order?.id}
+                  </h1>
                   {order?.status !== 0 && order?.integration_id && (
-                    <h1>{t('TICKET', 'Ticket')}: {order?.integration_id}</h1>
+                    <h1>
+                      {t('TICKET', 'Ticket')}: {order?.integration_id}
+                    </h1>
                   )}
-                  <p>{t('DATE_TIME_FOR_ORDER', theme?.defaultLanguages?.DATE_TIME_FOR_ORDER || 'Date and time for your order')}</p>
-                  <p className='date'>
-                    {
-                      order?.delivery_datetime_utc
-                        ? parseDate(order?.delivery_datetime_utc)
-                        : parseDate(order?.delivery_datetime, { utc: false })
-                    }
+                  <p>
+                    {t(
+                      'DATE_TIME_FOR_ORDER',
+                      theme?.defaultLanguages?.DATE_TIME_FOR_ORDER ||
+                        'Date and time for your order'
+                    )}
                   </p>
-                  <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+                  <p className='date'>
+                    {order?.delivery_datetime_utc
+                      ? parseDate(order?.delivery_datetime_utc)
+                      : parseDate(order?.delivery_datetime, { utc: false })}
+                  </p>
+                  <StatusBar
+                    percentage={getOrderStatus(order?.status)?.percentage}
+                  />
                 </OrderData>
                 <OrderStatus>
                   <span>{getOrderStatus(order?.status)?.value}</span>
                   <StatusImage>
-                    <img src={getImage(order?.status || 0)} alt='status' width='70px' height='70px' loading='lazy' />
+                    <img
+                      src={getImage(order?.status || 0)}
+                      alt='status'
+                      width='70px'
+                      height='70px'
+                      loading='lazy'
+                    />
                   </StatusImage>
                 </OrderStatus>
               </OrderInfo>
@@ -333,20 +382,35 @@ const OrderDetailsUI = (props) => {
               <OrderCustomer>
                 <div className='photo'>
                   {order?.customer?.photo ? (
-                    <PhotoBlock src={order?.customer?.photo} width='80' height='80' />
+                    <PhotoBlock
+                      src={order?.customer?.photo}
+                      width='80'
+                      height='80'
+                    />
                   ) : (
                     <FaUserCircle />
                   )}
                 </div>
                 <InfoBlock>
-                  <h1>{order?.customer?.name} {order?.customer?.lastname}</h1>
+                  <h1>
+                    {order?.customer?.name} {order?.customer?.lastname}
+                  </h1>
                   <span>{order?.customer?.address}</span>
                 </InfoBlock>
               </OrderCustomer>
               {order?.delivery_type === 1 && (
                 <CommentContainer>
                   <h3>{t('DELIVERY_PREFERENCE', 'Delivery preference')}</h3>
-                  <span>{order?.delivery_option?.name ? t(order?.delivery_option?.name.toUpperCase().replace(/\s/g, '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</span>
+                  <span>
+                    {order?.delivery_option?.name
+                      ? t(
+                          order?.delivery_option?.name
+                            .toUpperCase()
+                            .replace(/\s/g, '_'),
+                          order?.delivery_option?.name
+                        )
+                      : t('EITHER_WAY', 'Either way')}
+                  </span>
                 </CommentContainer>
               )}
               {order?.comment && (
@@ -356,27 +420,43 @@ const OrderDetailsUI = (props) => {
                 </CommentContainer>
               )}
 
-              {parseInt(configs?.guest_uuid_access?.value, 10) && order?.hash_key && (
-                <ShareOrder>
-                  <div className='text'>
-                    <h1>{t('SHARE_THIS_DELIVERY', theme?.defaultLanguages?.SHARE_THIS_DELIVERY || 'Share this delivery')}</h1>
-                    <p>{t('LET_SOMEONE_FOLLOW_ALONG', theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG || 'Let someone follow along')}</p>
-                  </div>
-                  <div className='wrap'>
-                    <ProductShare
-                      withBtn
-                      btnText={t('SHARE', theme?.defaultLanguages?.SHARE || 'Share')}
-                      defaultUrl={urlToShare(order?.hash_key)}
-                    />
-                  </div>
-                </ShareOrder>
-              )}
+              {parseInt(configs?.guest_uuid_access?.value, 10) &&
+                order?.hash_key && (
+                  <ShareOrder>
+                    <div className='text'>
+                      <h1>
+                        {t(
+                          'SHARE_THIS_DELIVERY',
+                          theme?.defaultLanguages?.SHARE_THIS_DELIVERY ||
+                            'Share this delivery'
+                        )}
+                      </h1>
+                      <p>
+                        {t(
+                          'LET_SOMEONE_FOLLOW_ALONG',
+                          theme?.defaultLanguages?.LET_SOMEONE_FOLLOW_ALONG ||
+                            'Let someone follow along'
+                        )}
+                      </p>
+                    </div>
+                    <div className='wrap'>
+                      <ProductShare
+                        withBtn
+                        btnText={t(
+                          'SHARE',
+                          theme?.defaultLanguages?.SHARE || 'Share'
+                        )}
+                        defaultUrl={urlToShare(order?.hash_key)}
+                      />
+                    </div>
+                  </ShareOrder>
+                )}
 
               {order?.driver && (
                 <>
                   {order?.driver?.location && parseInt(order?.status) === 9 && (
                     <Map>
-                      <GoogleMapsMap
+                      <GoogleMaps
                         apiKey={configs?.google_maps_api_key?.value}
                         location={order?.driver?.location}
                         locations={locations}
@@ -386,28 +466,54 @@ const OrderDetailsUI = (props) => {
                   )}
                   <>
                     <SectionTitle>
-                      {t('YOUR_DRIVER', theme?.defaultLanguages?.YOUR_DRIVER || 'Your Driver')}
+                      {t(
+                        'YOUR_DRIVER',
+                        theme?.defaultLanguages?.YOUR_DRIVER || 'Your Driver'
+                      )}
                     </SectionTitle>
                     <OrderDriver>
                       <WrapperDriver>
                         <div className='photo'>
                           {order?.driver?.photo ? (
-                            <PhotoBlock src={order?.driver?.photo} width='70' height='70' />
+                            <PhotoBlock
+                              src={order?.driver?.photo}
+                              width='70'
+                              height='70'
+                            />
                           ) : (
                             <RiUser2Fill />
                           )}
                         </div>
                         <InfoBlock>
-                          <h1>{order?.driver?.name} {order?.driver?.lastname}</h1>
-                          <span>{t('DRIVER', theme?.defaultLanguages?.DRIVER || 'Driver')}</span>
+                          <h1>
+                            {order?.driver?.name} {order?.driver?.lastname}
+                          </h1>
+                          <span>
+                            {t(
+                              'DRIVER',
+                              theme?.defaultLanguages?.DRIVER || 'Driver'
+                            )}
+                          </span>
                         </InfoBlock>
                       </WrapperDriver>
                       <ActionsBlock>
-                        {order.driver && order.driver?.phone &&
-                          <span onClick={() => window.open(`tel:${order.driver.phone}`)}>
+                        {order.driver && order.driver?.phone && (
+                          <span
+                            onClick={() =>
+                              window.open(`tel:${order.driver.phone}`)
+                            }
+                          >
                             <FiPhone />
-                          </span>}
-                        <MessagesIcon onClick={() => handleOpenMessages({ driver: true, business: false })}>
+                          </span>
+                        )}
+                        <MessagesIcon
+                          onClick={() =>
+                            handleOpenMessages({
+                              driver: true,
+                              business: false
+                            })
+                          }
+                        >
                           {order?.unread_count > 0 && unreadAlert?.driver && (
                             <ExclamationWrapper>
                               <AiFillExclamationCircle />
@@ -422,56 +528,95 @@ const OrderDetailsUI = (props) => {
               )}
 
               <SectionTitle>
-                {t('YOUR_ORDER', theme?.defaultLanguages?.YOUR_ORDER || 'Your Order')}
+                {t(
+                  'YOUR_ORDER',
+                  theme?.defaultLanguages?.YOUR_ORDER || 'Your Order'
+                )}
               </SectionTitle>
               <OrderProducts>
-                {order?.products?.length && order?.products.map(product => (
-                  <ProductItemAccordion
-                    key={product.id}
-                    product={product}
-                  />
-                ))}
+                {order?.products?.length &&
+                  order?.products.map((product) => (
+                    <ProductItemAccordion key={product.id} product={product} />
+                  ))}
               </OrderProducts>
               <OrderBill>
                 <table>
                   <tbody>
                     <tr>
-                      <td>{t('SUBTOTAL', theme?.defaultLanguages?.SUBTOTAL || 'Subtotal')}</td>
                       <td>
-                        {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()))}
+                        {t(
+                          'SUBTOTAL',
+                          theme?.defaultLanguages?.SUBTOTAL || 'Subtotal'
+                        )}
+                      </td>
+                      <td>
+                        {parsePrice(
+                          (order?.summary?.subtotal ?? order?.subtotal) +
+                            getIncludedTaxes()
+                        )}
                       </td>
                     </tr>
-                    {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
-                      <tr>
-                        {order?.offer_type === 1 ? (
+                    {(order?.summary?.discount > 0 ?? order?.discount > 0) &&
+                      order?.offers?.length === 0 && (
+                        <tr>
+                          {order?.offer_type === 1 ? (
+                            <td>
+                              {t(
+                                'DISCOUNT',
+                                theme?.defaultLanguages?.DISCOUNT || 'Discount'
+                              )}{' '}
+                              <span>{`(${verifyDecimals(
+                                order?.offer_rate,
+                                parsePrice
+                              )}%)`}</span>
+                            </td>
+                          ) : (
+                            <td>
+                              {t(
+                                'DISCOUNT',
+                                theme?.defaultLanguages?.DISCOUNT || 'Discount'
+                              )}
+                            </td>
+                          )}
                           <td>
-                            {t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}{' '}
-                            <span>{`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}</span>
-                          </td>
-                        ) : (
-                          <td>{t('DISCOUNT', theme?.defaultLanguages?.DISCOUNT || 'Discount')}</td>
-                        )}
-                        <td>- {parsePrice(order?.summary?.discount ?? order?.discount)}</td>
-                      </tr>
-                    )}
-                    {
-                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td>
-                            {offer.name}
-                            {offer.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                            -{' '}
+                            {parsePrice(
+                              order?.summary?.discount ?? order?.discount
                             )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
                           </td>
                         </tr>
-                      ))
-                    }
+                      )}
+                    {order?.offers?.length > 0 &&
+                      order?.offers
+                        ?.filter((offer) => offer?.target === 1)
+                        ?.map((offer) => (
+                          <tr key={offer.id}>
+                            <td>
+                              {offer.name}
+                              {offer.rate_type === 1 && (
+                                <span>{`(${verifyDecimals(
+                                  offer?.rate,
+                                  parsePrice
+                                )}%)`}</span>
+                              )}
+                              <Exclamation
+                                onClick={() =>
+                                  setOpenTaxModal({
+                                    open: true,
+                                    data: offer,
+                                    type: 'offer_target_1'
+                                  })
+                                }
+                              >
+                                <AiOutlineExclamationCircle
+                                  size='20'
+                                  color={theme.colors.primary}
+                                />
+                              </Exclamation>
+                            </td>
+                            <td>- {parsePrice(offer?.summary?.discount)}</td>
+                          </tr>
+                        ))}
                     <tr>
                       <td>
                         <Divider />
@@ -480,120 +625,236 @@ const OrderDetailsUI = (props) => {
                         <Divider />
                       </td>
                     </tr>
-                    {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
+                    {order?.summary?.subtotal_with_discount > 0 &&
+                      order?.summary?.discount > 0 &&
+                      order?.summary?.total >= 0 && (
+                        <tr>
+                          <td>
+                            {t(
+                              'SUBTOTAL_WITH_DISCOUNT',
+                              'Subtotal with discount'
+                            )}
+                          </td>
+                          {order?.tax_type === 1 ? (
+                            <td>
+                              {parsePrice(
+                                order?.summary?.subtotal_with_discount +
+                                  getIncludedTaxesDiscounts() ?? 0
+                              )}
+                            </td>
+                          ) : (
+                            <td>
+                              {parsePrice(
+                                order?.summary?.subtotal_with_discount ?? 0
+                              )}
+                            </td>
+                          )}
+                        </tr>
+                      )}
+                    {order?.taxes?.length === 0 && order?.tax_type === 2 && (
                       <tr>
-                        <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
-                        {order?.tax_type === 1 ? (
-                          <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
-                        ) : (
-                          <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
-                        )}
+                        <td>
+                          {t('TAX', 'Tax')}
+                          <span>{`(${verifyDecimals(
+                            order?.tax,
+                            parseNumber
+                          )}%)`}</span>
+                        </td>
+                        <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
                       </tr>
                     )}
-                    {
-                      order?.taxes?.length === 0 && order?.tax_type === 2 && (
-                        <tr>
-                          <td>
-                            {t('TAX', 'Tax')}
-                            <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
-                        </tr>
-                      )
-                    }
-                    {
-                      order?.fees?.length === 0 && (
-                        <tr>
-                          <td>
-                            {t('SERVICE_FEE', 'Service fee')}
-                            <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
-                          </td>
-                          <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
-                        </tr>
-                      )
-                    }
-                    {
-                      order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
-                        <tr key={tax?.id}>
-                          <td>
-                            {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
-                        </tr>
-                      ))
-                    }
-                    {
-                      order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
-                        <tr key={fee.id}>
-                          <td>
-                            {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
-                            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
-                        </tr>
-                      ))
-                    }
-                    {
-                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td>
-                            {offer.name}
-                            {offer.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
-                          </td>
-                        </tr>
-                      ))
-                    }
+                    {order?.fees?.length === 0 && (
+                      <tr>
+                        <td>
+                          {t('SERVICE_FEE', 'Service fee')}
+                          <span>{`(${verifyDecimals(
+                            order?.service_fee,
+                            parseNumber
+                          )}%)`}</span>
+                        </td>
+                        <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
+                      </tr>
+                    )}
+                    {order?.taxes?.length > 0 &&
+                      order?.taxes
+                        ?.filter((tax) => tax?.type === 2 && tax?.rate !== 0)
+                        .map((tax) => (
+                          <tr key={tax?.id}>
+                            <td>
+                              {tax?.name ||
+                                t(
+                                  'INHERIT_FROM_BUSINESS',
+                                  'Inherit from business'
+                                )}
+                              <span>{`(${verifyDecimals(
+                                tax?.rate,
+                                parseNumber
+                              )}%)`}</span>
+                              <Exclamation
+                                onClick={() =>
+                                  setOpenTaxModal({
+                                    open: true,
+                                    data: tax,
+                                    type: 'tax'
+                                  })
+                                }
+                              >
+                                <AiOutlineExclamationCircle
+                                  size='20'
+                                  color={theme.colors.primary}
+                                />
+                              </Exclamation>
+                            </td>
+                            <td>
+                              {parsePrice(
+                                tax?.summary?.tax_after_discount ??
+                                  tax?.summary?.tax ??
+                                  0
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                    {order?.fees?.length > 0 &&
+                      order?.fees
+                        ?.filter(
+                          (fee) => !(fee?.fixed === 0 && fee?.percentage === 0)
+                        )
+                        ?.map((fee) => (
+                          <tr key={fee.id}>
+                            <td>
+                              {fee?.name ||
+                                t(
+                                  'INHERIT_FROM_BUSINESS',
+                                  'Inherit from business'
+                                )}
+                              (
+                              {fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}
+                              {fee.percentage}%)
+                              <Exclamation
+                                onClick={() =>
+                                  setOpenTaxModal({
+                                    open: true,
+                                    data: fee,
+                                    type: 'fee'
+                                  })
+                                }
+                              >
+                                <AiOutlineExclamationCircle
+                                  size='20'
+                                  color={theme.colors.primary}
+                                />
+                              </Exclamation>
+                            </td>
+                            <td>
+                              {parsePrice(
+                                fee?.summary?.fixed +
+                                  (fee?.summary?.percentage_after_discount ??
+                                    fee?.summary?.percentage) ?? 0
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                    {order?.offers?.length > 0 &&
+                      order?.offers
+                        ?.filter((offer) => offer?.target === 3)
+                        ?.map((offer) => (
+                          <tr key={offer.id}>
+                            <td>
+                              {offer.name}
+                              {offer.rate_type === 1 && (
+                                <span>{`(${verifyDecimals(
+                                  offer?.rate,
+                                  parsePrice
+                                )}%)`}</span>
+                              )}
+                              <Exclamation
+                                onClick={() =>
+                                  setOpenTaxModal({
+                                    open: true,
+                                    data: offer,
+                                    type: 'offer_target_3'
+                                  })
+                                }
+                              >
+                                <AiOutlineExclamationCircle
+                                  size='20'
+                                  color={theme.colors.primary}
+                                />
+                              </Exclamation>
+                            </td>
+                            <td>- {parsePrice(offer?.summary?.discount)}</td>
+                          </tr>
+                        ))}
                     {order?.summary?.delivery_price > 0 && (
                       <tr>
-                        <td>{t('DELIVERY_FEE', theme?.defaultLanguages?.DELIVERY_FEE || 'Delivery Fee')}</td>
+                        <td>
+                          {t(
+                            'DELIVERY_FEE',
+                            theme?.defaultLanguages?.DELIVERY_FEE ||
+                              'Delivery Fee'
+                          )}
+                        </td>
                         <td>{parsePrice(order?.summary?.delivery_price)}</td>
                       </tr>
                     )}
-                    {
-                      order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
-                        <tr key={offer.id}>
-                          <td>
-                            {offer.name}
-                            {offer.rate_type === 1 && (
-                              <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
-                            )}
-                            <Exclamation onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })}>
-                              <AiOutlineExclamationCircle size='20' color={theme.colors.primary} />
-                            </Exclamation>
-                          </td>
-                          <td>
-                            - {parsePrice(offer?.summary?.discount)}
-                          </td>
-                        </tr>
-                      ))
-                    }
-                    {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
+                    {order?.offers?.length > 0 &&
+                      order?.offers
+                        ?.filter((offer) => offer?.target === 2)
+                        ?.map((offer) => (
+                          <tr key={offer.id}>
+                            <td>
+                              {offer.name}
+                              {offer.rate_type === 1 && (
+                                <span>{`(${verifyDecimals(
+                                  offer?.rate,
+                                  parsePrice
+                                )}%)`}</span>
+                              )}
+                              <Exclamation
+                                onClick={() =>
+                                  setOpenTaxModal({
+                                    open: true,
+                                    data: offer,
+                                    type: 'offer_target_2'
+                                  })
+                                }
+                              >
+                                <AiOutlineExclamationCircle
+                                  size='20'
+                                  color={theme.colors.primary}
+                                />
+                              </Exclamation>
+                            </td>
+                            <td>- {parsePrice(offer?.summary?.discount)}</td>
+                          </tr>
+                        ))}
+                    {(order?.summary?.driver_tip > 0 ||
+                      order?.driver_tip > 0) && (
                       <tr>
                         <td>
-                          {t('DRIVER_TIP', theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip')}{' '}
-                          {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) &&
-                            parseInt(configs?.driver_tip_type?.value, 10) === 2 &&
-                            !parseInt(configs?.driver_tip_use_custom?.value, 10) &&
-                            (
-                              <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
+                          {t(
+                            'DRIVER_TIP',
+                            theme?.defaultLanguages?.DRIVER_TIP || 'Driver tip'
+                          )}{' '}
+                          {(order?.summary?.driver_tip > 0 ||
+                            order?.driver_tip > 0) &&
+                            parseInt(configs?.driver_tip_type?.value, 10) ===
+                              2 &&
+                            !parseInt(
+                              configs?.driver_tip_use_custom?.value,
+                              10
+                            ) && (
+                              <span>{`(${verifyDecimals(
+                                order?.driver_tip,
+                                parseNumber
+                              )}%)`}</span>
                             )}
                         </td>
-                        <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip)}</td>
+                        <td>
+                          {parsePrice(
+                            order?.summary?.driver_tip ?? order?.totalDriverTip
+                          )}
+                        </td>
                       </tr>
                     )}
                   </tbody>
@@ -601,8 +862,12 @@ const OrderDetailsUI = (props) => {
                 <table className='total'>
                   <tbody>
                     <tr>
-                      <td>{t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}</td>
-                      <td>{parsePrice(order?.summary?.total ?? order?.total)}</td>
+                      <td>
+                        {t('TOTAL', theme?.defaultLanguages?.TOTAL || 'Total')}
+                      </td>
+                      <td>
+                        {parsePrice(order?.summary?.total ?? order?.total)}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -624,19 +889,29 @@ const OrderDetailsUI = (props) => {
                 parseInt(order?.status) === 6 ||
                 parseInt(order?.status) === 10 ||
                 parseInt(order?.status) === 11 ||
-                parseInt(order?.status) === 12
-              ) && (!order?.review || (order.driver && !order?.user_review)) && (!isOrderReviewed || !isProductReviewed || !isDriverReviewed) && (
-                <ReviewsAction>
-                  <Button color='primary' onClick={handleOpenReview}>
-                    {t('REVIEW_ORDER', theme?.defaultLanguages?.REVIEW_ORDER || 'Review your Order')}
-                  </Button>
-                </ReviewsAction>
-              )}
+                parseInt(order?.status) === 12) &&
+                (!order?.review || (order.driver && !order?.user_review)) &&
+                (!isOrderReviewed ||
+                  !isProductReviewed ||
+                  !isDriverReviewed) && (
+                  <ReviewsAction>
+                    <Button color='primary' onClick={handleOpenReview}>
+                      {t(
+                        'REVIEW_ORDER',
+                        theme?.defaultLanguages?.REVIEW_ORDER ||
+                          'Review your Order'
+                      )}
+                    </Button>
+                  </ReviewsAction>
+                )}
 
               {!userCustomerId && (
                 <FootActions>
                   <a onClick={() => handleGoToPage({ page: 'orders' })}>
-                    {t('MY_ORDERS', theme?.defaultLanguages?.MY_ORDERS || 'My Orders')}
+                    {t(
+                      'MY_ORDERS',
+                      theme?.defaultLanguages?.MY_ORDERS || 'My Orders'
+                    )}
                     <BiCaretUp />
                   </a>
                 </FootActions>
@@ -658,19 +933,26 @@ const OrderDetailsUI = (props) => {
           </WrapperContainer>
         )}
 
-        {!loading && error && (
-          error.includes('ERROR_ACCESS_EXPIRED') ? (
+        {!loading &&
+          error &&
+          (error.includes('ERROR_ACCESS_EXPIRED') ? (
             <NotFoundSource
               content={t(error[0], 'Sorry, the order has expired.')}
             />
           ) : (
             <NotFoundSource
-              content={t('NOT_FOUND_ORDER', theme?.defaultLanguages?.NOT_FOUND_ORDER || 'Sorry, we couldn\'t find the requested order.')}
-              btnTitle={t('ORDERS_REDIRECT', theme?.defaultLanguages?.ORDERS_REDIRECT || 'Go to Orders')}
+              content={t(
+                'NOT_FOUND_ORDER',
+                theme?.defaultLanguages?.NOT_FOUND_ORDER ||
+                  "Sorry, we couldn't find the requested order."
+              )}
+              btnTitle={t(
+                'ORDERS_REDIRECT',
+                theme?.defaultLanguages?.ORDERS_REDIRECT || 'Go to Orders'
+              )}
               onClickButton={handleOrderRedirect}
             />
-          )
-        )}
+          ))}
 
         {(openMessages.driver || openMessages.business) && (
           <Modal
@@ -690,36 +972,60 @@ const OrderDetailsUI = (props) => {
             />
           </Modal>
         )}
-        {
-          isReviewOpen && (
-            <Modal
-              open={isReviewOpen}
-              onClose={handleCloseReivew}
-              title={order
-                ? (reviewStatus?.order
+        {isReviewOpen && (
+          <Modal
+            open={isReviewOpen}
+            onClose={handleCloseReivew}
+            title={
+              order
+                ? reviewStatus?.order
                   ? t('REVIEW_ORDER', 'Review order')
-                  : (reviewStatus?.product
-                    ? t('REVIEW_PRODUCT', 'Review Product')
-                    : t('REVIEW_DRIVER', 'Review Driver')))
-                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')}
-            >
-              {
-                reviewStatus?.order
-                  ? <ReviewOrder order={order} closeReviewOrder={closeReviewOrder} setIsReviewed={setIsOrderReviewed} />
-                  : (reviewStatus?.product
-                    ? <ReviewProduct order={order} closeReviewProduct={closeReviewProduct} setIsProductReviewed={setIsProductReviewed} />
-                    : <ReviewDriver order={order} closeReviewDriver={handleCloseReivew} setIsDriverReviewed={setIsDriverReviewed} />)
-              }
-            </Modal>
-          )
-        }
+                  : reviewStatus?.product
+                  ? t('REVIEW_PRODUCT', 'Review Product')
+                  : t('REVIEW_DRIVER', 'Review Driver')
+                : t('LOADING', theme?.defaultLanguages?.LOADING || 'Loading...')
+            }
+          >
+            {reviewStatus?.order ? (
+              <ReviewOrder
+                order={order}
+                closeReviewOrder={closeReviewOrder}
+                setIsReviewed={setIsOrderReviewed}
+              />
+            ) : reviewStatus?.product ? (
+              <ReviewProduct
+                order={order}
+                closeReviewProduct={closeReviewProduct}
+                setIsProductReviewed={setIsProductReviewed}
+              />
+            ) : (
+              <ReviewDriver
+                order={order}
+                closeReviewDriver={handleCloseReivew}
+                setIsDriverReviewed={setIsDriverReviewed}
+              />
+            )}
+          </Modal>
+        )}
         <Modal
           width='70%'
           open={openTaxModal.open}
           padding='20px'
           closeOnBackdrop
-          title={`${openTaxModal.data?.name ||
-            t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2 ? `(${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})` : ''}  `}
+          title={`${
+            openTaxModal.data?.name ||
+            t('INHERIT_FROM_BUSINESS', 'Inherit from business')
+          } ${
+            openTaxModal.data?.rate_type !== 2
+              ? `(${
+                  typeof openTaxModal.data?.rate === 'number'
+                    ? `${openTaxModal.data?.rate}%`
+                    : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${
+                        openTaxModal.data?.percentage
+                      }%`
+                })`
+              : ''
+          }  `}
           onClose={() => setOpenTaxModal({ open: false, tax: null, type: '' })}
           modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
         >
@@ -731,11 +1037,11 @@ const OrderDetailsUI = (props) => {
         </Modal>
       </Container>
       {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
+        <AfterComponent key={i} {...props} />
+      ))}
       {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
+        <React.Fragment key={i}>{AfterElement}</React.Fragment>
+      ))}
     </>
   )
 }
