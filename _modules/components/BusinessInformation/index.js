@@ -35,6 +35,8 @@ var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
 var _AutoScroll = require("../AutoScroll");
 
+var _BusinessInformationController = require("../BusinessInformationController");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -273,7 +275,7 @@ var BusinessInformation = function BusinessInformation(props) {
     googleMapsControls: googleMapsControls
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessInformation, BusinessInformationProps);
+  return /*#__PURE__*/_react.default.createElement(_BusinessInformationController.BusinessInformationController, BusinessInformationProps);
 };
 
 exports.BusinessInformation = BusinessInformation;

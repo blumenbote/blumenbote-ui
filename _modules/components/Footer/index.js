@@ -66,6 +66,7 @@ var FooterUI = function FooterUI(props) {
     setBusinessCities(newCities);
   }, [businessesList]);
   var Cities = businessCities.map(function (c, index) {
+    if (!c) return;
     return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/search?region=".concat(c),
       key: index,

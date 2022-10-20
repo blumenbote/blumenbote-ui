@@ -21,6 +21,8 @@ var _BusinessProductsCategories = require("../BusinessProductsCategories");
 
 var _BusinessProductsList = require("../BusinessProductsList");
 
+var _BusinessInformationController = require("../BusinessInformationController");
+
 var _groceries = require("../BusinessProductsCategories/layouts/groceries");
 
 var _groceries2 = require("../BusinessProductsList/layouts/groceries");
@@ -448,7 +450,7 @@ var RenderProductsLayout = function RenderProductsLayout(props) {
     googleMapsControls: googleMapsControls
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessInformation, RenderProductsLayoutProps);
+  return /*#__PURE__*/_react.default.createElement(_BusinessInformationController.BusinessInformationController, RenderProductsLayoutProps);
 };
 
 exports.RenderProductsLayout = RenderProductsLayout;

@@ -81,6 +81,12 @@ Object.defineProperty(exports, "BusinessInformation", {
     return _BusinessInformation.BusinessInformation;
   }
 });
+Object.defineProperty(exports, "BusinessInformationController", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessInformationController.BusinessInformationController;
+  }
+});
 Object.defineProperty(exports, "BusinessItemAccordion", {
   enumerable: true,
   get: function get() {
@@ -217,6 +223,12 @@ Object.defineProperty(exports, "DropdownToggle", {
   enumerable: true,
   get: function get() {
     return _Dropdown.DropdownToggle;
+  }
+});
+Object.defineProperty(exports, "ErrorBoundary", {
+  enumerable: true,
+  get: function get() {
+    return _ErrorBoundary.ErrorBoundary;
   }
 });
 Object.defineProperty(exports, "FacebookLoginButton", {
@@ -800,6 +812,8 @@ var _BusinessesMap = require("./components/BusinessesMap");
 
 var _BusinessInformation = require("./components/BusinessInformation");
 
+var _BusinessInformationController = require("./components/BusinessInformationController");
+
 var _BusinessItemAccordion = require("./components/BusinessItemAccordion");
 
 var _BusinessProductsCategories = require("./components/BusinessProductsCategories");
@@ -969,6 +983,8 @@ var _AppleLogin = require("./components/AppleLogin");
 var _GoogleAutocompleteInput = require("./components/GoogleAutocompleteInput");
 
 var _GoogleMaps = require("./components/GoogleMaps");
+
+var _ErrorBoundary = require("./components/ErrorBoundary");
 
 var _ThemeContext = require("./contexts/ThemeContext");
 

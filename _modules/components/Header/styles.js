@@ -19,10 +19,10 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  /* flex: 0 0 auto; */\n\n  ", "\n"])), function (props) {
-  return props.home ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n          background-color: #333;\n\n          & ", " {\n            background-color: transparent;\n            border-color: transparent;\n            color: ", ";\n          }\n\n          & ", " {\n            color: #fff;\n          }\n        "])), _Selects.Select, function (props) {
+var Header = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;  \n\n  ", "\n"])), function (props) {
+  return props.home ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-color: #333;\n\n  & ", " {\n    background-color: transparent;\n    border-color: transparent;\n    color: ", "\n  }\n\n  & ", " {\n    color: #FFF;\n  }\n\n  "])), _Selects.Select, function (props) {
     return props.theme.colors.primaryContrast;
-  }, MenuLink) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n          & ", " {\n            div {\n              color: #333;\n            }\n          }\n        "])), SubMenu);
+  }, MenuLink) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    & ", "{\n      div{\n        color: #333;\n      }\n    }\n  "])), SubMenu);
 });
 
 exports.Header = Header;
