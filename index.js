@@ -126,5 +126,3 @@ export {
   AgreementProvider,
   useAgreement
 }
-
-console.log('index body')
