@@ -9,6 +9,7 @@ import { BusinessController } from './components/BusinessController'
 import { BusinessesListing } from './components/BusinessesListing'
 import { BusinessesMap } from './components/BusinessesMap'
 import { BusinessInformation } from './components/BusinessInformation'
+import { BusinessInformationController } from './components/BusinessInformationController'
 import { BusinessItemAccordion } from './components/BusinessItemAccordion'
 import { BusinessProductsCategories } from './components/BusinessProductsCategories'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from './components/BusinessProductsCategories/layouts/groceries'
@@ -94,6 +95,7 @@ import { SmsLoginButton } from './components/SmsLogin'
 import { AppleLogin } from './components/AppleLogin'
 import { GoogleAutocompleteInput } from './components/GoogleAutocompleteInput'
 import { GoogleMaps } from './components/GoogleMaps'
+import { ErrorBoundary } from './components/ErrorBoundary'
 
 
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -129,6 +131,7 @@ export {
   BusinessController,
   BusinessesListing,
   BusinessInformation,
+  BusinessInformationController,
   BusinessItemAccordion,
   BusinessProductsCategories,
   CategoriesLayoutGroceries,
@@ -219,6 +222,7 @@ export {
   AppleLogin,
   GoogleMaps,
   GoogleAutocompleteInput,
+  ErrorBoundary,
   // Contexts
   ThemeContext,
   ThemeProvider,
