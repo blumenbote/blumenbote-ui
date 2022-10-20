@@ -81,7 +81,7 @@ export const WrapperSearch = styled.div`
       `}
   }
   span {
-    transform: translate(-70%, 0%);
+    transform: translate(-40%, 1%);
   }
 
   ${BusinessSearch} {
