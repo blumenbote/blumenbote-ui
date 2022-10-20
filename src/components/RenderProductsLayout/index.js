@@ -4,12 +4,12 @@ import {
   useLanguage,
   useConfig,
   useUtils,
-  BusinessInformation as BusinessInformationController
 } from 'ordering-components'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { BusinessProductsList } from '../BusinessProductsList'
+import { BusinessInformationController } from '../BusinessInformationController'
 import { BusinessProductsCategories as CategoriesLayoutGroceries } from '../BusinessProductsCategories/layouts/groceries'
 import { BusinessProductsList as ProductListLayoutGroceries } from '../BusinessProductsList/layouts/groceries'
 import { Modal } from '../Modal'
