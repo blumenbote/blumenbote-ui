@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../utils'
 import { useTheme } from 'styled-components'
 import {
-  BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
   useOrder,
   useLanguage,
@@ -43,6 +42,7 @@ import FiClock from '@meronex/icons/fi/FiClock'
 import GrLocation from '@meronex/icons/gr/GrLocation'
 import MdClose from '@meronex/icons/md/MdClose'
 import { AutoScroll } from '../AutoScroll'
+import { BusinessInformationController } from '../BusinessInformationController'
 
 export const BusinessInformationUI = (props) => {
   const {
@@ -76,7 +76,6 @@ export const BusinessInformationUI = (props) => {
   const [image, setImage] = useState('')
 
   const scheduleFormatted = ({ hour, minute }) => {
-    const checkTime = (val) => val < 10 ? `0${val}` : val
     const checkTime = (val) => (val < 10 ? `0${val}` : val)
     return `${checkTime(hour)}:${checkTime(minute)}`
   }
