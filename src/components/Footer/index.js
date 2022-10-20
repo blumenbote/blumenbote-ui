@@ -18,6 +18,7 @@ export const FooterUI = (props) => {
   }, [businessesList])
 
   let Cities = businessCities.map((c, index) => {
+    if(!c) return 
     return <Link to={`/search?region=${c}`} key={index} aria-label="link2">
       {`${t('FLOWERS', 'Flowers')} ${c}`}
     </Link>
