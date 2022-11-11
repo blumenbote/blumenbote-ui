@@ -50,6 +50,7 @@ var BusinessProductsCategoriesUI = function BusinessProductsCategoriesUI(props) 
       openBusinessInformation = props.openBusinessInformation;
 
   var ProductCategories = function ProductCategories() {
+    console.log('categories =>', categories);
     return categories && categories.length && categories.map(function (category) {
       return /*#__PURE__*/_react.default.createElement(_Tabs.Tab, {
         key: category.name,

@@ -45,10 +45,7 @@ var FooterUI = function FooterUI(props) {
   var businessesList = props.businessesList,
       getCities = props.getCities,
       citiesState = props.citiesState;
-
-  var _useApi = (0, _orderingComponents.useApi)(),
-      _useApi2 = _slicedToArray(_useApi, 1),
-      ordering = _useApi2[0];
+  console.log(businessesList);
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -57,22 +54,12 @@ var FooterUI = function FooterUI(props) {
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       businessCities = _useState2[0],
-      setBusinessCities = _useState2[1]; // useEffect(() => {
-  //   // console.log('getCities() :>> ', getCities())
-  //   // const requestOptions = {
-  //   //   method: 'GET',
-  //   //   headers: {
-  //   //     'Content-Type': 'application/json'
-  //   //     // Authorization: `Bearer ${token}`
-  //   //   }
-  //   // }
-  //   // fetch(`${ordering.root}/countries`, requestOptions)
-  //   //   .then((res) => res.json())
-  //   //   .then((res) => console.log('Response', res))
-  //   //   .catch((err) => console.log(err))
-  // }, [citiesState])
+      setBusinessCities = _useState2[1];
 
-
+  (0, _react.useEffect)(function () {
+    console.log('citiesState :>> ', citiesState);
+    console.log('getCities() :>> ', getCities());
+  }, []);
   (0, _react.useEffect)(function () {
     var newCities = businessesList.businesses.filter(function (value, index, self) {
       return index === self.findIndex(function (t) {
@@ -85,14 +72,17 @@ var FooterUI = function FooterUI(props) {
     });
     setBusinessCities(newCities);
   }, [businessesList]);
-  var Cities = citiesState.cities.map(function (c, index) {
+  console.log('businessCities :>> ', businessCities);
+  var Cities = businessCities.map(function (c, index) {
+    console.log(c);
     if (!c) return;
     return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/search?region=".concat(c.name),
+      to: "/search?region=".concat(c),
       key: index,
       "aria-label": "link2"
-    }, "".concat(t('FLOWERS', 'Flowers'), " ").concat(c.name));
+    }, "".concat(t('FLOWERS', 'Flowers'), " ").concat(c));
   });
+  console.log('Cities :>> ', Cities);
   return /*#__PURE__*/_react.default.createElement(_styles.FooterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h4", {
     name: "title-1"
   }, t('REGIONS', 'Regions')), Cities.length !== 0 ? Cities : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -101,16 +91,13 @@ var FooterUI = function FooterUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 21
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 200,
-    height: 21
   }))), /*#__PURE__*/_react.default.createElement(_styles.Content, null, /*#__PURE__*/_react.default.createElement("h4", {
     name: "title-2"
-  }, t('NEW_PARTNERS', 'NEUE PARTNER')), /*#__PURE__*/_react.default.createElement("a", {
+  }, "NEUE PARTNER"), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     "aria-label": "link4",
     href: "/store/reinweissblumen"
-  }, t('NAME_COMPANY', 'REINWEISS BLUMEN')), /*#__PURE__*/_react.default.createElement("a", {
+  }, "REINWEISS BLUMEN"), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     "aria-label": "link5",
     href: "/https://www.blumenbote.online/store/marsanoblumen"
@@ -122,9 +109,9 @@ var FooterUI = function FooterUI(props) {
     name: "title-3"
   }, "BLUMENBOTE.ONLINE"), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "https://blumenbote.online/pages/impressum"
-  }, t('IMPRINT', 'IMPRINT'))), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("a", {
+  }, "IMPRESSUM")), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "https://blumenbote.online/pages/datenschutz"
-  }, t('DATA_PROTECTION', 'DATA PROTECTION'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
+  }, "DATENSCHUTZERKL\xC4RUNG")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.SocialIcon, {
     href: "https://www.facebook.com/blumenbote.online",
     target: "_blank",
     rel: "noreferrer",

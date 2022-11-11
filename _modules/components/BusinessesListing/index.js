@@ -316,12 +316,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, (configs && (configs === null || configs === void 0 ? void 0 : configs.business_listing_categories) !== false || !isCustomLayout) && /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
-    images: props.images,
-    businessTypes: props.businessTypes,
-    defaultBusinessType: props.defaultBusinessType,
-    handleChangeBusinessType: changeBusinessType
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.BusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperSearch, {
     isCustomLayout: isCustomLayout
   }, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     lazyLoad: true,

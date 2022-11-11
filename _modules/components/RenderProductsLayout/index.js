@@ -328,10 +328,8 @@ var RenderProductsLayoutUI = function RenderProductsLayoutUI(props) {
         src: photo.file,
         alt: "photo-".concat(i),
         width: "191",
-        height: "128",
-        onClick: function onClick() {
-          return handleModalImage(photo.file);
-        },
+        height: "128" // onClick={() => handleModalImage(photo.file)}
+        ,
         loading: "lazy"
       });
     }))), (businessVideos === null || businessVideos === void 0 ? void 0 : businessVideos.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.BusinessMediaContent, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('BUSINESS_VIDEOS', 'Business Videos')), /*#__PURE__*/_react.default.createElement("div", null, businessVideos.map(function (video, i) {
