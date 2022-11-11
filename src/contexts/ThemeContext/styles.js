@@ -77,7 +77,7 @@ export const GlobalStyle = createGlobalStyle`
     .main {
       flex : 1 0 auto;
     }
-    ${'' /* @font-face {
+    @font-face {
       font-family: 'Lobster';
       font-weight: 400;
       font-display: swap;
@@ -136,9 +136,7 @@ export const GlobalStyle = createGlobalStyle`
       font-display: swap;
       src: local('Poppins'),
         url('https://media.blumenbote.online/media/fonts/poppins/poppins-700.woff2') format('woff2'),
-         url('https://media.blumenbote.online/media/fonts/poppins/poppins-700.woff')
-          format('woff'),
-         url('https://media.blumenbote.online/media/fonts/poppins/poppins-700.ttf')
-          format('truetype');
-    }  */}
+         url('https://media.blumenbote.online/media/fonts/poppins/poppins-700.woff') format('woff'),
+         url('https://media.blumenbote.online/media/fonts/poppins/poppins-700.ttf') format('truetype');
+    } 
 `
