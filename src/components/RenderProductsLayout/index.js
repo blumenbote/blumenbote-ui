@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
-import {
-  useLanguage,
-  useConfig,
-  useUtils,
-} from 'ordering-components'
+import { useLanguage, useConfig, useUtils } from 'ordering-components'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import { BusinessBasicInformation } from '../BusinessBasicInformation'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
@@ -128,7 +124,8 @@ export const RenderProductsLayoutUI = (props) => {
         : BusinessProductsList
     }
 
-    const ComponentToRender = props?.component && components[props?.component]
+    const ComponentToRender =
+      props?.component && components[props?.component]
 
     return props?.component && <ComponentToRender {...props} />
   }
@@ -182,7 +179,10 @@ export const RenderProductsLayoutUI = (props) => {
                     categories={[
                       {
                         id: null,
-                        name: t('ALL', theme?.defaultLanguages?.ALL || 'All')
+                        name: t(
+                          'ALL',
+                          theme?.defaultLanguages?.ALL || 'All'
+                        )
                       },
                       {
                         id: 'featured',
@@ -191,7 +191,9 @@ export const RenderProductsLayoutUI = (props) => {
                           theme?.defaultLanguages?.FEATURED || 'Featured'
                         )
                       },
-                      ...business?.categories.sort((a, b) => a.rank - b.rank)
+                      ...business?.categories.sort(
+                        (a, b) => a.rank - b.rank
+                      )
                     ]}
                     categorySelected={categorySelected}
                     onClickCategory={onClickCategory}
@@ -210,7 +212,8 @@ export const RenderProductsLayoutUI = (props) => {
                           'Search Products'
                       )}
                       lazyLoad={
-                        businessState?.business?.lazy_load_products_recommended
+                        businessState?.business
+                          ?.lazy_load_products_recommended
                       }
                       isCustomLayout='true'
                     />
@@ -243,7 +246,8 @@ export const RenderProductsLayoutUI = (props) => {
                             id: 'featured',
                             name: t(
                               'FEATURED',
-                              theme?.defaultLanguages?.FEATURED || 'Featured'
+                              theme?.defaultLanguages?.FEATURED ||
+                                'Featured'
                             )
                           },
                           ...business?.categories.sort(
@@ -273,7 +277,9 @@ export const RenderProductsLayoutUI = (props) => {
               ) : (
                 <BusinessContent>
                   <BusinessCategoriesContainer>
-                    {!(business?.categories?.length === 0 && !categoryId) && (
+                    {!(
+                      business?.categories?.length === 0 && !categoryId
+                    ) && (
                       <BusinessLayout
                         component='categories'
                         categories={[
@@ -288,7 +294,8 @@ export const RenderProductsLayoutUI = (props) => {
                             id: 'featured',
                             name: t(
                               'FEATURED',
-                              theme?.defaultLanguages?.FEATURED || 'Featured'
+                              theme?.defaultLanguages?.FEATURED ||
+                                'Featured'
                             )
                           },
                           ...business?.categories.sort(
@@ -320,7 +327,8 @@ export const RenderProductsLayoutUI = (props) => {
                             id: 'featured',
                             name: t(
                               'FEATURED',
-                              theme?.defaultLanguages?.FEATURED || 'Featured'
+                              theme?.defaultLanguages?.FEATURED ||
+                                'Featured'
                             )
                           },
                           ...business?.categories.sort(
@@ -399,7 +407,8 @@ export const RenderProductsLayoutUI = (props) => {
                                   <p
                                     style={{
                                       borderBottom: '2px solid',
-                                      borderBottomColor: theme.colors.primary,
+                                      borderBottomColor:
+                                        theme.colors.primary,
                                       marginBottom: 10
                                     }}
                                   >
@@ -451,7 +460,7 @@ export const RenderProductsLayoutUI = (props) => {
                       alt={`photo-${i}`}
                       width='191'
                       height='128'
-                      onClick={() => handleModalImage(photo.file)}
+                      // onClick={() => handleModalImage(photo.file)}
                       loading='lazy'
                     />
                   ))}
@@ -535,9 +544,10 @@ export const RenderProductsLayoutUI = (props) => {
                       <td>{offer.name}</td>
                       <td>
                         {offer.rate_type === 1
-                          ? `${offer.rate} % ${t('MIN', 'Min')}: ${parsePrice(
-                              offer.minimum
-                            )}`
+                          ? `${offer.rate} % ${t(
+                              'MIN',
+                              'Min'
+                            )}: ${parsePrice(offer.minimum)}`
                           : `${parsePrice(offer.rate)} ${t(
                               'MIN',
                               'Min'
@@ -574,18 +584,20 @@ export const RenderProductsLayoutUI = (props) => {
                 <Categories />
                 <CategoryInners />
               </div>
-              {isCartOnProductsList && currentCart?.products?.length > 0 && (
-                <Cart
-                  isForceOpenCart
-                  cart={currentCart}
-                  isCartPending={currentCart?.status === 2}
-                  isProducts={currentCart.products.length}
-                  isCartOnProductsList={
-                    isCartOnProductsList && currentCart?.products?.length > 0
-                  }
-                  handleCartOpen={(val) => handleCartOpen(val)}
-                />
-              )}
+              {isCartOnProductsList &&
+                currentCart?.products?.length > 0 && (
+                  <Cart
+                    isForceOpenCart
+                    cart={currentCart}
+                    isCartPending={currentCart?.status === 2}
+                    isProducts={currentCart.products.length}
+                    isCartOnProductsList={
+                      isCartOnProductsList &&
+                      currentCart?.products?.length > 0
+                    }
+                    handleCartOpen={(val) => handleCartOpen(val)}
+                  />
+                )}
             </>
           )}
 
@@ -656,7 +668,10 @@ export const RenderProductsLayoutUI = (props) => {
               <div className='empty-content'>
                 <AiOutlineShoppingCart />
                 <p>
-                  {t('ADD_PRODUCTS_IN_YOUR_CART', 'Add products in your cart')}
+                  {t(
+                    'ADD_PRODUCTS_IN_YOUR_CART',
+                    'Add products in your cart'
+                  )}
                 </p>
               </div>
               <EmptyBtnWrapper>

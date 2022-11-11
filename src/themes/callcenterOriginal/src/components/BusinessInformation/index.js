@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { formatUrlVideo, convertHoursToMinutes } from '../../../../../utils'
 import {
-  BusinessInformation as BusinessInformationController,
   GoogleMapsMap,
   useLanguage,
   useConfig
@@ -25,6 +24,7 @@ import {
   Divider
 } from './styles'
 import MdClose from '@meronex/icons/md/MdClose'
+import { BusinessInformationController } from '../BusinessInformationController'
 
 export const BusinessInformationUI = (props) => {
   const {

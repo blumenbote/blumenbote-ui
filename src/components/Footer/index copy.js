@@ -1,55 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { Content, FooterContainer, SocialIcon, Copy } from './styles'
-import {
-  BusinessList as FooterController,
-  useLanguage,
-  useApi
-} from 'ordering-components'
+import { BusinessList as FooterController, useLanguage } from 'ordering-components'
 import Skeleton from 'react-loading-skeleton'
 import { Link } from 'react-router-dom'
 
 export const FooterUI = (props) => {
-  const { businessesList, getCities, citiesState } = props
+  const {
+    businessesList,
+    getCities,
+    citiesState
+  } = props
 
-  const [ordering] = useApi()
+
+  
+  console.log(businessesList)
   const [, t] = useLanguage()
   const [businessCities, setBusinessCities] = useState([])
-
-  // useEffect(() => {
-  //   // console.log('getCities() :>> ', getCities())
-  //   // const requestOptions = {
-  //   //   method: 'GET',
-  //   //   headers: {
-  //   //     'Content-Type': 'application/json'
-  //   //     // Authorization: `Bearer ${token}`
-  //   //   }
-  //   // }
-
-  //   // fetch(`${ordering.root}/countries`, requestOptions)
-  //   //   .then((res) => res.json())
-  //   //   .then((res) => console.log('Response', res))
-  //   //   .catch((err) => console.log(err))
-  // }, [citiesState])
+  
+  
+  useEffect(() => {
+    console.log('citiesState :>> ', citiesState);
+    console.log('getCities() :>> ', getCities());
+  },[])
 
   useEffect(() => {
-    let newCities = businessesList.businesses
-      .filter(
-        (value, index, self) =>
-          index === self.findIndex((t) => t.city_id === value.city_id)
-      )
-      .map((i) => i.city?.name)
+    let newCities = businessesList.businesses.filter((value, index, self) => index === self.findIndex(t => t.city_id === value.city_id)).map(i => i.city?.name)
     setBusinessCities(newCities)
   }, [businessesList])
 
-  let Cities = citiesState.cities.map((c, index) => {
-    if (!c) return
-    return (
-      <Link to={`/search?region=${c.name}`} key={index} aria-label='link2'>
-        {`${t('FLOWERS', 'Flowers')} ${c.name}`}
-      </Link>
-    )
+  console.log('businessCities :>> ', businessCities);
+  let Cities = businessCities.map((c, index) => {
+    console.log(c);
+    if(!c) return 
+    return <Link to={`/search?region=${c}`} key={index} aria-label="link2">
+      {`${t('FLOWERS', 'Flowers')} ${c}`}
+    </Link>
   })
 
+  console.log('Cities :>> ', Cities);
   return (
     <FooterContainer>
       <Content>
@@ -60,18 +48,18 @@ export const FooterUI = (props) => {
           <>
             <Skeleton width={200} height={21} />
             <Skeleton width={200} height={21} />
-            <Skeleton width={200} height={21} />
+            {/* <Skeleton width={200} height={21} /> */}
           </>
         )}
       </Content>
       <Content>
-        <h4 name='title-2'>{t('NEW_PARTNERS', 'NEUE PARTNER')}</h4>
+        <h4 name='title-2'>NEUE PARTNER</h4>
         <a
           rel='noopener noreferrer'
           aria-label='link4'
           href='/store/reinweissblumen'
         >
-          {t('NAME_COMPANY', 'REINWEISS BLUMEN')}
+          REINWEISS BLUMEN
         </a>
         <a
           rel='noopener noreferrer'
@@ -87,13 +75,11 @@ export const FooterUI = (props) => {
       <Content>
         <h4 name='title-3'>BLUMENBOTE.ONLINE</h4>
         <p>
-          <a href='https://blumenbote.online/pages/impressum'>
-            {t('IMPRINT', 'IMPRINT')}
-          </a>
+          <a href='https://blumenbote.online/pages/impressum'>IMPRESSUM</a>
         </p>
         <p>
           <a href='https://blumenbote.online/pages/datenschutz'>
-            {t('DATA_PROTECTION', 'DATA PROTECTION')}
+            DATENSCHUTZERKLÄRUNG
           </a>
         </p>
         <div>
@@ -223,5 +209,7 @@ export const Footer = (props) => {
     UIComponent: FooterUI
   }
 
-  return <FooterController {...FooterProps} />
+  return (
+    <FooterController {...FooterProps} />
+  )
 }

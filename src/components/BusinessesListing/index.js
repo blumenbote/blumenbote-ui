@@ -173,14 +173,14 @@ const BusinessesListingUI = (props) => {
       {props.beforeComponents?.map((BeforeComponent, i) => (
         <BeforeComponent key={i} {...props} />))}
       <BusinessContainer>
-        {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
+        {/* {((configs && configs?.business_listing_categories !== false) || !isCustomLayout) && (
           <BusinessTypeFilter
             images={props.images}
             businessTypes={props.businessTypes}
             defaultBusinessType={props.defaultBusinessType}
             handleChangeBusinessType={changeBusinessType}
           />
-        )}
+        )} */}
         <WrapperSearch isCustomLayout={isCustomLayout}>
           <SearchBar
             lazyLoad
