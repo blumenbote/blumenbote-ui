@@ -1,35 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Content, FooterContainer, SocialIcon, Copy } from './styles'
-import {
-  BusinessList as FooterController,
-  useLanguage,
-  useApi
-} from 'ordering-components'
+import { useLanguage } from 'ordering-components'
+import { BusinessList as FooterController } from '../BusinessList'
 import Skeleton from 'react-loading-skeleton'
 import { Link } from 'react-router-dom'
 
 export const FooterUI = (props) => {
-  const { businessesList, getCities, citiesState } = props
+  const { businessesList, citiesState } = props
 
-  const [ordering] = useApi()
   const [, t] = useLanguage()
-  const [businessCities, setBusinessCities] = useState([])
-
-  // useEffect(() => {
-  //   // console.log('getCities() :>> ', getCities())
-  //   // const requestOptions = {
-  //   //   method: 'GET',
-  //   //   headers: {
-  //   //     'Content-Type': 'application/json'
-  //   //     // Authorization: `Bearer ${token}`
-  //   //   }
-  //   // }
-
-  //   // fetch(`${ordering.root}/countries`, requestOptions)
-  //   //   .then((res) => res.json())
-  //   //   .then((res) => console.log('Response', res))
-  //   //   .catch((err) => console.log(err))
-  // }, [citiesState])
+  const [businessesArray, setBusinessCities] = useState([])
 
   useEffect(() => {
     let newCities = businessesList.businesses
