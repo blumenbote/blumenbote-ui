@@ -13,6 +13,8 @@ var _styles = require("./styles");
 
 var _orderingComponents = require("ordering-components");
 
+var _BusinessList = require("../BusinessList");
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _reactRouterDom = require("react-router-dom");
@@ -43,12 +45,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var FooterUI = function FooterUI(props) {
   var businessesList = props.businessesList,
-      getCities = props.getCities,
       citiesState = props.citiesState;
-
-  var _useApi = (0, _orderingComponents.useApi)(),
-      _useApi2 = _slicedToArray(_useApi, 1),
-      ordering = _useApi2[0];
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -56,22 +53,8 @@ var FooterUI = function FooterUI(props) {
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      businessCities = _useState2[0],
-      setBusinessCities = _useState2[1]; // useEffect(() => {
-  //   // console.log('getCities() :>> ', getCities())
-  //   // const requestOptions = {
-  //   //   method: 'GET',
-  //   //   headers: {
-  //   //     'Content-Type': 'application/json'
-  //   //     // Authorization: `Bearer ${token}`
-  //   //   }
-  //   // }
-  //   // fetch(`${ordering.root}/countries`, requestOptions)
-  //   //   .then((res) => res.json())
-  //   //   .then((res) => console.log('Response', res))
-  //   //   .catch((err) => console.log(err))
-  // }, [citiesState])
-
+      businessesArray = _useState2[0],
+      setBusinessCities = _useState2[1];
 
   (0, _react.useEffect)(function () {
     var newCities = businessesList.businesses.filter(function (value, index, self) {
@@ -194,7 +177,7 @@ var Footer = function Footer(props) {
     UIComponent: FooterUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.BusinessList, FooterProps);
+  return /*#__PURE__*/_react.default.createElement(_BusinessList.BusinessList, FooterProps);
 };
 
 exports.Footer = Footer;

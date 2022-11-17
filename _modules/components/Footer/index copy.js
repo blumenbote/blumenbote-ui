@@ -45,7 +45,6 @@ var FooterUI = function FooterUI(props) {
   var businessesList = props.businessesList,
       getCities = props.getCities,
       citiesState = props.citiesState;
-  console.log(businessesList);
 
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),

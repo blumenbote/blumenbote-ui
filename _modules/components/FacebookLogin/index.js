@@ -13,6 +13,8 @@ var _FaFacebook = _interopRequireDefault(require("@meronex/icons/fa/FaFacebook")
 
 var _styles = require("./styles");
 
+var _AgreementContext = require("../../contexts/AgreementContext");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -34,6 +36,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var FacebookLoginButtonUI = function FacebookLoginButtonUI(props) {
+  var _useAgreement = (0, _AgreementContext.useAgreement)(),
+      _useAgreement2 = _slicedToArray(_useAgreement, 1),
+      isAgreement = _useAgreement2[0];
+
   var _useLanguage = (0, _orderingComponents.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -53,7 +59,7 @@ var FacebookLoginButton = function FacebookLoginButton(props) {
     UIComponent: FacebookLoginButtonUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponents.FacebookLoginButton, facebookLoginProps);
+  return isAgreement ? /*#__PURE__*/_react.default.createElement(_orderingComponents.FacebookLoginButton, facebookLoginProps) : /*#__PURE__*/_react.default.createElement(_styles.FacebookButton, null);
 };
 
 exports.FacebookLoginButton = FacebookLoginButton;
