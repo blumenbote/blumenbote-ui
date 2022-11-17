@@ -5,8 +5,10 @@ import {
 } from 'ordering-components'
 import FaFacebook from '@meronex/icons/fa/FaFacebook'
 import { FacebookButton } from './styles'
+import { useAgreement } from '../../contexts/AgreementContext'
 
 const FacebookLoginButtonUI = (props) => {
+  const [isAgreement] = useAgreement()
   const [, t] = useLanguage()
   const { handleFacebookLogin } = props
   return (
@@ -26,5 +28,10 @@ export const FacebookLoginButton = (props) => {
     ...props,
     UIComponent: FacebookLoginButtonUI
   }
-  return <FacebookLoginController {...facebookLoginProps} />
+
+  return isAgreement ? (
+    <FacebookLoginController {...facebookLoginProps} />
+  ) : (
+    <FacebookButton />
+  )
 }
