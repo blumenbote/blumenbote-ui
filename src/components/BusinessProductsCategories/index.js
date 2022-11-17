@@ -17,7 +17,6 @@ const BusinessProductsCategoriesUI = (props) => {
   } = props
 
   const ProductCategories = () => {
-    console.log('categories =>' , categories);
     return (
       categories && categories.length && categories.map(category => (
         <Tab
