@@ -17,7 +17,8 @@ import {
   WrapperBusinessLogo,
   BusinessLogo,
   BusinessInfo,
-  BusinessInfoItem
+  BusinessInfoItem,
+  PartnerInfo
 } from './styles'
 
 const types = ['food', 'laundry', 'alcohol', 'groceries']
@@ -129,6 +130,14 @@ export const BusinessBasicInformation = (props) => {
           </BusinessInfo>
         </BusinessContent>
       </BusinessContainer>
+      {business.partner && business.partner !== undefined && (
+        <PartnerInfo>
+          {t(
+            "NOT_PARTNER_BLUMENBOTE",
+            "Dieser Florist ist leider noch kein Blumenbote. Wir informieren ihn, dass Du gern bei ihm bestellt hättest."
+          )}
+        </PartnerInfo>
+      )}
       {props.afterComponents?.map((AfterComponent, i) => (
         <AfterComponent key={i} {...props} />))}
       {props.afterElements?.map((AfterElement, i) => (

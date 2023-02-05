@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.reviewCommentList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.scrollTo = exports.reviewCommentList = exports.getTraduction = exports.getIconCard = exports.getHourMin = exports.getGoogleMapImage = exports.getFormatDate = exports.getDistance = exports.formatUrlVideo = exports.formatSeconds = exports.flatArray = exports.fieldsToSort = exports.convertToRadian = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = void 0;
 
 var _orderingComponents = require("ordering-components");
 
@@ -715,3 +715,16 @@ var reviewCommentList = function reviewCommentList(type) {
 };
 
 exports.reviewCommentList = reviewCommentList;
+
+var getFormatDate = function getFormatDate() {
+  var date = new Date().toLocaleDateString().split('/');
+
+  var _date = _slicedToArray(date, 3),
+      month = _date[0],
+      day = _date[1],
+      year = _date[2];
+
+  return "".concat(day, ".").concat(month, ".").concat(year);
+};
+
+exports.getFormatDate = getFormatDate;

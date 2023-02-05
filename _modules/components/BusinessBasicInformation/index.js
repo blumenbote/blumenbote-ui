@@ -118,7 +118,7 @@ var BusinessBasicInformation = function BusinessBasicInformation(props) {
     width: 70
   }), (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !loading ? /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement(_GrDeliver.default, null), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70
-  }))))))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
+  }))))))), business.partner && business.partner !== undefined && /*#__PURE__*/_react.default.createElement(_styles.PartnerInfo, null, t("NOT_PARTNER_BLUMENBOTE", "Dieser Florist ist leider noch kein Blumenbote. Wir informieren ihn, dass Du gern bei ihm bestellt hättest.")), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
       key: i
     }, props));

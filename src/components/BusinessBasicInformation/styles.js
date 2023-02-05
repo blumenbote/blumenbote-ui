@@ -161,3 +161,10 @@ export const BusinessInfoItem = styled.div`
     }
   }
 `
+
+export const PartnerInfo = styled.div`
+  border-radius: 16px;
+  background-color: rgb(204, 204, 204);
+  color : rgb(51, 51, 51);
+  padding: 14px;
+`

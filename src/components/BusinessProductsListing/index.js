@@ -3,7 +3,6 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useLocation } from 'react-router-dom'
 import {
-  BusinessAndProductList,
   useEvent,
   useLanguage,
   useOrder,
@@ -20,6 +19,7 @@ import { ProductForm } from '../ProductForm'
 import { FloatingButton } from '../FloatingButton'
 import { Modal } from '../Modal'
 import { UpsellingPage } from '../UpsellingPage'
+import { BusinessAndProductList } from "../BusinessAndProductList"
 
 import { RenderProductsLayout } from '../RenderProductsLayout'
 
@@ -49,6 +49,7 @@ const BusinessProductsListingUI = (props) => {
     featuredProducts,
     handleChangeSortBy,
     isCartOnProductsList,
+    city,
     errorQuantityProducts
   } = props
 
@@ -61,7 +62,6 @@ const BusinessProductsListingUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
-  const location = useLocation()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -70,6 +70,7 @@ const BusinessProductsListingUI = (props) => {
   const [openBusinessInformation, setOpenBusinessInformation] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [productToIdLoading, setProductIdToLoading] = useState(null)
+  const [errorBusinessURL, setErrorBusinessURL] = useState(false)
 
   const currentCart =
     Object.values(carts).find(
@@ -137,18 +138,20 @@ const BusinessProductsListingUI = (props) => {
       onProductRedirect({
         slug: business?.slug,
         product: product.id,
-        category: product.category_id
+        category: product.category_id,
+        city: business?.city.name.toLowerCase(),
       })
       setCurProduct(product)
       setModalIsOpen(true)
-      events.emit('product_clicked', product)
+      events.emit("product_clicked", product)
     }
   }
   const handlerProductAction = (product) => {
     if (Object.keys(product).length) {
       setModalIsOpen(false)
       onProductRedirect({
-        slug: business?.slug
+        slug: business?.slug,
+        city: business?.city.name.toLowerCase(),
       })
     }
   }
@@ -159,7 +162,8 @@ const BusinessProductsListingUI = (props) => {
     updateProductModal(null)
     setCurProduct(null)
     onProductRedirect({
-      slug: business?.slug
+      slug: business?.slug,
+      city: business?.city.name.toLowerCase(),
     })
   }
 
@@ -205,13 +209,13 @@ const BusinessProductsListingUI = (props) => {
     if (categoryId && productId) {
       handleUpdateInitialRender(true)
     }
-    events.emit('get_current_view')
+    events.emit("get_current_view")
   }, [])
 
   useEffect(() => {
-    events.on('change_view', handleChangePage)
+    events.on("change_view", handleChangePage)
     return () => {
-      events.off('change_view', handleChangePage)
+      events.off("change_view", handleChangePage)
     }
   }, [openProduct])
 
@@ -237,83 +241,53 @@ const BusinessProductsListingUI = (props) => {
     getNextProducts()
   }, [hasScrollBar, categoryState?.loading])
 
+  useEffect(() => {
+    if (
+      city &&
+      business &&
+      business.city &&
+      city !== business.city.name.toLowerCase()
+    ) {
+      setErrorBusinessURL(true)
+    }
+  }, [city, business])
+
   return (
     <>
       <ProductsContainer>
-        <RenderProductsLayout
-          errors={errors}
-          isError={error}
-          isLoading={loading}
-          business={business}
-          categoryId={categoryId}
-          searchValue={searchValue}
-          sortByValue={sortByValue}
-          currentCart={currentCart}
-          businessState={businessState}
-          sortByOptions={sortByOptions}
-          categoryState={categoryState}
-          categoriesState={props.categoriesState}
-          categorySelected={categorySelected}
-          openCategories={openCategories}
-          openBusinessInformation={openBusinessInformation}
-          isCartOnProductsList={
-            isCartOnProductsList && currentCart?.products?.length > 0
-          }
-          handleChangeSortBy={handleChangeSortBy}
-          errorQuantityProducts={errorQuantityProducts}
-          onClickCategory={handleChangeCategory}
-          featuredProducts={featuredProducts}
-          handler={handler}
-          onProductClick={onProductClick}
-          handleSearchRedirect={handleSearchRedirect}
-          handleChangeSearch={handleChangeSearch}
-          setOpenBusinessInformation={setOpenBusinessInformation}
-          productToIdLoading={productToIdLoading}
-          handleCartOpen={(val) => setIsCartOpen(val)}
-        />
-
-        {!loading && business && !Object.keys(business).length && (
-          <NotFoundSource
-            content={t(
-              'NOT_FOUND_BUSINESS_PRODUCTS',
-              theme?.defaultLanguages?.NOT_FOUND_BUSINESS_PRODUCTS ||
-                'No products to show at this business, please try with other business.'
-            )}
-            btnTitle={t(
-              'SEARCH_REDIRECT',
-              theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses'
-            )}
-            onClickButton={() => handleSearchRedirect()}
-          />
-        )}
-
-        {!loading && !business && location.pathname.includes('/store/') && (
-          <NotFoundSource
-            content={t(
-              'ERROR_NOT_FOUND_STORE',
-              theme?.defaultLanguages?.ERROR_NOT_FOUND_STORE ||
-                'Sorry, an error has occurred with business selected.'
-            )}
-            btnTitle={t(
-              'SEARCH_REDIRECT',
-              theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses'
-            )}
-            onClickButton={handleSearchRedirect}
-          />
-        )}
-
-        {!loading && !business && !location.pathname.includes('/store/') && (
+        {(!loading && !business) || errorBusinessURL ? (
           <PageNotFound />
-        )}
-
-        {error && error.length > 0 && Object.keys(business).length && (
-          <NotFoundSource
-            content={error[0]?.message || error[0]}
-            btnTitle={t(
-              'SEARCH_REDIRECT',
-              theme?.defaultLanguages?.SEARCH_REDIRECT || 'Go to Businesses'
-            )}
-            onClickButton={handleSearchRedirect}
+        ) : (
+          <RenderProductsLayout
+            errors={errors}
+            isError={error}
+            isLoading={loading}
+            business={business}
+            categoryId={categoryId}
+            searchValue={searchValue}
+            sortByValue={sortByValue}
+            currentCart={currentCart}
+            businessState={businessState}
+            sortByOptions={sortByOptions}
+            categoryState={categoryState}
+            categoriesState={props.categoriesState}
+            categorySelected={categorySelected}
+            openCategories={openCategories}
+            openBusinessInformation={openBusinessInformation}
+            isCartOnProductsList={
+              isCartOnProductsList && currentCart?.products?.length > 0
+            }
+            handleChangeSortBy={handleChangeSortBy}
+            errorQuantityProducts={errorQuantityProducts}
+            onClickCategory={handleChangeCategory}
+            featuredProducts={featuredProducts}
+            handler={handler}
+            onProductClick={onProductClick}
+            handleSearchRedirect={handleSearchRedirect}
+            handleChangeSearch={handleChangeSearch}
+            setOpenBusinessInformation={setOpenBusinessInformation}
+            productToIdLoading={productToIdLoading}
+            handleCartOpen={(val) => setIsCartOpen(val)}
           />
         )}
       </ProductsContainer>

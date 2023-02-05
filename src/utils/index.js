@@ -434,3 +434,11 @@ export const reviewCommentList = (type) => {
 
   return reviews[type]
 }
+
+
+export const getFormatDate  = ()  =>  {
+  const date = new Date().toLocaleDateString().split('/')
+  const [month, day, year] = date
+
+  return `${day}.${month}.${year}`
+}
