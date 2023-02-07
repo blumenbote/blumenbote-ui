@@ -8758,9 +8758,9 @@ optionator@^0.8.3:
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"ordering-components@github:Ordering-Inc/ordering-components#development":
+"ordering-components@github:blumenbote/blumenbote-components":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components/tar.gz/1e08f2df5964930a223d09be60e6858597651212"
+  resolved "https://codeload.github.com/blumenbote/blumenbote-components/tar.gz/734fa225c3acdbf6111c9311bf1c428c78e6ce75"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

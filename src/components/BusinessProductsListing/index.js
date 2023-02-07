@@ -8,7 +8,8 @@ import {
   useOrder,
   useSession,
   useUtils,
-  useConfig
+  useConfig,
+  useCity
 } from 'ordering-components'
 
 import { ProductsContainer, ProductLoading, SkeletonItem } from './styles'
@@ -62,6 +63,7 @@ const BusinessProductsListingUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [events] = useEvent()
   const [{ auth }] = useSession()
+  const [cities] = useCity()
 
   const [openProduct, setModalIsOpen] = useState(false)
   const [curProduct, setCurProduct] = useState(props.product)
@@ -139,7 +141,7 @@ const BusinessProductsListingUI = (props) => {
         slug: business?.slug,
         product: product.id,
         category: product.category_id,
-        city: business?.city.name.toLowerCase(),
+        city: cities.get(business?.city_id),
       })
       setCurProduct(product)
       setModalIsOpen(true)
@@ -151,7 +153,7 @@ const BusinessProductsListingUI = (props) => {
       setModalIsOpen(false)
       onProductRedirect({
         slug: business?.slug,
-        city: business?.city.name.toLowerCase(),
+        city: cities.get(business?.city_id),
       })
     }
   }
@@ -163,7 +165,7 @@ const BusinessProductsListingUI = (props) => {
     setCurProduct(null)
     onProductRedirect({
       slug: business?.slug,
-      city: business?.city.name.toLowerCase(),
+      city: cities.get(business?.city_id),
     })
   }
 
@@ -246,7 +248,7 @@ const BusinessProductsListingUI = (props) => {
       city &&
       business &&
       business.city &&
-      city !== business.city.name.toLowerCase()
+      cities.get(business.city_id) !== city
     ) {
       setErrorBusinessURL(true)
     }
