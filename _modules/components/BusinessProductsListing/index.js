@@ -128,6 +128,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       auth = _useSession2[0].auth;
 
+  var _useCity = (0, _orderingComponents.useCity)(),
+      _useCity2 = _slicedToArray(_useCity, 1),
+      cities = _useCity2[0];
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       openProduct = _useState2[0],
@@ -248,7 +252,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
                 slug: business === null || business === void 0 ? void 0 : business.slug,
                 product: product.id,
                 category: product.category_id,
-                city: business === null || business === void 0 ? void 0 : business.city.name.toLowerCase()
+                city: cities.get(business === null || business === void 0 ? void 0 : business.city_id)
               });
               setCurProduct(product);
               setModalIsOpen(true);
@@ -272,7 +276,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setModalIsOpen(false);
       onProductRedirect({
         slug: business === null || business === void 0 ? void 0 : business.slug,
-        city: business === null || business === void 0 ? void 0 : business.city.name.toLowerCase()
+        city: cities.get(business === null || business === void 0 ? void 0 : business.city_id)
       });
     }
   };
@@ -284,7 +288,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setCurProduct(null);
     onProductRedirect({
       slug: business === null || business === void 0 ? void 0 : business.slug,
-      city: business === null || business === void 0 ? void 0 : business.city.name.toLowerCase()
+      city: cities.get(business === null || business === void 0 ? void 0 : business.city_id)
     });
   };
 
@@ -348,7 +352,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     getNextProducts();
   }, [hasScrollBar, categoryState === null || categoryState === void 0 ? void 0 : categoryState.loading]);
   (0, _react.useEffect)(function () {
-    if (city && business && business.city && city !== business.city.name.toLowerCase()) {
+    if (city && business && business.city && cities.get(business.city_id) !== city) {
       setErrorBusinessURL(true);
     }
   }, [city, business]);
