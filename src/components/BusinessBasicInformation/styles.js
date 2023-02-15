@@ -17,6 +17,7 @@ export const BusinessContainer = styled.div`
   justify-content: center;
   align-items: flex-end;
   border-radius: 20px;
+  margin-bottom: 8px;
 
   ${props => props.isSkeleton && css`
     background-color: #F8F8F8;
