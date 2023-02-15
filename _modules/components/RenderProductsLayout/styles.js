@@ -105,7 +105,7 @@ var Description = _styledComponents.default.p(_templateObject21 || (_templateObj
 
 exports.Description = Description;
 
-var FlexTabs = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  height: 10%;\n  padding-top: 30px;\n  overflow-x: auto;\n  white-space: nowrap;\n"])));
+var FlexTabs = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-start;\n  height: 10%;\n  overflow-x: auto;\n  white-space: nowrap;\n"])));
 
 exports.FlexTabs = FlexTabs;
 

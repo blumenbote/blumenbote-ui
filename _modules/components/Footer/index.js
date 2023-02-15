@@ -92,11 +92,11 @@ var FooterUI = function FooterUI(props) {
   }, t('NEW_PARTNERS', 'NEUE PARTNER')), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     "aria-label": "link4",
-    href: "/store/reinweissblumen"
+    href: "/berlin/reinweissblumen"
   }, t('NAME_COMPANY', 'REINWEISS BLUMEN')), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     "aria-label": "link5",
-    href: "/https://www.blumenbote.online/store/marsanoblumen"
+    href: "/berlin/marsanoblumen"
   }, "MARSANO BLUMEN"), /*#__PURE__*/_react.default.createElement("a", {
     rel: "noopener noreferrer",
     "aria-label": "link6",
