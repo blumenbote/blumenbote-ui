@@ -305,7 +305,6 @@ export const FlexTabs = styled.div`
   display: flex;
   justify-content: flex-start;
   height: 10%;
-  padding-top: 30px;
   overflow-x: auto;
   white-space: nowrap;
 `
